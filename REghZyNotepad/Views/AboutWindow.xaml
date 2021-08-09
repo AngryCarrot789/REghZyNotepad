@@ -5,8 +5,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:REghZyNotepad.Views"
         mc:Ignorable="d"
-        Title="AboutWindow" Height="450" Width="800">
+        Title="AboutWindow" Height="450" Width="800"
+        Style="{DynamicResource CustomToolWindowStyle}">
     <Grid>
-        
+        <TextBlock Text="BY REGHZY XDDDDDDDDDDDDD" VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </Grid>
 </Window>

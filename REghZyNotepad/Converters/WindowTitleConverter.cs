@@ -8,14 +8,21 @@ namespace REghZyNotepad.Converters {
     // values[1] = string (file path)
     public class WindowTitleConverter : IMultiValueConverter {
         public const string WINDOW_TITLE = "REghZy Notepad";
+        public const string WINDOW_TITLE_UNTITLED = "REghZy Notepad - Untitled";
 
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture) {
             if (values[1] == null) {
-                if (values[0] is bool hasChanged && !hasChanged) {
-                    return WINDOW_TITLE;
+                if (values[0] is bool hasChanged) {
+                    if (hasChanged) {
+                        return WINDOW_TITLE_UNTITLED;
+                    }
+                    else {
+                        return WINDOW_TITLE;
+                    }
                 }
-
-                throw new InvalidDataException("Element 0 of 'values' wasn't a boolean, or was false, but the 2nd value (file path) was null");
+                else {
+                    throw new InvalidDataException("Element 0 of 'values' wasn't a boolean");
+                }
             }
 
             if (values[1] is string filePath) {

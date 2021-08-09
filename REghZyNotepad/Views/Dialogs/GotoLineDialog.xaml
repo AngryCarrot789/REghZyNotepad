@@ -3,10 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:REghZyNotepad.Views.Dialogs"
+        xmlns:local="clr-namespace:REghZyNotepad.Views.Dialogs" 
+        d:DataContext="{d:DesignInstance Type=local:GotoLineViewModel}"
         mc:Ignorable="d"
-        Title="GotoLineDialog" Height="450" Width="800">
+        Title="Go to..." 
+        Height="105" Width="200"
+        WindowStartupLocation="CenterScreen"
+        Style="{DynamicResource CustomToolWindowStyle}">
     <Grid>
-        
+        <TextBlock Text="Goto line: (index based)" Margin="10,10,10,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="LineBox" Text="{Binding TargetLine, UpdateSourceTrigger=PropertyChanged}" Padding="4" VerticalAlignment="Bottom" Margin="10,0,60,10"/>
+        <Button Content="Go" Margin="0,0,10,10" VerticalAlignment="Bottom" Height="26" BorderThickness="0 1 1 1" Click="Button_Click" HorizontalAlignment="Right" Width="50"/>
     </Grid>
 </Window>

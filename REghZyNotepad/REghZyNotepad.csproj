@@ -79,7 +79,7 @@
       <DependentUpon>LightTheme.xaml</DependentUpon>
     </Compile>
     <Compile Include="Themes\ThemesController.cs" />
-    <Compile Include="Themes\ThemeTypes.cs" />
+    <Compile Include="Themes\ThemeType.cs" />
     <Compile Include="Utilities\BaseView.cs" />
     <Compile Include="Utilities\BaseViewModel.cs" />
     <Compile Include="Utilities\Command.cs" />
@@ -87,12 +87,17 @@
     <Compile Include="Utilities\RCSConfig.cs" />
     <Compile Include="Utilities\ScrollViewerHelper.cs" />
     <Compile Include="Utilities\StringExtensions.cs" />
+    <Compile Include="Views\AboutWindow.xaml.cs">
+      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Dialogs\GotoLineDialog.xaml.cs">
       <DependentUpon>GotoLineDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Dialogs\GotoLineViewModel.cs" />
     <Compile Include="Views\FormatWindow.xaml.cs">
       <DependentUpon>FormatWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\IViewProvider.cs" />
     <Page Include="Editor\REghZyTextEditorStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -125,6 +130,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\AboutWindow.xaml" />
     <Page Include="Views\Dialogs\GotoLineDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

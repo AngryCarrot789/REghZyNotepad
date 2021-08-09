@@ -27,6 +27,12 @@
         <KeyBinding Key="O" Modifiers="Ctrl"  Command="{Binding OpenFileCommand, Mode=OneTime}"/>
         <KeyBinding Key="S" Modifiers="Ctrl"  Command="{Binding SaveFileCommand, Mode=OneTime}"/>
         <KeyBinding Key="S" Modifiers="Ctrl + Shift" Command="{Binding SaveFileAsCommand, Mode=OneTime}"/>
+        <KeyBinding Key="F" Modifiers="Ctrl" Command="{Binding FindCommand, Mode=OneTime}"/>
+        <KeyBinding Key="F3" Command="{Binding FindNextCommand, Mode=OneTime}"/>
+        <KeyBinding Key="F3" Modifiers="Shift" Command="{Binding FindPreviousCommand, Mode=OneTime}"/>
+        <KeyBinding Key="H" Modifiers="Ctrl" Command="{Binding ReplaceCommand, Mode=OneTime}"/>
+        <KeyBinding Key="H" Modifiers="Ctrl + Shift" Command="{Binding ReplaceAllCommand, Mode=OneTime}"/>
+        <KeyBinding Key="G" Modifiers="Ctrl" Command="{Binding GotoLineCommand, Mode=OneTime}"/>
     </Window.InputBindings>
     <Grid>
         <Menu VerticalAlignment="Top" Height="18" Background="{DynamicResource ControlDefaultBackground}">
@@ -58,43 +64,67 @@
             <MenuItem Header="View">
                 <MenuItem Header="Nothing yet :)"/>
             </MenuItem>
+            <MenuItem Header="Theme">
+                <MenuItem Header="Light" Click="ChangeTheme" Uid="0">
+                    <MenuItem.Icon>
+                        <Rectangle Stroke="#FF848484" Fill="#FFE8E8E8" StrokeThickness="2" StrokeLineJoin="Round"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Colourful Light" Click="ChangeTheme" Uid="1">
+                    <MenuItem.Icon>
+                        <Rectangle Stroke="#FF2C7FF5" Fill="#FFE8E8E8" StrokeThickness="2" StrokeLineJoin="Round"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Dark" Click="ChangeTheme" Uid="2">
+                    <MenuItem.Icon>
+                        <Rectangle Stroke="#FF404040" Fill="#FF1B1B1B" StrokeThickness="2" StrokeLineJoin="Round"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Colourful Dark" Click="ChangeTheme" Uid="3">
+                    <MenuItem.Icon>
+                        <Rectangle Stroke="#FF2C7FF5" Fill="#FF1B1B1B" StrokeThickness="2" StrokeLineJoin="Round"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
             <MenuItem Header="Help">
                 <MenuItem Header="About"/>
             </MenuItem>
         </Menu>
         <Grid Margin="0,18,0,0">
-            <Grid>
+            <Grid Margin="0,0,0,22">
                 <editor:REghZyTextEditor x:Name="TextEditor"
-                     DataContext="{Binding NotepadEditor, UpdateSourceTrigger=PropertyChanged}"
-                     Text="{Binding Document.Contents, UpdateSourceTrigger=PropertyChanged}"
-                     FontSize="{Binding Format.FontSize, UpdateSourceTrigger=PropertyChanged}"
-                     FontFamily="{Binding Format.Font, UpdateSourceTrigger=PropertyChanged}"
-                     FontWeight="{Binding Format.Weight, UpdateSourceTrigger=PropertyChanged}"
-                     FontStyle="{Binding Format.Style, UpdateSourceTrigger=PropertyChanged}"
-                     TextDecorations="{Binding Format.Decoration, UpdateSourceTrigger=PropertyChanged}"
-                     TextWrapping="{Binding Format.Wrapping, UpdateSourceTrigger=PropertyChanged}"
-                     SelectionChanged="TextEditor_SelectionChanged"
-                     ScrollViewer.CanContentScroll="False"
-                     AcceptsReturn="True"
-                     IsTabStop="True"
-                     AcceptsTab="True"
-                     Margin="0 0 0 22"
-                     BorderThickness="0 1 0 1" 
-                     Background="Transparent" 
-                     AutoWordSelection="False"
-                     IsInactiveSelectionHighlightEnabled="True"
-                     SpellCheck.SpellingReform="Postreform"
-                     Language="en"
-                     UndoLimit="1000"
-                     ap:HorizontalScrolling.UseHorizontalScrollingValue="True"
-                     ScrollViewer.PanningMode="VerticalFirst"
-                     HorizontalScrollBarVisibility="Visible"
-                     VerticalScrollBarVisibility="Visible"
-                     ScrollViewer.HorizontalScrollBarVisibility="Visible"
-                     ScrollViewer.VerticalScrollBarVisibility="Visible"
-                     Focusable="True" 
-                     Visibility="Visible" 
-                     Style="{DynamicResource REghZyTextEditorStyle}">
+                    DataContext="{Binding NotepadEditor, UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding Document.Contents, UpdateSourceTrigger=PropertyChanged}"
+                    FontSize="{Binding Format.FontSize, UpdateSourceTrigger=PropertyChanged}"
+                    FontFamily="{Binding Format.Font, UpdateSourceTrigger=PropertyChanged}"
+                    FontWeight="{Binding Format.Weight, UpdateSourceTrigger=PropertyChanged}"
+                    FontStyle="{Binding Format.Style, UpdateSourceTrigger=PropertyChanged}"
+                    TextDecorations="{Binding Format.Decoration, UpdateSourceTrigger=PropertyChanged}"
+                    TextWrapping="{Binding Format.Wrapping, UpdateSourceTrigger=PropertyChanged}"
+                    SelectionChanged="TextEditor_SelectionChanged"
+                    MouseWheel="TextEditor_MouseWheel"
+                    SizeChanged="TextEditor_SizeChanged"
+                    ScrollViewer.ScrollChanged="TextEditor_ScrollChanged"
+                    ScrollViewer.CanContentScroll="False"
+                    AcceptsReturn="True"
+                    IsTabStop="True"
+                    AcceptsTab="True"
+                    BorderThickness="0 1 0 1" 
+                    Background="Transparent" 
+                    AutoWordSelection="False"
+                    IsInactiveSelectionHighlightEnabled="True"
+                    SpellCheck.SpellingReform="Postreform"
+                    Language="en"
+                    UndoLimit="1000"
+                    ap:HorizontalScrolling.UseHorizontalScrollingValue="True"
+                    ScrollViewer.PanningMode="VerticalFirst"
+                    HorizontalScrollBarVisibility="Visible"
+                    VerticalScrollBarVisibility="Visible"
+                    ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                    ScrollViewer.VerticalScrollBarVisibility="Visible"
+                    Focusable="True" 
+                    Visibility="Visible" 
+                    Style="{DynamicResource REghZyTextEditorStyle}">
                     <editor:REghZyTextEditor.ContextMenu>
                         <ContextMenu OverridesDefaultStyle="False">
                             <MenuItem Header="Undo" InputGestureText="Ctrl + Z"         Command="ApplicationCommands.Undo"/>
@@ -126,7 +156,7 @@
                 <DockPanel Margin="0,0,15,0" DataContext="{Binding NotepadBar, Mode=OneTime}">
                     <Separator Style="{DynamicResource VerticalSeparator}" DockPanel.Dock="Right" Margin="2 0 0 0"/>
                     <TextBlock Padding="2" 
-                               Text="{Binding NotepadEditor.Document.FileSize, UpdateSourceTrigger=PropertyChanged}" 
+                               Text="{Binding NotepadEditor.Document.Length, UpdateSourceTrigger=PropertyChanged}"
                                VerticalAlignment="Center" 
                                DockPanel.Dock="Right"/>
                     <Separator Style="{DynamicResource VerticalSeparator}" DockPanel.Dock="Right"/>

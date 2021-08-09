@@ -8,7 +8,10 @@ namespace REghZyNotepad.Notepad {
         public DocumentViewModel Document { get; }
         public FormatViewModel Format { get; }
 
-        public NotepadEditorViewModel() {
+        public ITextSelectable TextSelector { get; }
+
+        public NotepadEditorViewModel(ITextSelectable textSelector) {
+            this.TextSelector = textSelector;
             this.Document = new DocumentViewModel();
             this.Format = new FormatViewModel();
         }
@@ -59,7 +62,7 @@ namespace REghZyNotepad.Notepad {
                 throw new NullReferenceException("This document didn't have a path");
             }
 
-            StreamWriter writer = new StreamWriter(path, false, Encoding.Unicode, (int) (this.Document.FileSize + 1));
+            StreamWriter writer = new StreamWriter(path, false, Encoding.Unicode, (int) (this.Document.Length + 1));
             writer.Write(this.Document.Contents);
             writer.Flush();
             writer.Close();

@@ -6,7 +6,7 @@ namespace REghZyNotepad.Notepad {
     public class DocumentViewModel : BaseViewModel {
         private string _contents;
         private string _filePath;
-        private long _fileSize;
+        private long _length;
 
         private bool _hasMadeChanges;
         public bool HasTextChangedSinceSave {
@@ -21,7 +21,7 @@ namespace REghZyNotepad.Notepad {
             get => _contents;
             set {
                 RaisePropertyChanged(ref this._contents, value);
-                this.FileSize = value.Length;
+                this.Length = value.Length;
                 if (!this._hasMadeChanges) {
                     this.HasTextChangedSinceSave = true;
                 }
@@ -52,8 +52,8 @@ namespace REghZyNotepad.Notepad {
             }
         }
 
-        public long FileSize {
-            get => _fileSize;
+        public long Length {
+            get => _length;
             set {
                 if (value < 0) {
                     throw new InvalidDataException("File size cannot be below 0");
@@ -62,7 +62,29 @@ namespace REghZyNotepad.Notepad {
                     throw new InvalidDataException("File size cannot exceed 41943040 bytes");
                 }
 
-                RaisePropertyChanged(ref this._fileSize, value);
+                RaisePropertyChanged(ref this._length, value);
+            }
+        }
+
+        public int GetTotalLines() {
+            string content = this.Contents;
+            if (content == null) {
+                return -1;
+            }
+
+            int nextIndex = content.IndexOf('\n');
+            if (nextIndex == -1) {
+                return 0;
+            }
+
+            int lineCount = 1;
+            while (true) {
+                nextIndex = content.IndexOf('\n', nextIndex + 1);
+                if (nextIndex == -1) {
+                    return lineCount + 1;
+                }
+
+                lineCount++;
             }
         }
     }

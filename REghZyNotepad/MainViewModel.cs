@@ -4,6 +4,7 @@ using System.Windows;
 using REghZyFramework.Utilities;
 using REghZyNotepad.Files;
 using REghZyNotepad.Notepad;
+using REghZyNotepad.Views;
 
 namespace REghZyNotepad {
     public class MainViewModel : BaseViewModel {
@@ -12,10 +13,11 @@ namespace REghZyNotepad {
         private NotepadEditorViewModel _notepadEditor;
         public NotepadEditorViewModel NotepadEditor {
             get => this._notepadEditor;
-            set => RaisePropertyChanged(ref this._notepadEditor, value);
+            set => RaisePropertyChanged(ref this._notepadEditor, value, this.ViewProvider.UpdateCurrentEditor);
         }
 
         public ITextSelectable TextSelector { get; }
+        public IViewProvider ViewProvider { get; }
 
         public Command NewFileCommand { get; }
         public Command OpenFileCommand { get; }
@@ -32,15 +34,21 @@ namespace REghZyNotepad {
 
         public Command ShowFormatCommand { get; }
 
-        public MainViewModel(ITextSelectable textSelector) {
+        public MainViewModel(IViewProvider viewProvider, ITextSelectable textSelector) {
+            this.ViewProvider = viewProvider;
             this.TextSelector = textSelector;
-            this.NotepadEditor = new NotepadEditorViewModel();
+            this.NotepadEditor = new NotepadEditorViewModel(this.TextSelector);
             this.NotepadBar = new NotepadBarViewModel(this.NotepadEditor);
             this.NewFileCommand = new Command(ClearDocument);
             this.OpenFileCommand = new Command(OpenDocumentWithDialog);
             this.SaveFileCommand = new Command(SaveDocumentAuto);
             this.SaveFileAsCommand = new Command(SaveDocumentAsAuto);
             this.ExitCommand = new Command(() => { Application.Current.Shutdown(); });
+
+            this.FindCommand = new Command(() => ViewProvider.OpenFindView(false));
+            this.ReplaceCommand = new Command(() => ViewProvider.OpenFindView(true));
+            this.ShowFormatCommand = new Command(() => ViewProvider.OpenFormatView());
+            this.GotoLineCommand = new Command(() => ViewProvider.OpenGotoLineView());
         }
 
         public void SaveDocumentAuto() {
@@ -68,7 +76,7 @@ namespace REghZyNotepad {
         }
 
         public void ClearDocument() {
-            this.NotepadEditor = new NotepadEditorViewModel();
+            this.NotepadEditor = new NotepadEditorViewModel(this.TextSelector);
         }
 
         public void OpenDocumentWithDialog() {
@@ -92,8 +100,8 @@ namespace REghZyNotepad {
         }
 
         public void UpdateBar() {
-            this.NotepadBar.Column = this.TextSelector.ColumnIndex;
-            this.NotepadBar.Line = this.TextSelector.LineIndex;
+            this.NotepadBar.Column = this.TextSelector.ColumnIndex + 1;
+            this.NotepadBar.Line = this.TextSelector.LineIndex + 1;
         }
 
         public void UpdateTitle() {

@@ -3,15 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:REghZyNotepad.Views" 
-        xmlns:sys="clr-namespace:System;assembly=mscorlib" 
-        xmlns:controls="clr-namespace:REghZyNotepad.Controls" 
-        xmlns:notepad="clr-namespace:REghZyNotepad.Notepad" 
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:notepad="clr-namespace:REghZyNotepad.Notepad"
         d:DataContext="{d:DesignInstance Type=notepad:NotepadEditorViewModel}"
         mc:Ignorable="d"
         Title="Format" 
         Width="450" Height="500"
-        KeyDown="Window_KeyDown"
         Style="{DynamicResource CustomWindowStyle}">
     <Window.Resources>
         <DropShadowBitmapEffect x:Key="NormalShadow" ShadowDepth="2" Softness="0.2" Opacity="0.64"/>
