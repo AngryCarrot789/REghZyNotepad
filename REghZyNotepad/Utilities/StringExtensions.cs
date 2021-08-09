@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace REghZyFramework.Utilities
-{
+namespace REghZyFramework.Utilities {
     /// <summary>
     /// A class i made that provides a bunch of helpful functions for "manipulating" strings
     /// </summary>
-    public static class StringExtensions
-    {
+    public static class StringExtensions {
         /// <summary>
         ///     Extracts the values (between the text of a and b) within value.
         ///     It returns the first occourance of the values of a and b.
@@ -19,15 +17,15 @@ namespace REghZyFramework.Utilities
         /// <param name="a"></param>
         /// <param name="b"></param>
         /// <returns></returns>
-        public static string Between(this string value, string a, string b)
-        {
-            try
-            {
+        public static string Between(this string value, string a, string b) {
+            try {
                 int posA = value.IndexOf(a);
-                if (posA == -1) return "";
+                if (posA == -1)
+                    return "";
 
                 int posB = value.IndexOf(b, posA);
-                if (posB == -1) return "";
+                if (posB == -1)
+                    return "";
 
                 return value.Extract(posA + a.Length, posB);
             }
@@ -40,10 +38,8 @@ namespace REghZyFramework.Utilities
         ///     Example: "hi there lol".Before("ere"); returns "hi th";
         /// </code>
         /// </summary>
-        public static string Before(this string value, string beforeThis)
-        {
-            try
-            {
+        public static string Before(this string value, string beforeThis) {
+            try {
                 int posBefore = value.IndexOf(beforeThis);
 
                 if (posBefore == -1)
@@ -60,10 +56,8 @@ namespace REghZyFramework.Utilities
         ///     Example: "hi there lol hehe".After("he"); returns "re lol hehe";
         /// </code>
         /// </summary>
-        public static string After(this string value, string afterThis)
-        {
-            try
-            {
+        public static string After(this string value, string afterThis) {
+            try {
                 int posAfter = value.IndexOf(afterThis);
 
                 if (posAfter == -1)
@@ -84,8 +78,7 @@ namespace REghZyFramework.Utilities
         /// </summary>
         /// <param name="text"></param>
         /// <returns></returns>
-        public static bool IsEmpty(this string text)
-        {
+        public static bool IsEmpty(this string text) {
             return string.IsNullOrEmpty(text);
         }
 
@@ -97,8 +90,7 @@ namespace REghZyFramework.Utilities
         /// <param name="str"></param>
         /// <param name="minimumLength"></param>
         /// <returns></returns>
-        public static bool IsLongEnough(this string str, int minimumLength)
-        {
+        public static bool IsLongEnough(this string str, int minimumLength) {
             return str.Length >= minimumLength;
         }
 
@@ -107,8 +99,7 @@ namespace REghZyFramework.Utilities
         /// </summary>
         /// <param name="character"></param>
         /// <returns></returns>
-        public static bool IsWord(this char character)
-        {
+        public static bool IsWord(this char character) {
             return char.IsLetterOrDigit(character) || character == '_';
         }
 
@@ -121,8 +112,7 @@ namespace REghZyFramework.Utilities
         /// <param name="length"></param>
         /// <param name="check">The value to be checked</param>
         /// <returns></returns>
-        public static bool CheckAfter(this string value, int startIndex, string check)
-        {
+        public static bool CheckAfter(this string value, int startIndex, string check) {
             return value.Extract(startIndex, check.Length) == check;
             //return value.IsLongEnough(startIndex + 1 + length) && value.Substring(startIndex, length) == check;
         }
@@ -133,11 +123,9 @@ namespace REghZyFramework.Utilities
         /// <param name="value">The value to be repeated</param>
         /// <param name="n">The number of times to repeat the value</param>
         /// <returns>A new string with the repeated text</returns>
-        public static string Repeat(this string value, int n)
-        {
+        public static string Repeat(this string value, int n) {
             string newValue = "";
-            for (int i = 0; i < n; i++)
-            {
+            for (int i = 0; i < n; i++) {
                 newValue += value;
             }
             return newValue;
@@ -149,11 +137,9 @@ namespace REghZyFramework.Utilities
         /// <param name="value">The character to be repeated</param>
         /// <param name="n">The number of times to repeat the value</param>
         /// <returns>A new string with the repeated text</returns>
-        public static string Repeat(this char value, int n)
-        {
+        public static string Repeat(this char value, int n) {
             string newValue = "";
-            for (int i = 0; i < n; i++)
-            {
+            for (int i = 0; i < n; i++) {
                 newValue += value;
             }
             return newValue;
@@ -166,8 +152,7 @@ namespace REghZyFramework.Utilities
         /// <param name="text">the text</param>
         /// <param name="length">The length of the string that will be returned</param>
         /// <returns></returns>
-        public static string EnsureLength(this string text, int length, char fillCharacter = ' ')
-        {
+        public static string EnsureLength(this string text, int length, char fillCharacter = ' ') {
             int repeatLength = length - text.Length;
             if (repeatLength == 0)
                 return text;
@@ -183,14 +168,25 @@ namespace REghZyFramework.Utilities
         /// <param name="value"></param>
         /// <param name="character"></param>
         /// <returns></returns>
-        public static int Count(this string value, char character)
-        {
-            int counts = 0;
-            for (int i = 0; i < value.Length; i++)
-            {
-                if (value[i] == character) counts++;
+        public static int Count(this string value, char character) {
+            if (value == null) {
+                return 0;
             }
-            return counts;
+
+            int nextIndex = value.IndexOf(character);
+            if (nextIndex == -1) {
+                return 0;
+            }
+
+            int charCount = 1;
+            while (true) {
+                nextIndex = value.IndexOf(character, nextIndex + 1);
+                if (nextIndex == -1) {
+                    return charCount;
+                }
+
+                charCount++;
+            }
         }
 
         /// <summary>
@@ -198,8 +194,7 @@ namespace REghZyFramework.Utilities
         /// </summary>
         /// <param name="value"></param>
         /// <returns>A string where all occourances of whitespaces are always 1 character long</returns>
-        public static string CollapseWhitespaces(this string value)
-        {
+        public static string CollapseWhitespaces(this string value) {
             //return Regex.Replace(value, @"\s+", " ");
             return value.CollapseCharacter(' ');
         }
@@ -209,12 +204,10 @@ namespace REghZyFramework.Utilities
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string CollapseCharacter(this string value, char character)
-        {
+        public static string CollapseCharacter(this string value, char character) {
             string[] values = value.Split(character);
             List<string> newValues = new List<string>(values.Length);
-            for (int i = 0; i < values.Length; i++)
-            {
+            for (int i = 0; i < values.Length; i++) {
                 string val = values[i];
                 if (val.Trim() == string.Empty)
                     continue;
@@ -230,8 +223,7 @@ namespace REghZyFramework.Utilities
         /// <param name="startIndex">The start of the extraction</param>
         /// <param name="endIndex">The end of the extraction</param>
         /// <returns>The text between <paramref name="startIndex"/> and <paramref name="endIndex"/> within <paramref name="value"/></returns>
-        public static string Extract(this string value, int startIndex, int endIndex)
-        {
+        public static string Extract(this string value, int startIndex, int endIndex) {
             return value.Substring(startIndex, Math.Min(endIndex - startIndex, value.Length));
         }
 
@@ -243,29 +235,23 @@ namespace REghZyFramework.Utilities
         /// <param name="oldText">Replace this text...</param>
         /// <param name="newText">with this tex</param>
         /// <returns></returns>
-        public static string ReplaceAll(this string text, string oldText, string newText)
-        {
-            if (text.IsEmpty())
-            {
+        public static string ReplaceAll(this string text, string oldText, string newText) {
+            if (text.IsEmpty()) {
                 return text;
             }
 
             int currentIndex = 0;
-            while (true)
-            {
+            while (true) {
                 int position = text.IndexOf(oldText, currentIndex);
-                if (position == -1)
-                {
+                if (position == -1) {
                     return text;
                 }
                 int indexAfter = position + oldText.Length;
-                if ((position == 0 || !IsWord(text[position - 1])) && (indexAfter == text.Length || !IsWord(text[indexAfter])))
-                {
+                if ((position == 0 || !IsWord(text[position - 1])) && (indexAfter == text.Length || !IsWord(text[indexAfter]))) {
                     text = text.Substring(0, position) + newText + text.Substring(indexAfter);
                     currentIndex = position + newText.Length;
                 }
-                else
-                {
+                else {
                     currentIndex = position + oldText.Length;
                 }
             }
@@ -278,8 +264,7 @@ namespace REghZyFramework.Utilities
         /// <param name="oldText">Replace the last occourance of this...</param>
         /// <param name="newText">with this</param>
         /// <returns></returns>
-        public static string ReplaceLast(this string text, string oldText, string newText)
-        {
+        public static string ReplaceLast(this string text, string oldText, string newText) {
             int place = text.LastIndexOf(oldText);
 
             if (place == -1)
@@ -295,8 +280,7 @@ namespace REghZyFramework.Utilities
         /// <param name="oldText">Replace the last occourance of this...</param>
         /// <param name="newText">with this</param>
         /// <returns></returns>
-        public static string ReplaceFirst(this string text, string oldText, string newText)
-        {
+        public static string ReplaceFirst(this string text, string oldText, string newText) {
             int place = text.IndexOf(oldText);
 
             if (place == -1)
@@ -312,8 +296,7 @@ namespace REghZyFramework.Utilities
         /// <param name="oldText">Replace the last occourance of this...</param>
         /// <param name="newText">with this</param>
         /// <returns></returns>
-        public static string Replace(this string text, string oldText, string newText, int startIndex)
-        {
+        public static string Replace(this string text, string oldText, string newText, int startIndex) {
             int place = text.IndexOf(oldText, startIndex);
 
             if (place == -1)
@@ -322,11 +305,9 @@ namespace REghZyFramework.Utilities
             return text.Remove(place, oldText.Length).Insert(place, newText);
         }
 
-        public static string EfficientToLower(this string value)
-        {
+        public static string EfficientToLower(this string value) {
             string output = "";
-            for (int i = 0; i < value.Length; i++)
-            {
+            for (int i = 0; i < value.Length; i++) {
                 char character = value[i];
                 if (character > 96 && character < 123)
                     output += (char)(character + 32);
@@ -337,11 +318,9 @@ namespace REghZyFramework.Utilities
             return output;
         }
 
-        public static string EfficientToUpper(this string value)
-        {
+        public static string EfficientToUpper(this string value) {
             string output = "";
-            for (int i = 0; i < value.Length; i++)
-            {
+            for (int i = 0; i < value.Length; i++) {
                 char character = value[i];
                 if (character > 96 && character < 123)
                     output += (char)(character - 32);
@@ -352,13 +331,11 @@ namespace REghZyFramework.Utilities
             return output;
         }
 
-        public static bool IsLowercase(this char character)
-        {
+        public static bool IsLowercase(this char character) {
             return character > 96 && character < 123;
         }
 
-        public static bool IsUppercase(this char character)
-        {
+        public static bool IsUppercase(this char character) {
             return character > 96 && character < 123;
         }
     }

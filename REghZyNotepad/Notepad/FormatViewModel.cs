@@ -84,6 +84,7 @@ namespace REghZyNotepad.Notepad {
             this.FontSize = fontSize;
             this.Style = FontStyles.Normal;
             this.Weight = FontWeights.Normal;
+            this.IsWrapped = false;
         }
     }
 }

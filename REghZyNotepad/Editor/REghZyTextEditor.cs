@@ -266,13 +266,24 @@ namespace REghZyNotepad.Editor {
         }
 
         public int CountCharacters(string text, char character) {
-            int count = 0;
-            for (int i = 0; i < text.Length; i++) {
-                if (text[i] == character) {
-                    count++;
-                }
+            if (text == null) {
+                return 0;
             }
-            return count;
+
+            int nextIndex = text.IndexOf(character);
+            if (nextIndex == -1) {
+                return 0;
+            }
+
+            int charCount = 1;
+            while (true) {
+                nextIndex = text.IndexOf(character, nextIndex + 1);
+                if (nextIndex == -1) {
+                    return charCount;
+                }
+
+                charCount++;
+            }
         }
 
         public int CustomGetLineCount() {

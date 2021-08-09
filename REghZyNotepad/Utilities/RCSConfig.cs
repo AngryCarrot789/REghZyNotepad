@@ -24,7 +24,7 @@ namespace REghZyFramework.Utilities {
     /// </summary>
     public class RCSConfig {
         public const string DEFAULT_CONFIG_FILE_NAME = "config";
-        public const string DEFAULT_CONFIG_DIRECTORY_NAME = "REghZyWPFTemplateFull";
+        public const string DEFAULT_CONFIG_DIRECTORY_NAME = "REghZyApps";
 
         public Dictionary<string, string> StringValues { get; set; }
         public Dictionary<string, List<string>> ListValues { get; set; }
@@ -89,7 +89,7 @@ namespace REghZyFramework.Utilities {
                 Load(fullPath);
             }
             else {
-                File.WriteAllText(fullPath, " ");
+                File.WriteAllText(fullPath, "");
                 ConfigPath = fullPath;
             }
         }
@@ -331,12 +331,12 @@ namespace REghZyFramework.Utilities {
         /// </summary>
         /// <param name="fieldName"></param>
         /// <param name="fieldValue"></param>
-        public void SetString(string fieldName, string fieldValue, bool addIfNotFound = true) {
+        public void SetString(string fieldName, string fieldValue, bool replaceIfNotFound = true) {
             if (TryGetString(fieldName, out string unused)) {
                 StringValues[fieldName] = fieldValue;
             }
-            else if (addIfNotFound) {
-                StringValues.Add(fieldName, fieldValue);
+            else if (replaceIfNotFound) {
+                StringValues[fieldName] = fieldValue;
             }
         }
 
@@ -347,21 +347,21 @@ namespace REghZyFramework.Utilities {
         /// <param name="fieldName"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public void SetEnum<TEnum>(string fieldName, TEnum enumValue, bool addIfNotFound = true) where TEnum : struct {
+        public void SetEnum<TEnum>(string fieldName, TEnum enumValue, bool replaceIfNotFound = true) where TEnum : struct {
             if (TryGetString(fieldName, out string unused)) {
                 StringValues[fieldName] = enumValue.ToString();
             }
-            else if (addIfNotFound) {
-                StringValues.Add(fieldName, enumValue.ToString());
+            else if (replaceIfNotFound) {
+                StringValues[fieldName] = enumValue.ToString();
             }
         }
 
-        public void SetInteger(string fieldName, int fieldValue, bool addIfNotFound = true) {
-            SetString(fieldName, fieldValue.ToString(), addIfNotFound);
+        public void SetInteger(string fieldName, int fieldValue, bool replaceIfNotFound = true) {
+            SetString(fieldName, fieldValue.ToString(), replaceIfNotFound);
         }
 
-        public void SetBoolean(string fieldName, bool fieldValue, bool addIfNotFound = true) {
-            SetString(fieldName, fieldValue.ToString(), addIfNotFound);
+        public void SetBoolean(string fieldName, bool fieldValue, bool replaceIfNotFound = true) {
+            SetString(fieldName, fieldValue.ToString(), replaceIfNotFound);
         }
 
         /// <summary>
@@ -376,7 +376,7 @@ namespace REghZyFramework.Utilities {
                 ListValues[fieldName] = fieldValues;
             }
             else if (addIfNotFound) {
-                ListValues.Add(fieldName, fieldValues);
+                ListValues[fieldName] = fieldValues;
             }
         }
 

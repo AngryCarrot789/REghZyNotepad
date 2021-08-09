@@ -42,6 +42,30 @@ namespace REghZyNotepad {
             this.FormatWindow = new FormatWindow();
             this.AboutWindow = new AboutWindow();
             this.Model = new MainViewModel(this, this);
+            // WPF's builtin settings thing sometimes doesnt load when the main window opens so i made my own :)))))
+            RCSConfig.Main = new RCSConfig("reghzy-notepad");
+            if (!RCSConfig.Main.TryGetBoolean("first-time-setup-complete", out bool hasSetup) || !hasSetup) {
+                RCSConfig.Main.SetBoolean("save-location", true);
+                RCSConfig.Main.SetBoolean("load-location", true);
+                RCSConfig.Main.SetBoolean("save-size", true);
+                RCSConfig.Main.SetBoolean("load-size", true);
+                RCSConfig.Main.SetBoolean("save-theme", true);
+                RCSConfig.Main.SetBoolean("load-theme", true);
+                RCSConfig.Main.SetBoolean("first-time-setup-complete", true);
+            }
+            if (RCSConfig.Main.TryGetBoolean("load-location", out bool saveLocation) && saveLocation) {
+                if (RCSConfig.Main.TryGetInteger("last-x", out int x)) { this.Left = x; }
+                if (RCSConfig.Main.TryGetInteger("last-y", out int y)) { this.Top = y; }
+            }
+            if (RCSConfig.Main.TryGetBoolean("load-size", out bool saveSize) && saveSize) {
+                if (RCSConfig.Main.TryGetInteger("last-w", out int w)) { this.Width = w; }
+                if (RCSConfig.Main.TryGetInteger("last-h", out int h)) { this.Height = h; }
+            }
+            if (RCSConfig.Main.TryGetBoolean("load-theme", out bool saveTheme) && saveTheme) {
+                if (RCSConfig.Main.TryGetEnum("theme", out ThemeType theme)) { ThemesController.SetTheme(theme); }
+            }
+
+            RCSConfig.Main.SaveConfig();
         }
 
         public int GetCharIndexWithinLine(int line) {
@@ -124,26 +148,58 @@ namespace REghZyNotepad {
         }
 
         protected override void OnClosing(CancelEventArgs e) {
+            if (this.Model.NotepadEditor.Document.HasTextChangedSinceSave) {
+                if (MessageBox.Show(
+                    "You have unsaved changes. Do you want to save them?", 
+                    "Save changes?", 
+                    MessageBoxButton.YesNo, 
+                    MessageBoxImage.Warning, 
+                    MessageBoxResult.No) == MessageBoxResult.Yes) {
+                    this.Model.SaveDocumentAuto();
+                }
+            }
+
+            if (RCSConfig.Main.TryGetBoolean("save-location", out bool saveLocation) && saveLocation) {
+                RCSConfig.Main.SetInteger("last-x", (int) this.Left);
+                RCSConfig.Main.SetInteger("last-y", (int) this.Top);
+            }
+            if (RCSConfig.Main.TryGetBoolean("save-size", out bool saveSize) && saveSize) {
+                RCSConfig.Main.SetInteger("last-w", (int)this.Width);
+                RCSConfig.Main.SetInteger("last-h", (int)this.Height);
+            }
+            if (RCSConfig.Main.TryGetBoolean("save-theme", out bool saveTheme) && saveTheme) {
+                RCSConfig.Main.SetEnum("theme", ThemesController.CurrentTheme);
+            }
+
             this.AboutWindow.Close();
             this.FormatWindow.Close();
             base.OnClosing(e);
             Application.Current.Shutdown();
+            RCSConfig.Main.SaveConfig();
         }
 
         private void ChangeTheme(object sender, RoutedEventArgs e) {
+            ThemeType theme;
             switch (int.Parse(((MenuItem)sender).Uid)) {
                 case 0:
-                    ThemesController.SetTheme(ThemeType.Light);
+                    theme = ThemeType.Light;
                     break;
                 case 1:
-                    ThemesController.SetTheme(ThemeType.ColourfulLight);
+                    theme = ThemeType.ColourfulLight;
                     break;
                 case 2:
-                    ThemesController.SetTheme(ThemeType.Dark);
+                    theme = ThemeType.Dark;
                     break;
                 case 3:
-                    ThemesController.SetTheme(ThemeType.ColourfulDark);
+                    theme = ThemeType.ColourfulDark;
                     break;
+                default: 
+                    return;
+            }
+
+            ThemesController.SetTheme(theme);
+            if (RCSConfig.Main.TryGetBoolean("save-theme", out bool saveTheme) && saveTheme) {
+                RCSConfig.Main.SetEnum("theme", theme);
             }
         }
     }

@@ -34,7 +34,7 @@ namespace REghZyNotepad.Files {
         public static string SaveFile() {
             SaveFileDialog dialog = new SaveFileDialog() {
                 Title = "Select a file to save",
-                FileName = "new.txt",
+                FileName = "Untitled.txt",
                 Filter = FILTERS,
                 FilterIndex = 0
             };

@@ -59,39 +59,54 @@
         <Grid.RowDefinitions>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="25*"/>
-            <ColumnDefinition Width="5"/>
-            <ColumnDefinition Width="30*"/>
-        </Grid.ColumnDefinitions>
-        <GroupBox Header="Font">
+        <GroupBox Header="Font" HorizontalAlignment="Left" Width="197">
             <ListBox ItemsSource="{Binding Source={StaticResource FontFamilyOptions}}" SelectedItem="{Binding Format.Font, UpdateSourceTrigger=PropertyChanged}"/>
         </GroupBox>
-        <Grid Grid.Column="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="140"/>
-                <RowDefinition Height="5"/>
-                <RowDefinition Height="4*"/>
-                <RowDefinition Height="5"/>
-                <RowDefinition Height="5*"/>
-            </Grid.RowDefinitions>
+        <Grid Margin="202,0,0,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <GroupBox Header="Font Style">
-                <ListBox ItemsSource="{Binding Source={StaticResource FontStyleOptions}}" SelectedItem="{Binding Format.Style, UpdateSourceTrigger=PropertyChanged}"/>
+            <GroupBox Header="Font Style" Height="99" VerticalAlignment="Top">
+                <ListBox ItemsSource="{Binding Source={StaticResource FontStyleOptions}}" SelectedItem="{Binding Format.Style, UpdateSourceTrigger=PropertyChanged}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" FontStyle="{Binding}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </GroupBox>
-            <GroupBox Header="Font Size" Grid.Column="2" Grid.RowSpan="5">
+            <GroupBox Header="Font Size" Grid.Column="2" Height="325" VerticalAlignment="Top">
                 <ListBox ItemsSource="{Binding Source={StaticResource FontSizeOptions}}" SelectedItem="{Binding Format.FontSize, UpdateSourceTrigger=PropertyChanged}"/>
             </GroupBox>
-            <GroupBox Header="Font Weight" Grid.Row="2">
-                <ListBox ItemsSource="{Binding Source={StaticResource FontWeightOptions}}" SelectedItem="{Binding Format.Weight, UpdateSourceTrigger=PropertyChanged}"/>
+            <GroupBox Header="Font Weight" Margin="0,104,0,0" Height="99" VerticalAlignment="Top">
+                <ListBox ItemsSource="{Binding Source={StaticResource FontWeightOptions}}" SelectedItem="{Binding Format.Weight, UpdateSourceTrigger=PropertyChanged}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" FontWeight="{Binding}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </GroupBox>
-            <GroupBox Header="Text Decorations" Grid.Row="4">
-                <ListBox ItemsSource="{Binding Source={StaticResource TextDeocrationOptions}}" SelectedItem="{Binding Format.DecorationString, UpdateSourceTrigger=PropertyChanged}"/>
+            <GroupBox Header="Text Decorations" Margin="0,208,0,0" Height="135" VerticalAlignment="Top">
+                <ListBox ItemsSource="{Binding Source={StaticResource TextDeocrationOptions}}" SelectedItem="{Binding Format.DecorationString, UpdateSourceTrigger=PropertyChanged}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" TextDecorations="{Binding}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </GroupBox>
+            <GroupBox Header="Example" Margin="0,343,0,0" Grid.ColumnSpan="3" Style="{DynamicResource OriginalGroupBox}">
+                <TextBlock Text="AaBb Yy Z z" VerticalAlignment="Center" HorizontalAlignment="Center"
+                           TextDecorations="{Binding Format.DecorationString, UpdateSourceTrigger=PropertyChanged}"
+                           FontWeight="{Binding Format.Weight, UpdateSourceTrigger=PropertyChanged}"
+                           FontStyle="{Binding Format.Style, UpdateSourceTrigger=PropertyChanged}"
+                           FontFamily="{Binding Format.Font, UpdateSourceTrigger=PropertyChanged}"
+                           FontSize="{Binding Format.FontSize, UpdateSourceTrigger=PropertyChanged}"/>
+            </GroupBox>
+            <CheckBox IsChecked="{Binding Format.IsWrapped, UpdateSourceTrigger=PropertyChanged}" Content="Word Wrapping" Grid.Column="2" Margin="0,328,0,79"/>
         </Grid>
     </Grid>
 </Window>

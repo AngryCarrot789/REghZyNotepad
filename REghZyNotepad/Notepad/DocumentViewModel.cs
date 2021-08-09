@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using REghZyFramework.Utilities;
 
 namespace REghZyNotepad.Notepad {
@@ -7,6 +8,7 @@ namespace REghZyNotepad.Notepad {
         private string _contents;
         private string _filePath;
         private long _length;
+        private long _wordCount;
 
         private bool _hasMadeChanges;
         public bool HasTextChangedSinceSave {
@@ -55,14 +57,19 @@ namespace REghZyNotepad.Notepad {
         public long Length {
             get => _length;
             set {
-                if (value < 0) {
-                    throw new InvalidDataException("File size cannot be below 0");
-                }
                 if (value > 41943040) {
                     throw new InvalidDataException("File size cannot exceed 41943040 bytes");
                 }
 
+                this.WordCount = CountWords();
                 RaisePropertyChanged(ref this._length, value);
+            }
+        }
+
+        public long WordCount {
+            get => _wordCount;
+            set {
+                RaisePropertyChanged(ref this._wordCount, value);
             }
         }
 
@@ -86,6 +93,29 @@ namespace REghZyNotepad.Notepad {
 
                 lineCount++;
             }
+        }
+
+        public int CountWords() {
+            string text = this.Contents.Trim();
+            if (string.IsNullOrEmpty(text))
+                return 0;
+
+            int count = 0;
+            bool lastWasWordChar = false;
+            foreach (char c in text) {
+                if (char.IsLetterOrDigit(c) || c == '_' || c == '\'' || c == '-') {
+                    lastWasWordChar = true;
+                    continue;
+                }
+                if (lastWasWordChar) {
+                    lastWasWordChar = false;
+                    count++;
+                }
+            }
+            if (!lastWasWordChar)
+                count--;
+
+            return count + 1;
         }
     }
 }

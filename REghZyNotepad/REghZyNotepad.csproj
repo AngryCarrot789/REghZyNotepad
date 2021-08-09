@@ -57,6 +57,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AttachedProperties\HorizontalScrolling.cs" />
+    <Compile Include="Controls\ItemSelector.xaml.cs">
+      <DependentUpon>ItemSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\NumberAddConverter.cs" />
     <Compile Include="Converters\WindowTitleConverter.cs" />
     <Compile Include="Editor\REghZyTextEditor.cs" />
     <Compile Include="Files\DialogHelper.cs" />
@@ -98,6 +102,10 @@
       <DependentUpon>FormatWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\IViewProvider.cs" />
+    <Page Include="Controls\ItemSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Editor\REghZyTextEditorStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -166,6 +174,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Finding\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

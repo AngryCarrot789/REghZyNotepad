@@ -100,8 +100,8 @@ namespace REghZyNotepad {
         }
 
         public void UpdateBar() {
-            this.NotepadBar.Column = this.TextSelector.ColumnIndex + 1;
-            this.NotepadBar.Line = this.TextSelector.LineIndex + 1;
+            this.NotepadBar.Column = this.TextSelector.ColumnIndex;
+            this.NotepadBar.Line = this.TextSelector.LineIndex;
         }
 
         public void UpdateTitle() {

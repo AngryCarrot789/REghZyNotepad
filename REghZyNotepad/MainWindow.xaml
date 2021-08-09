@@ -8,7 +8,7 @@
         xmlns:ap="clr-namespace:REghZyNotepad.AttachedProperties"
         xmlns:Converters="clr-namespace:REghZyNotepad.Converters"
         mc:Ignorable="d" 
-        Width="703" Height="479"
+        Width="720" Height="560"
         ResizeMode="CanResizeWithGrip"
         Style="{DynamicResource CustomWindowStyle}"
         d:DataContext="{d:DesignInstance {x:Type local:MainViewModel}}">
@@ -152,11 +152,16 @@
                         IsHitTestVisible="False"/>
             </Grid>
             <Grid VerticalAlignment="Bottom" Height="22" Background="{DynamicResource ControlDefaultBackground}">
-                <Border HorizontalAlignment="Right" Width="15" Background="{DynamicResource ControlDefaultBorderBrush}"/>
-                <DockPanel Margin="0,0,15,0" DataContext="{Binding NotepadBar, Mode=OneTime}">
-                    <Separator Style="{DynamicResource VerticalSeparator}" DockPanel.Dock="Right" Margin="2 0 0 0"/>
-                    <TextBlock Padding="2" 
-                               Text="{Binding NotepadEditor.Document.Length, UpdateSourceTrigger=PropertyChanged}"
+                <DockPanel DataContext="{Binding NotepadBar, Mode=OneTime}" >
+                    <DockPanel.Resources>
+                        <Converters:NumberAddConverter x:Key="AddNumber"/>
+                    </DockPanel.Resources>
+                    <TextBlock Padding="2" FontFamily="Consolas"
+                               Text="{Binding NotepadEditor.Document.WordCount, UpdateSourceTrigger=PropertyChanged, StringFormat={}({0} words)}"
+                               VerticalAlignment="Center" 
+                               DockPanel.Dock="Right"/>
+                    <TextBlock Padding="2" FontFamily="Consolas"
+                               Text="{Binding NotepadEditor.Document.Length, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0} chars}"
                                VerticalAlignment="Center" 
                                DockPanel.Dock="Right"/>
                     <Separator Style="{DynamicResource VerticalSeparator}" DockPanel.Dock="Right"/>
@@ -171,16 +176,29 @@
                                VerticalAlignment="Center"
                                DockPanel.Dock="Right"/>
                     <Separator Style="{DynamicResource VerticalSeparator}" DockPanel.Dock="Right"/>
-                    <TextBlock Padding="0 0 2 0" Text="{Binding Column, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" DockPanel.Dock="Right"/>
-                    <TextBlock Padding="0" Text="C" VerticalAlignment="Center" DockPanel.Dock="Right"/>
-                    <TextBlock Padding="0" Text=", " VerticalAlignment="Center" DockPanel.Dock="Right"/>
-                    <TextBlock Padding="0" Text="{Binding Line, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" DockPanel.Dock="Right"/>
-                    <TextBlock Padding="2 0 0 0" Text="L" VerticalAlignment="Center" DockPanel.Dock="Right"/>
-                    <Separator Style="{DynamicResource VerticalSeparator}" DockPanel.Dock="Right"/>
-                    <TextBlock Padding="4 2 2 2" 
-                               Text="{Binding NotepadEditor.Document.FilePath, UpdateSourceTrigger=PropertyChanged}"
+                    <TextBlock Padding="0 0 2 0" FontFamily="Consolas"
+                               Text="{Binding Column, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource AddNumber}}" 
                                VerticalAlignment="Center" 
-                               HorizontalAlignment="Stretch"/>
+                               DockPanel.Dock="Right"
+                               ToolTip="The zero-based line index that the carex is located on"/>
+                    <TextBlock Padding="0" FontFamily="Consolas" Text="C" VerticalAlignment="Center" DockPanel.Dock="Right"/>
+                    <TextBlock Padding="0"  Text=", " VerticalAlignment="Center" DockPanel.Dock="Right"/>
+                    <TextBlock Padding="0" FontFamily="Consolas"
+                               Text="{Binding Line, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource AddNumber}}" 
+                               VerticalAlignment="Center" 
+                               DockPanel.Dock="Right"
+                               ToolTip="The zero-based line index that the carex is located on"/>
+                    <TextBlock Padding="2 0 0 0" FontFamily="Consolas" Text="L" VerticalAlignment="Center" DockPanel.Dock="Right"/>
+                    <Separator Style="{DynamicResource VerticalSeparator}" DockPanel.Dock="Right" Margin="1 0 2 0"/>
+                    <TextBox Padding="2 2 2 2" BorderThickness="0"
+                             Background="Transparent"
+                             VerticalContentAlignment="Center"
+                             IsReadOnly="True"
+                             FontFamily="Consolas"
+                             Text="{Binding NotepadEditor.Document.FilePath, UpdateSourceTrigger=PropertyChanged}"
+                             VerticalAlignment="Center" 
+                             HorizontalAlignment="Stretch"
+                             ToolTip="The path to the file that is currently opened"/>
                 </DockPanel>
             </Grid>
         </Grid>
