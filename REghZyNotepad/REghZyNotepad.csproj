@@ -57,7 +57,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AttachedProperties\HorizontalScrolling.cs" />
-    <Compile Include="Converters\LineColumnConverter.cs" />
+    <Compile Include="Converters\WindowTitleConverter.cs" />
     <Compile Include="Editor\REghZyTextEditor.cs" />
     <Compile Include="Files\DialogHelper.cs" />
     <Compile Include="MainViewModel.cs" />
@@ -87,6 +87,12 @@
     <Compile Include="Utilities\RCSConfig.cs" />
     <Compile Include="Utilities\ScrollViewerHelper.cs" />
     <Compile Include="Utilities\StringExtensions.cs" />
+    <Compile Include="Views\Dialogs\GotoLineDialog.xaml.cs">
+      <DependentUpon>GotoLineDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormatWindow.xaml.cs">
+      <DependentUpon>FormatWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Editor\REghZyTextEditorStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -119,6 +125,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Dialogs\GotoLineDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FormatWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -146,8 +160,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Dialogs\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

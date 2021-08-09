@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Windows;
 using REghZyFramework.Utilities;
 using REghZyNotepad.Files;
 using REghZyNotepad.Notepad;
@@ -39,7 +40,7 @@ namespace REghZyNotepad {
             this.OpenFileCommand = new Command(OpenDocumentWithDialog);
             this.SaveFileCommand = new Command(SaveDocumentAuto);
             this.SaveFileAsCommand = new Command(SaveDocumentAsAuto);
-            this.ExitCommand = new Command(() => { Environment.Exit(0); });
+            this.ExitCommand = new Command(() => { Application.Current.Shutdown(); });
         }
 
         public void SaveDocumentAuto() {
@@ -53,6 +54,8 @@ namespace REghZyNotepad {
             else {
                 this.NotepadEditor.SaveDocument();
             }
+
+            UpdateTitle();
         }
 
         public void SaveDocumentAsAuto() {
@@ -91,6 +94,10 @@ namespace REghZyNotepad {
         public void UpdateBar() {
             this.NotepadBar.Column = this.TextSelector.ColumnIndex;
             this.NotepadBar.Line = this.TextSelector.LineIndex;
+        }
+
+        public void UpdateTitle() {
+            this.NotepadEditor.Document.FilePath = this.NotepadEditor.Document.FilePath;
         }
     }
 }

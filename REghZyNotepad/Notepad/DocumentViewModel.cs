@@ -8,11 +8,23 @@ namespace REghZyNotepad.Notepad {
         private string _filePath;
         private long _fileSize;
 
+        private bool _hasMadeChanges;
+        public bool HasTextChangedSinceSave {
+            get => this._hasMadeChanges;
+            set {
+                RaisePropertyChanged(ref this._hasMadeChanges, value);
+                this.FilePath = this.FilePath;
+            }
+        }
+
         public string Contents {
             get => _contents;
             set {
                 RaisePropertyChanged(ref this._contents, value);
                 this.FileSize = value.Length;
+                if (!this._hasMadeChanges) {
+                    this.HasTextChangedSinceSave = true;
+                }
             }
         }
 

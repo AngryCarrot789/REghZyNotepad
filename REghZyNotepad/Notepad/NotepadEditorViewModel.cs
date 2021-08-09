@@ -45,6 +45,7 @@ namespace REghZyNotepad.Notepad {
 
             this.Document.FilePath = path;
             this.Document.Contents = contentBuilder.ToString();
+            this.Document.HasTextChangedSinceSave = false;
         }
 
         public void SaveDocumentTo(string path) {
@@ -63,6 +64,7 @@ namespace REghZyNotepad.Notepad {
             writer.Flush();
             writer.Close();
             writer.Dispose();
+            this.Document.HasTextChangedSinceSave = false;
         }
     }
 }

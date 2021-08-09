@@ -6,12 +6,28 @@
         xmlns:local="clr-namespace:REghZyNotepad" 
         xmlns:editor="clr-namespace:REghZyNotepad.Editor"
         xmlns:ap="clr-namespace:REghZyNotepad.AttachedProperties"
-        mc:Ignorable="d"
-        Title="REghZy Notepad" 
-        Width="600" Height="450"
+        xmlns:Converters="clr-namespace:REghZyNotepad.Converters"
+        mc:Ignorable="d" 
+        Width="703" Height="479"
         ResizeMode="CanResizeWithGrip"
         Style="{DynamicResource CustomWindowStyle}"
-        d:DataContext="{d:DesignInstance local:MainViewModel}">
+        d:DataContext="{d:DesignInstance {x:Type local:MainViewModel}}">
+    <Window.Resources>
+        <Converters:WindowTitleConverter x:Key="TitleConverter"/>
+    </Window.Resources>
+    <Window.Title>
+        <MultiBinding Converter="{StaticResource TitleConverter}">
+            <Binding Path="NotepadEditor.Document.HasTextChangedSinceSave" UpdateSourceTrigger="PropertyChanged"/>
+            <Binding Path="NotepadEditor.Document.FilePath" UpdateSourceTrigger="PropertyChanged"/>
+        </MultiBinding>
+    </Window.Title>
+    <Window.InputBindings>
+        <KeyBinding Key="Esc" Command="{Binding ExitCommand, Mode=OneTime}"/>
+        <KeyBinding Key="N" Modifiers="Ctrl"  Command="{Binding NewFileCommand, Mode=OneTime}"/>
+        <KeyBinding Key="O" Modifiers="Ctrl"  Command="{Binding OpenFileCommand, Mode=OneTime}"/>
+        <KeyBinding Key="S" Modifiers="Ctrl"  Command="{Binding SaveFileCommand, Mode=OneTime}"/>
+        <KeyBinding Key="S" Modifiers="Ctrl + Shift" Command="{Binding SaveFileAsCommand, Mode=OneTime}"/>
+    </Window.InputBindings>
     <Grid>
         <Menu VerticalAlignment="Top" Height="18" Background="{DynamicResource ControlDefaultBackground}">
             <MenuItem Header="File">
@@ -47,12 +63,14 @@
             </MenuItem>
         </Menu>
         <Grid Margin="0,18,0,0">
-            <editor:REghZyTextEditor x:Name="TextEditor"
+            <Grid>
+                <editor:REghZyTextEditor x:Name="TextEditor"
                      DataContext="{Binding NotepadEditor, UpdateSourceTrigger=PropertyChanged}"
                      Text="{Binding Document.Contents, UpdateSourceTrigger=PropertyChanged}"
                      FontSize="{Binding Format.FontSize, UpdateSourceTrigger=PropertyChanged}"
                      FontFamily="{Binding Format.Font, UpdateSourceTrigger=PropertyChanged}"
                      FontWeight="{Binding Format.Weight, UpdateSourceTrigger=PropertyChanged}"
+                     FontStyle="{Binding Format.Style, UpdateSourceTrigger=PropertyChanged}"
                      TextDecorations="{Binding Format.Decoration, UpdateSourceTrigger=PropertyChanged}"
                      TextWrapping="{Binding Format.Wrapping, UpdateSourceTrigger=PropertyChanged}"
                      SelectionChanged="TextEditor_SelectionChanged"
@@ -76,7 +94,33 @@
                      ScrollViewer.VerticalScrollBarVisibility="Visible"
                      Focusable="True" 
                      Visibility="Visible" 
-                     Style="{DynamicResource REghZyTextEditorStyle}"/>
+                     Style="{DynamicResource REghZyTextEditorStyle}">
+                    <editor:REghZyTextEditor.ContextMenu>
+                        <ContextMenu OverridesDefaultStyle="False">
+                            <MenuItem Header="Undo" InputGestureText="Ctrl + Z"         Command="ApplicationCommands.Undo"/>
+                            <MenuItem Header="Redo" InputGestureText="Ctrl + Shift + Z" Command="ApplicationCommands.Redo"/>
+                            <Separator Style="{DynamicResource MenuItemSeparator}"/>
+                            <MenuItem Header="Cut"    InputGestureText="Ctrl + X" Command="ApplicationCommands.Cut"/>
+                            <MenuItem Header="Copy"   InputGestureText="Ctrl + C" Command="ApplicationCommands.Copy"/>
+                            <MenuItem Header="Paste"  InputGestureText="Ctrl + V" Command="ApplicationCommands.Paste"/>
+                            <MenuItem Header="Delete" InputGestureText="Del"      Command="ApplicationCommands.Delete"/>
+                        </ContextMenu>
+                    </editor:REghZyTextEditor.ContextMenu>
+                    <editor:REghZyTextEditor.InputBindings>
+                        <KeyBinding Key="Z" Modifiers="Ctrl+Shift" Command="ApplicationCommands.Redo"/>
+                    </editor:REghZyTextEditor.InputBindings>
+                </editor:REghZyTextEditor>
+                <Border x:Name="aditionalSelection"
+                        Visibility="Collapsed"
+                        BorderBrush="{DynamicResource ControlBrightDefaultBorderBrush}"
+                        Opacity="0.7"
+                        BorderThickness="2"
+                        CornerRadius="2"
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Stretch" 
+                        Margin="0"
+                        IsHitTestVisible="False"/>
+            </Grid>
             <Grid VerticalAlignment="Bottom" Height="22" Background="{DynamicResource ControlDefaultBackground}">
                 <Border HorizontalAlignment="Right" Width="15" Background="{DynamicResource ControlDefaultBorderBrush}"/>
                 <DockPanel Margin="0,0,15,0" DataContext="{Binding NotepadBar, Mode=OneTime}">
@@ -87,7 +131,7 @@
                                DockPanel.Dock="Right"/>
                     <Separator Style="{DynamicResource VerticalSeparator}" DockPanel.Dock="Right"/>
                     <TextBlock Padding="2 2 1 2" 
-                               Text="{Binding NotepadEditor.Format.FontSize, UpdateSourceTrigger=PropertyChanged, StringFormat='({0}px)'}"
+                               Text="{Binding NotepadEditor.Format.FontSize, StringFormat=(\{0\}px), UpdateSourceTrigger=PropertyChanged}"
                                VerticalAlignment="Center"
                                DockPanel.Dock="Right"/>
                     <TextBlock Padding="2" 

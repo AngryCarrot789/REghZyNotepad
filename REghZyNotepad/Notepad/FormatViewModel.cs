@@ -79,7 +79,7 @@ namespace REghZyNotepad.Notepad {
             }
         }
 
-        public FormatViewModel(double fontSize = 13) {
+        public FormatViewModel(double fontSize = 14) {
             this.Font = new FontFamily("Consolas");
             this.FontSize = fontSize;
             this.Style = FontStyles.Normal;
