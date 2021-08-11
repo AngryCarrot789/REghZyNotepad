@@ -17,7 +17,9 @@ namespace REghZyNotepad.Editor {
             get => (TextEditorViewModel) this.DataContext;
         }
 
-        public REghZyTextEditor() { }
+        public REghZyTextEditor() {
+            AllowDrop = true;
+        }
 
         protected override void OnPreviewKeyDown(KeyEventArgs e) {
             //Model.Notepad.LinesCounter.LinesCount = this.LineCount;

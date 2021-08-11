@@ -97,6 +97,26 @@ namespace REghZyNotepad.Core.ViewModels {
             }
         }
 
+        public void OpenDocument(string path, bool keepFormat = true) {
+            // a user might try and lighting fast delete a file just as they open it :)
+            if (!File.Exists(path)) {
+                ServiceLocator.Dialog.Show($"The file ({path}) doesn't exist!", "Failed to open file");
+                return;
+            }
+            try {
+                if (keepFormat) {
+                    this.Editor.OpenDocument(path);
+                }
+                else {
+                    ClearDocument();
+                    this.Editor.OpenDocument(path);
+                }
+            }
+            catch (Exception e) {
+                ServiceLocator.Dialog.Show($"Cannot open file: {e.Message}", "Failed to open file");
+            }
+        }
+
         /// <summary>
         /// Triggers the title of the view to update by """changing""" the File Path that it should be bound to
         /// </summary>

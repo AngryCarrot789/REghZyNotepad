@@ -10,16 +10,22 @@ namespace REghZyNotepad.Converters {
             if (value is bool isWrapping) {
                 return isWrapping ? TextWrapping.Wrap : TextWrapping.NoWrap;
             }
+            else if (value is TextWrapping wrapping) {
+                return wrapping == TextWrapping.Wrap;
+            }
 
-            throw new InvalidDataException($"(Converting) provided value was not a boolean ({value.GetType().Name})");
+            throw new InvalidDataException($"(Converting) provided value was not a valid value ({value.GetType().Name})");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
             if (value is TextWrapping wrapping) {
                 return wrapping == TextWrapping.Wrap;
             }
+            else if (value is bool isWrapping) {
+                return isWrapping ? TextWrapping.Wrap : TextWrapping.NoWrap;
+            }
 
-            throw new InvalidDataException($"(Converting Back) provided value was not TextWrapping ({value.GetType().Name})");
+            throw new InvalidDataException($"(Converting Back) provided value was not a valid value ({value.GetType().Name})");
         }
     }
 }

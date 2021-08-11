@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using REghZyNotepad.Core;
 using REghZyNotepad.Dialogs;
@@ -14,6 +9,8 @@ namespace REghZyNotepad {
     /// </summary>
     public partial class App : Application {
         private void Application_Startup(object sender, StartupEventArgs e) {
+            AppDomain.CurrentDomain.UnhandledException += this.CurrentDomain_UnhandledException;
+
             WindowsDialogService service = new WindowsDialogService();
             ServiceLocator.SaveOpen = service;
             ServiceLocator.Dialog = service;
@@ -21,6 +18,31 @@ namespace REghZyNotepad {
 
             this.MainWindow = new MainWindow();
             this.MainWindow.Show();
+
+            if (e.Args != null && e.Args.Length > 0) {
+                ProcessArgs(e.Args);
+            }
+        }
+
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e) {
+            try {
+                ServiceLocator.Dialog.Show("Crashed!", $"The application has crashed: {e.ExceptionObject.ToString()}");
+            }
+            catch { }
+        }
+
+        private void ProcessArgs(string[] args) {
+            string parms = string.Join(" ", args);
+            if (parms.Length > 0) {
+                string[] arguments = parms.Split('\"');
+                if (arguments.Length > 0) {
+                    OpenArgsFile(arguments);
+                }
+            }
+        }
+
+        private void OpenArgsFile(string[] args) {
+            ViewModelLocator.Instance.GetCurrentNotepad().OpenDocument(args[0]);
         }
     }
 }

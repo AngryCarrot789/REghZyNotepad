@@ -41,8 +41,8 @@ namespace REghZyNotepad {
 
         public MainWindow() {
             InitializeComponent();
-            IoC.SetService<ITextEditor>(this);
-            IoC.SetService<IViewProvider>(this);
+            ServiceLocator.TextEditor = this;
+            ServiceLocator.ViewProvider = this;
 
             // WPF's builtin settings thing sometimes doesnt load when the main window opens so i made my own :)))))
             int configVersion = 2;
@@ -92,7 +92,6 @@ namespace REghZyNotepad {
             }
 
             ViewModelLocator.Instance.Application.Notepad.ClearDocument();
-
             this.FormatWindow = new FormatWindow();
             this.AboutWindow = new AboutWindow();
         }
@@ -234,6 +233,18 @@ namespace REghZyNotepad {
             if (RCSConfig.Main.TryGetBoolean("save-theme", out bool saveTheme) && saveTheme) {
                 RCSConfig.Main.SetEnum("theme", theme);
             }
+        }
+
+        private void NotepadDrop(object sender, DragEventArgs e) {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop)) {
+                if (e.Data.GetData(DataFormats.FileDrop) is string[] arr && arr.Length > 0) {
+                    ViewModelLocator.Instance.GetCurrentNotepad().OpenDocument(arr[0]);
+                }
+            }
+        }
+
+        private void NotepadDragEnter(object sender, DragEventArgs e) {
+            e.Handled = true;
         }
     }
 }
