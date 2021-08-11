@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using System.Windows;
 using REghZyNotepad.Core;
 using REghZyNotepad.Dialogs;
@@ -34,15 +35,12 @@ namespace REghZyNotepad {
         private void ProcessArgs(string[] args) {
             string parms = string.Join(" ", args);
             if (parms.Length > 0) {
-                string[] arguments = parms.Split('\"');
-                if (arguments.Length > 0) {
-                    OpenArgsFile(arguments);
-                }
+                OpenArgsFile(parms.Replace('\"', '\0'));
             }
         }
 
-        private void OpenArgsFile(string[] args) {
-            ViewModelLocator.Instance.GetCurrentNotepad().OpenDocument(args[0]);
+        private void OpenArgsFile(string file) {
+            ViewModelLocator.Instance.GetCurrentNotepad().OpenDocument(file);
         }
     }
 }

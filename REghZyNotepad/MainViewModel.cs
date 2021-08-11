@@ -28,7 +28,15 @@ namespace REghZyNotepad {
         public Command SwitchShowBottomBarCommand { get; }
 
         public MainViewModel() {
-            this.NewFileCommand = new Command(() => ViewModelLocator.Instance.Application.Notepad.ClearDocument());
+            this.NewFileCommand = new Command(() => {
+                if (ViewModelLocator.Instance.Application.Notepad.Editor.Document.HasTextChangedSinceSave) {
+                    if (ServiceLocator.Dialog.ShowConfirmable("Save changes?", "You have unsaved changes. Do you want to save them?", false)) {
+                        ViewModelLocator.Instance.Application.Notepad.SaveDocumentAuto();
+                    }
+                }
+
+                ViewModelLocator.Instance.Application.Notepad.ClearDocument();
+            });
             this.OpenFileCommand = new Command(() => ViewModelLocator.Instance.Application.Notepad.OpenDocumentWithDialog());
             this.SaveFileCommand = new Command(() => ViewModelLocator.Instance.Application.Notepad.SaveDocumentAuto());
             this.SaveFileAsCommand = new Command(() => ViewModelLocator.Instance.Application.Notepad.SaveDocumentAsAuto());

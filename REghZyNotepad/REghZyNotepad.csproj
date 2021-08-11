@@ -33,6 +33,10 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>file.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationFramework.Aero2" />
@@ -174,6 +178,46 @@
       <Project>{87cea552-8d72-46d3-86d0-f3986e24d060}</Project>
       <Name>REghZyNotepad.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="file.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\alertSaveFile.png" />
+    <Resource Include="Resources\binCan.png" />
+    <Resource Include="Resources\closeAllFiles.png" />
+    <Resource Include="Resources\closeFile.png" />
+    <Resource Include="Resources\closePane.png" />
+    <Resource Include="Resources\copy.png" />
+    <Resource Include="Resources\cut.png" />
+    <Resource Include="Resources\downIcon.png" />
+    <Resource Include="Resources\file.ico" />
+    <Resource Include="Resources\findReplace.png" />
+    <Resource Include="Resources\focusWindow.png" />
+    <Resource Include="Resources\matchCaseIcon.png" />
+    <Resource Include="Resources\matchWholeWordIcon.png" />
+    <Resource Include="Resources\newFile.png" />
+    <Resource Include="Resources\oldSharpPadIcon.png" />
+    <Resource Include="Resources\openFile.png" />
+    <Resource Include="Resources\openFolder.png" />
+    <Resource Include="Resources\openInNewWindow.png" />
+    <Resource Include="Resources\openPane.png" />
+    <Resource Include="Resources\paste.png" />
+    <Resource Include="Resources\preferencesIcon.png" />
+    <Resource Include="Resources\previewWindow.png" />
+    <Resource Include="Resources\printIcon.png" />
+    <Resource Include="Resources\redo.png" />
+    <Resource Include="Resources\replaceAllIcon.png" />
+    <Resource Include="Resources\replaceIcon.png" />
+    <Resource Include="Resources\saveAll.png" />
+    <Resource Include="Resources\saveFile.png" />
+    <Resource Include="Resources\saveFileAs.png" />
+    <Resource Include="Resources\sharpPadIcon.ico" />
+    <Resource Include="Resources\sharpPadIcon.png" />
+    <Resource Include="Resources\topTabsClose.png" />
+    <Resource Include="Resources\topTabsOpen.png" />
+    <Resource Include="Resources\undo.png" />
+    <Resource Include="Resources\upIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

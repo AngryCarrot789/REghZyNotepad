@@ -22,9 +22,10 @@
     </Window.Resources>
     <Window.InputBindings>
         <KeyBinding Key="Esc" Command="{Binding ExitCommand, Mode=OneTime}"/>
-        <KeyBinding Key="N" Modifiers="Ctrl"  Command="{Binding NewFileCommand, Mode=OneTime}"/>
-        <KeyBinding Key="O" Modifiers="Ctrl"  Command="{Binding OpenFileCommand, Mode=OneTime}"/>
-        <KeyBinding Key="S" Modifiers="Ctrl"  Command="{Binding SaveFileCommand, Mode=OneTime}"/>
+        <KeyBinding Key="W" Modifiers="Ctrl" Command="{Binding ExitCommand, Mode=OneTime}"/>
+        <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding NewFileCommand, Mode=OneTime}"/>
+        <KeyBinding Key="O" Modifiers="Ctrl" Command="{Binding OpenFileCommand, Mode=OneTime}"/>
+        <KeyBinding Key="S" Modifiers="Ctrl" Command="{Binding SaveFileCommand, Mode=OneTime}"/>
         <KeyBinding Key="S" Modifiers="Ctrl + Shift" Command="{Binding SaveFileAsCommand, Mode=OneTime}"/>
         <KeyBinding Key="F" Modifiers="Ctrl" Command="{Binding FindCommand, Mode=OneTime}"/>
         <KeyBinding Key="F3" Command="{Binding FindNextCommand, Mode=OneTime}"/>
@@ -46,32 +47,92 @@
     <Grid>
         <Menu VerticalAlignment="Top" Height="18" Background="{DynamicResource ControlDefaultBackground}">
             <MenuItem Header="File">
-                <MenuItem Header="New" InputGestureText="Ctrl + N"                Command="{Binding NewFileCommand, Mode=OneTime}"/>
-                <MenuItem Header="Open" InputGestureText="Ctrl + O"               Command="{Binding OpenFileCommand, Mode=OneTime}"/>
-                <MenuItem Header="Save" InputGestureText="Ctrl + S"               Command="{Binding SaveFileCommand, Mode=OneTime}"/>
-                <MenuItem Header="Save as..." InputGestureText="Ctrl + Shift + S" Command="{Binding SaveFileAsCommand, Mode=OneTime}"/>
+                <MenuItem Header="New" InputGestureText="Ctrl + N"                Command="{Binding NewFileCommand, Mode=OneTime}">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/newFile.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Open" InputGestureText="Ctrl + O"               Command="{Binding OpenFileCommand, Mode=OneTime}">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/openFile.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Save" InputGestureText="Ctrl + S"               Command="{Binding SaveFileCommand, Mode=OneTime}">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/saveFile.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Save as..." InputGestureText="Ctrl + Shift + S" Command="{Binding SaveFileAsCommand, Mode=OneTime}">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/saveFileAs.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
                 <Separator Style="{DynamicResource MenuItemSeparator}"/>
-                <MenuItem Header="Exit" InputGestureText="Esc" Command="{Binding ExitCommand, Mode=OneTime}"/>
+                <MenuItem Header="Exit" InputGestureText="Esc" Command="{Binding ExitCommand, Mode=OneTime}">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/closePane.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Edit">
-                <MenuItem Header="Undo" InputGestureText="Ctrl + Z"         CommandTarget="{Binding ElementName=TextEditor}" Command="ApplicationCommands.Undo"/>
-                <MenuItem Header="Redo" InputGestureText="Ctrl + Shift + Z" CommandTarget="{Binding ElementName=TextEditor}" Command="ApplicationCommands.Redo"/>
+                <MenuItem Header="Undo" InputGestureText="Ctrl + Z"         CommandTarget="{Binding ElementName=TextEditor}" Command="ApplicationCommands.Undo">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/undo.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Redo" InputGestureText="Ctrl + Shift + Z" CommandTarget="{Binding ElementName=TextEditor}" Command="ApplicationCommands.Redo">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/redo.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
                 <Separator Style="{DynamicResource MenuItemSeparator}"/>
-                <MenuItem Header="Cut"    InputGestureText="Ctrl + X"       CommandTarget="{Binding ElementName=TextEditor}" Command="ApplicationCommands.Cut"/>
-                <MenuItem Header="Copy"   InputGestureText="Ctrl + C"       CommandTarget="{Binding ElementName=TextEditor}" Command="ApplicationCommands.Copy"/>
-                <MenuItem Header="Paste"  InputGestureText="Ctrl + V"       CommandTarget="{Binding ElementName=TextEditor}" Command="ApplicationCommands.Paste"/>
-                <MenuItem Header="Delete" InputGestureText="Del"            CommandTarget="{Binding ElementName=TextEditor}" Command="ApplicationCommands.Delete"/>
+                <MenuItem Header="Cut"    InputGestureText="Ctrl + X"       CommandTarget="{Binding ElementName=TextEditor}" Command="ApplicationCommands.Cut">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/cut.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Copy"   InputGestureText="Ctrl + C"       CommandTarget="{Binding ElementName=TextEditor}" Command="ApplicationCommands.Copy">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/copy.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Paste"  InputGestureText="Ctrl + V"       CommandTarget="{Binding ElementName=TextEditor}" Command="ApplicationCommands.Paste">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/paste.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Delete" InputGestureText="Del"            CommandTarget="{Binding ElementName=TextEditor}" Command="ApplicationCommands.Delete">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/binCan.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
                 <Separator Style="{DynamicResource MenuItemSeparator}"/>
-                <MenuItem Header="Find..."        InputGestureText="Ctrl + F"         Command="{Binding FindCommand, Mode=OneTime}"/>
+                <MenuItem Header="Find..."        InputGestureText="Ctrl + F"         Command="{Binding FindCommand, Mode=OneTime}">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/findReplace.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
                 <MenuItem Header="Find next"      InputGestureText="F3"               Command="{Binding FindNextCommand, Mode=OneTime}"/>
                 <MenuItem Header="Find previous"  InputGestureText="Shift + F3"       Command="{Binding FindPreviousCommand, Mode=OneTime}"/>
-                <MenuItem Header="Replace..."     InputGestureText="Ctrl + H"         Command="{Binding ReplaceCommand, Mode=OneTime}"/>
+                <MenuItem Header="Replace..."     InputGestureText="Ctrl + H"         Command="{Binding ReplaceCommand, Mode=OneTime}">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/findReplace.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
                 <MenuItem Header="Replace All..." InputGestureText="Ctrl + Shift + H" Command="{Binding ReplaceAllCommand, Mode=OneTime}"/>
-                <MenuItem Header="Goto (line)"    InputGestureText="Ctrl + G"         Command="{Binding GotoLineCommand, Mode=OneTime}"/>
+                <MenuItem Header="Goto (line)"    InputGestureText="Ctrl + G"         Command="{Binding GotoLineCommand, Mode=OneTime}">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/topTabsOpen.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Format" Command="{Binding ShowFormatCommand, Mode=OneTime}"/>
             <MenuItem Header="View">
-                <MenuItem Header="Show Info bar (at the bottom)" Command="{Binding SwitchShowBottomBarCommand, Mode=OneTime}"/>
+                <MenuItem Header="Show Info bar (at the bottom)" Command="{Binding SwitchShowBottomBarCommand, Mode=OneTime}">
+                    <MenuItem.Icon>
+                        <Image Source="Resources/topTabsOpen.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Theme">
                 <MenuItem Header="Light" Click="ChangeTheme" Uid="0">

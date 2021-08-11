@@ -176,12 +176,7 @@ namespace REghZyNotepad {
 
         protected override void OnClosing(CancelEventArgs e) {
             if (ViewModelLocator.Instance.Application.Notepad.Editor.Document.HasTextChangedSinceSave) {
-                if (MessageBox.Show(
-                    "You have unsaved changes. Do you want to save them?", 
-                    "Save changes?", 
-                    MessageBoxButton.YesNo, 
-                    MessageBoxImage.Warning, 
-                    MessageBoxResult.No) == MessageBoxResult.Yes) {
+                if (ServiceLocator.Dialog.ShowConfirmable("Save changes?", "You have unsaved changes. Do you want to save them?", false)) {
                     ViewModelLocator.Instance.Application.Notepad.SaveDocumentAuto();
                 }
             }
