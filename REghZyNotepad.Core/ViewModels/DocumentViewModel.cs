@@ -72,6 +72,10 @@ namespace REghZyNotepad.Core.ViewModels {
             }
         }
 
+        /// <summary>
+        /// Gets the total number of lines in the content. This is equal to Content.Count('\n') + 1
+        /// </summary>
+        /// <returns></returns>
         public int GetTotalLines() {
             string content = this.Contents;
             if (content == null) {
@@ -83,14 +87,14 @@ namespace REghZyNotepad.Core.ViewModels {
                 return 0;
             }
 
-            int lineCount = 1;
+            int charCount = 1;
             while (true) {
                 nextIndex = content.IndexOf('\n', nextIndex + 1);
                 if (nextIndex == -1) {
-                    return lineCount + 1;
+                    return charCount + 1;
                 }
 
-                lineCount++;
+                charCount++;
             }
         }
 

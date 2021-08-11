@@ -13,7 +13,7 @@
         ResizeMode="CanResizeWithGrip"
         Style="{DynamicResource CustomWindowStyle}">
     <Window.DataContext>
-        <reghzynotepad:MainViewModel/>
+        <reghzynotepad:MainViewModel x:Name="MVM"/>
     </Window.DataContext>
     <Window.Resources>
         <Converters:WindowTitleConverter x:Key="TitleConverter"/>
@@ -70,7 +70,7 @@
             </MenuItem>
             <MenuItem Header="Format" Command="{Binding ShowFormatCommand, Mode=OneTime}"/>
             <MenuItem Header="View">
-                <MenuItem Header="Nothing yet :)"/>
+                <MenuItem Header="Show Info bar (at the bottom)" Command="{Binding SwitchShowBottomBarCommand, Mode=OneTime}"/>
             </MenuItem>
             <MenuItem Header="Theme">
                 <MenuItem Header="Light" Click="ChangeTheme" Uid="0">
@@ -98,68 +98,9 @@
                 <MenuItem Header="About" Command="{Binding AboutCommand, Mode=OneTime}"/>
             </MenuItem>
         </Menu>
-        <Grid Margin="0,18,0,0" DataContext="{Binding Application.Notepad, Source={x:Static core:ViewModelLocator.Instance}, UpdateSourceTrigger=PropertyChanged}">
-            <Grid Margin="0,0,0,22">
-                <editor:REghZyTextEditor x:Name="TextEditor"
-                    DataContext="{Binding Editor, UpdateSourceTrigger=PropertyChanged}"
-                    Text="{Binding Document.Contents, UpdateSourceTrigger=PropertyChanged}"
-                    FontSize="{Binding Format.FontSize, UpdateSourceTrigger=PropertyChanged}"
-                    FontFamily="{Binding Format.Font, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FontConverter}}"
-                    FontWeight="{Binding Format.Weight, UpdateSourceTrigger=PropertyChanged}"
-                    FontStyle="{Binding Format.Style, UpdateSourceTrigger=PropertyChanged}"
-                    TextDecorations="{Binding Format.Decoration, UpdateSourceTrigger=PropertyChanged}"
-                    TextWrapping="{Binding Format.IsWrapped, UpdateSourceTrigger=PropertyChanged}"
-                    SelectionChanged="TextEditor_SelectionChanged"
-                    MouseWheel="TextEditor_MouseWheel"
-                    SizeChanged="TextEditor_SizeChanged"
-                    ScrollViewer.ScrollChanged="TextEditor_ScrollChanged"
-                    ScrollViewer.CanContentScroll="False"
-                    AcceptsReturn="True"
-                    IsTabStop="True"
-                    AcceptsTab="True"
-                    BorderThickness="0 1 0 1" 
-                    Background="Transparent" 
-                    AutoWordSelection="False"
-                    IsInactiveSelectionHighlightEnabled="True"
-                    SpellCheck.SpellingReform="Postreform"
-                    Language="en"
-                    UndoLimit="1000"
-                    attchprop:HorizontalScrolling.UseHorizontalScrollingValue="True"
-                    ScrollViewer.PanningMode="VerticalFirst"
-                    HorizontalScrollBarVisibility="Visible"
-                    VerticalScrollBarVisibility="Visible"
-                    ScrollViewer.HorizontalScrollBarVisibility="Visible"
-                    ScrollViewer.VerticalScrollBarVisibility="Visible"
-                    Focusable="True" 
-                    Visibility="Visible" 
-                    Style="{DynamicResource REghZyTextEditorStyle}">
-                    <editor:REghZyTextEditor.ContextMenu>
-                        <ContextMenu OverridesDefaultStyle="False">
-                            <MenuItem Header="Undo" InputGestureText="Ctrl + Z"         Command="ApplicationCommands.Undo"/>
-                            <MenuItem Header="Redo" InputGestureText="Ctrl + Shift + Z" Command="ApplicationCommands.Redo"/>
-                            <Separator Style="{DynamicResource MenuItemSeparator}"/>
-                            <MenuItem Header="Cut"    InputGestureText="Ctrl + X" Command="ApplicationCommands.Cut"/>
-                            <MenuItem Header="Copy"   InputGestureText="Ctrl + C" Command="ApplicationCommands.Copy"/>
-                            <MenuItem Header="Paste"  InputGestureText="Ctrl + V" Command="ApplicationCommands.Paste"/>
-                            <MenuItem Header="Delete" InputGestureText="Del"      Command="ApplicationCommands.Delete"/>
-                        </ContextMenu>
-                    </editor:REghZyTextEditor.ContextMenu>
-                    <editor:REghZyTextEditor.InputBindings>
-                        <KeyBinding Key="Z" Modifiers="Ctrl+Shift" Command="ApplicationCommands.Redo"/>
-                    </editor:REghZyTextEditor.InputBindings>
-                </editor:REghZyTextEditor>
-                <Border x:Name="aditionalSelection"
-                        Visibility="Collapsed"
-                        BorderBrush="{DynamicResource ControlBrightDefaultBorderBrush}"
-                        Opacity="0.7"
-                        BorderThickness="2"
-                        CornerRadius="2"
-                        HorizontalAlignment="Stretch" 
-                        VerticalAlignment="Stretch" 
-                        Margin="0"
-                        IsHitTestVisible="False"/>
-            </Grid>
-            <Grid VerticalAlignment="Bottom" Height="22" Background="{DynamicResource ControlDefaultBackground}">
+        <DockPanel Margin="0,18,0,0" DataContext="{Binding Application.Notepad, Source={x:Static core:ViewModelLocator.Instance}, UpdateSourceTrigger=PropertyChanged}">
+            <Grid DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Height="22" Background="{DynamicResource ControlDefaultBackground}" 
+                  Visibility="{Binding ShowInfoBar, ElementName=MVM, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource bool2VisibilityConverter}}">
                 <DockPanel DataContext="{Binding Editor, UpdateSourceTrigger=PropertyChanged}" >
                     <DockPanel.Resources>
                         <Converters:NumberAddConverter x:Key="AddNumber"/>
@@ -168,11 +109,13 @@
                     <TextBlock Padding="2" FontFamily="Consolas"
                                Text="{Binding Document.WordCount, UpdateSourceTrigger=PropertyChanged, StringFormat={}({0} words)}"
                                VerticalAlignment="Center" 
-                               DockPanel.Dock="Right"/>
+                               DockPanel.Dock="Right"
+                               ToolTip="The number of calculated words in this notepad"/>
                     <TextBlock Padding="2" FontFamily="Consolas"
                                Text="{Binding Document.Length, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0} chars}"
                                VerticalAlignment="Center" 
-                               DockPanel.Dock="Right"/>
+                               DockPanel.Dock="Right"
+                               ToolTip="The number of characters in this notepad"/>
                     <Separator Style="{DynamicResource VerticalSeparator}" DockPanel.Dock="Right"/>
                     <TextBlock Padding="2 2 1 2" 
                                Text="{Binding Format.FontSize, StringFormat=(\{0\}px), UpdateSourceTrigger=PropertyChanged}"
@@ -215,6 +158,66 @@
                     </TextBox>
                 </DockPanel>
             </Grid>
-        </Grid>
+            <Grid>
+                <editor:REghZyTextEditor x:Name="TextEditor"
+                    DataContext="{Binding Editor, UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding Document.Contents, UpdateSourceTrigger=PropertyChanged}"
+                    FontSize="{Binding Format.FontSize, UpdateSourceTrigger=PropertyChanged}"
+                    FontFamily="{Binding Format.Font, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FontConverter}}"
+                    FontWeight="{Binding Format.Weight, UpdateSourceTrigger=PropertyChanged}"
+                    FontStyle="{Binding Format.Style, UpdateSourceTrigger=PropertyChanged}"
+                    TextDecorations="{Binding Format.Decoration, UpdateSourceTrigger=PropertyChanged}"
+                    TextWrapping="{Binding Format.IsWrapped, UpdateSourceTrigger=PropertyChanged}"
+                    SelectionChanged="TextEditor_SelectionChanged"
+                    MouseWheel="TextEditor_MouseWheel"
+                    SizeChanged="TextEditor_SizeChanged"
+                    ScrollViewer.ScrollChanged="TextEditor_ScrollChanged"
+                    ScrollViewer.CanContentScroll="False"
+                    AcceptsReturn="True"
+                    IsTabStop="True"
+                    AcceptsTab="True"
+                    BorderThickness="0 1 0 0" 
+                    Background="Transparent" 
+                    AutoWordSelection="False"
+                    IsInactiveSelectionHighlightEnabled="True"
+                    SpellCheck.SpellingReform="Postreform"
+                    Language="en"
+                    UndoLimit="1000"
+                    attchprop:HorizontalScrolling.UseHorizontalScrollingValue="True"
+                    ScrollViewer.PanningMode="VerticalFirst"
+                    HorizontalScrollBarVisibility="Visible"
+                    VerticalScrollBarVisibility="Visible"
+                    ScrollViewer.HorizontalScrollBarVisibility="Visible"
+                    ScrollViewer.VerticalScrollBarVisibility="Visible"
+                    Focusable="True" 
+                    Visibility="Visible" 
+                    Style="{DynamicResource REghZyTextEditorStyle}">
+                    <editor:REghZyTextEditor.ContextMenu>
+                        <ContextMenu OverridesDefaultStyle="False">
+                            <MenuItem Header="Undo" InputGestureText="Ctrl + Z"         Command="ApplicationCommands.Undo"/>
+                            <MenuItem Header="Redo" InputGestureText="Ctrl + Shift + Z" Command="ApplicationCommands.Redo"/>
+                            <Separator Style="{DynamicResource MenuItemSeparator}"/>
+                            <MenuItem Header="Cut"    InputGestureText="Ctrl + X" Command="ApplicationCommands.Cut"/>
+                            <MenuItem Header="Copy"   InputGestureText="Ctrl + C" Command="ApplicationCommands.Copy"/>
+                            <MenuItem Header="Paste"  InputGestureText="Ctrl + V" Command="ApplicationCommands.Paste"/>
+                            <MenuItem Header="Delete" InputGestureText="Del"      Command="ApplicationCommands.Delete"/>
+                        </ContextMenu>
+                    </editor:REghZyTextEditor.ContextMenu>
+                    <editor:REghZyTextEditor.InputBindings>
+                        <KeyBinding Key="Z" Modifiers="Ctrl+Shift" Command="ApplicationCommands.Redo"/>
+                    </editor:REghZyTextEditor.InputBindings>
+                </editor:REghZyTextEditor>
+                <Border x:Name="aditionalSelection"
+                        Visibility="Collapsed"
+                        BorderBrush="{DynamicResource ControlBrightDefaultBorderBrush}"
+                        Opacity="0.7"
+                        BorderThickness="2"
+                        CornerRadius="2"
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Stretch" 
+                        Margin="0"
+                        IsHitTestVisible="False"/>
+            </Grid>
+        </DockPanel>
     </Grid>
 </Window>

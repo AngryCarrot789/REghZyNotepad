@@ -43,10 +43,9 @@ namespace REghZyNotepad {
             InitializeComponent();
             IoC.SetService<ITextEditor>(this);
             IoC.SetService<IViewProvider>(this);
-            //this.Model = new MainViewModel();
 
-            int configVersion = 1;
             // WPF's builtin settings thing sometimes doesnt load when the main window opens so i made my own :)))))
+            int configVersion = 2;
             RCSConfig.Main = new RCSConfig("reghzy-notepad");
             if (!RCSConfig.Main.TryGetInteger("config-version", out int value) || value != configVersion) {
                 RCSConfig.Main.SetBoolean("save-location", true);
@@ -55,6 +54,8 @@ namespace REghZyNotepad {
                 RCSConfig.Main.SetBoolean("load-size", true);
                 RCSConfig.Main.SetBoolean("save-theme", true);
                 RCSConfig.Main.SetBoolean("load-theme", true);
+                RCSConfig.Main.SetBoolean("save-format", true);
+                RCSConfig.Main.SetBoolean("load-format", true);
                 RCSConfig.Main.SetString("default-font-family", "Consolas");
                 RCSConfig.Main.SetDouble("default-font-size", 15);
                 // RCSConfig.Main.SetBoolean("allow-mwheel-horiz-scroll", true);
@@ -74,11 +75,13 @@ namespace REghZyNotepad {
                 if (RCSConfig.Main.TryGetBoolean("load-theme", out bool saveTheme) && saveTheme) {
                     if (RCSConfig.Main.TryGetEnum("theme", out ThemeType theme)) { ThemesController.SetTheme(theme); }
                 }
-                if (RCSConfig.Main.TryGetString("default-font-family", out string defaultFamily)) {
-                    FormatViewModel.DEFAULT_FONT_FAMILY = defaultFamily;
-                }
-                if (RCSConfig.Main.TryGetDouble("default-font-size", out double defaultSize)) {
-                    FormatViewModel.DEFAULT_FONT_SIZE = defaultSize;
+                if (RCSConfig.Main.TryGetBoolean("load-format", out bool saveFormat) && saveFormat) {
+                    if (RCSConfig.Main.TryGetString("default-font-family", out string defaultFamily)) {
+                        FormatViewModel.DEFAULT_FONT_FAMILY = defaultFamily;
+                    }
+                    if (RCSConfig.Main.TryGetDouble("default-font-size", out double defaultSize)) {
+                        FormatViewModel.DEFAULT_FONT_SIZE = defaultSize;
+                    }
                 }
                 // if (RCSConfig.Main.TryGetBoolean("allow-mwheel-horiz-scroll", out bool mwheelScroll)) {
                 //     HorizontalScrolling.SCROLL_HORIZONTAL_WITH_SHIFT_MOUSEWHEEL = mwheelScroll;
@@ -87,6 +90,8 @@ namespace REghZyNotepad {
                 //     REghZyTextEditor.CAN_SELECT_ENTIRE_LINE_CTRL_SHIFT_A = selectLine;
                 // }
             }
+
+            ViewModelLocator.Instance.Application.Notepad.ClearDocument();
 
             this.FormatWindow = new FormatWindow();
             this.AboutWindow = new AboutWindow();
@@ -192,6 +197,11 @@ namespace REghZyNotepad {
             }
             if (RCSConfig.Main.TryGetBoolean("save-theme", out bool saveTheme) && saveTheme) {
                 RCSConfig.Main.SetEnum("theme", ThemesController.CurrentTheme);
+            }
+            FormatViewModel format = ViewModelLocator.Instance.GetCurrentNotepad().Editor.Format;
+            if (RCSConfig.Main.TryGetBoolean("save-format", out bool saveFormat) && saveFormat) {
+                RCSConfig.Main.SetString("default-font-family", format.Font);
+                RCSConfig.Main.SetDouble("default-font-size", format.FontSize);
             }
 
             this.AboutWindow.Close();

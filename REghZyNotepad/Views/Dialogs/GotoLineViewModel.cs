@@ -6,22 +6,27 @@ using System.Windows.Input;
 namespace REghZyNotepad.Views.Dialogs {
     public class GotoLineViewModel : BaseViewModel {
         private int _targetLine;
+        public int TargetLine {
+            get => this._targetLine;
+            set {
+                if (value < 0) {
+                    value = 0;
+                }
+                else {
+                    int totalLines = ViewModelLocator.Instance.GetCurrentTextEditor().Document.GetTotalLines();
+                    if (value > totalLines) {
+                        value = totalLines;
+                    }
+                }
+
+                RaisePropertyChanged(ref this._targetLine, value);
+            }
+        }
 
         public ICommand GoToCommand { get; }
 
         public GotoLineViewModel() {
             this.GoToCommand = new Command(GotoLine);
-        }
-
-        public int TargetLine {
-            get => this._targetLine;
-            set {
-                if (value < 0 || value > ViewModelLocator.Instance.GetCurrentTextEditor().Document.GetTotalLines()) {
-                    return;
-                }
-
-                RaisePropertyChanged(ref this._targetLine, value);
-            }
         }
 
         public void GotoLine() {

@@ -4,6 +4,12 @@ using REghZyNotepad.Core.ViewModels.Base;
 
 namespace REghZyNotepad {
     public class MainViewModel : BaseViewModel {
+        private bool _showInfoBar;
+        public bool ShowInfoBar {
+            get => this._showInfoBar;
+            set => RaisePropertyChanged(ref this._showInfoBar, value);
+        }
+
         public Command NewFileCommand { get; }
         public Command OpenFileCommand { get; }
         public Command SaveFileCommand { get; }
@@ -18,8 +24,8 @@ namespace REghZyNotepad {
         public Command GotoLineCommand { get; }
 
         public Command ShowFormatCommand { get; }
-
         public Command AboutCommand { get; }
+        public Command SwitchShowBottomBarCommand { get; }
 
         public MainViewModel() {
             this.NewFileCommand = new Command(() => ViewModelLocator.Instance.Application.Notepad.ClearDocument());
@@ -31,7 +37,9 @@ namespace REghZyNotepad {
             this.ReplaceCommand = new Command(() => ServiceLocator.ViewProvider.OpenFindView(true));
             this.ShowFormatCommand = new Command(() => ServiceLocator.ViewProvider.OpenFormatView());
             this.GotoLineCommand = new Command(() => ServiceLocator.ViewProvider.OpenGotoLineView());
-            this.AboutCommand = new Command(()=> ServiceLocator.ViewProvider.OpenAboutView());
+            this.AboutCommand = new Command(() => ServiceLocator.ViewProvider.OpenAboutView());
+            this.SwitchShowBottomBarCommand = new Command(() => { this.ShowInfoBar = !this.ShowInfoBar; });
+            this.ShowInfoBar = true;
         }
     }
 }
