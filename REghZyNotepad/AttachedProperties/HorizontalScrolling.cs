@@ -30,9 +30,9 @@ namespace REghZyNotepad.AttachedProperties {
                 "HorizontalScrollingAmount",
                 typeof(int),
                 typeof(HorizontalScrolling),
-                new PropertyMetadata(3)); //Forms.SystemInformation.MouseWheelScrollLines));
+                new PropertyMetadata(SystemParameters.WheelScrollLines)); //Forms.SystemInformation.MouseWheelScrollLines));
 
-        public const bool SCROLL_HORIZONTAL_WITH_SHIFT_MOUSEWHEEL = true;
+        public static bool SCROLL_HORIZONTAL_WITH_SHIFT_MOUSEWHEEL = true;
 
         public static bool GetUseHorizontalScrollingValue(DependencyObject d) {
             return (bool)d.GetValue(UseHorizontalScrollingProperty);
@@ -64,8 +64,9 @@ namespace REghZyNotepad.AttachedProperties {
                 element.PreviewMouseWheel += OnPreviewMouseWheel;
             }
 
-            else
-                throw new Exception("Attached property must be used with UIElement.");
+            else {
+                throw new Exception("Attached property must be used with a UIElement");
+            }
         }
 
         private static void OnPreviewMouseWheel(object sender, MouseWheelEventArgs args) {
@@ -88,12 +89,16 @@ namespace REghZyNotepad.AttachedProperties {
                     if (scrollViewer == null)
                         return;
 
-                    if (args.Delta < 0)
-                        for (int i = 0; i < horizontalScrollingAmount; i++)
+                    if (args.Delta < 0) {
+                        for (int i = 0; i < horizontalScrollingAmount; i++) {
                             scrollViewer.LineRight();
-                    else
-                        for (int i = 0; i < horizontalScrollingAmount; i++)
+                        }
+                    }
+                    else {
+                        for (int i = 0; i < horizontalScrollingAmount; i++) {
                             scrollViewer.LineLeft();
+                        }
+                    }
 
                     args.Handled = true;
                 }
@@ -102,12 +107,16 @@ namespace REghZyNotepad.AttachedProperties {
                     if (scrollViewer == null)
                         return;
 
-                    if (args.Delta < 0)
-                        for (int i = 0; i < horizontalScrollingAmount; i++)
+                    if (args.Delta < 0) {
+                        for (int i = 0; i < horizontalScrollingAmount; i++) {
                             scrollViewer.LineRight();
-                    else
-                        for (int i = 0; i < horizontalScrollingAmount; i++)
+                        }
+                    }
+                    else {
+                        for (int i = 0; i < horizontalScrollingAmount; i++) {
                             scrollViewer.LineLeft();
+                        }
+                    }
 
                     args.Handled = true;
                 }
@@ -115,16 +124,16 @@ namespace REghZyNotepad.AttachedProperties {
         }
 
         private static T FindDescendant<T>(DependencyObject d) where T : DependencyObject {
-            if (d == null)
+            if (d == null) {
                 return null;
+            }
 
-            int childCount = VisualTreeHelper.GetChildrenCount(d);
-
-            for (var i = 0; i < childCount; i++) {
+            for (int i = 0, childCount = VisualTreeHelper.GetChildrenCount(d); i < childCount; i++) {
                 DependencyObject child = VisualTreeHelper.GetChild(d, i);
                 T result = child as T ?? FindDescendant<T>(child);
-                if (result != null)
+                if (result != null) {
                     return result;
+                }
             }
 
             return null;

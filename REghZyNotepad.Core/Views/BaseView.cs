@@ -1,4 +1,6 @@
-﻿namespace REghZyFramework.Utilities
+﻿using REghZyNotepad.Core.ViewModels.Base;
+
+namespace REghZyNotepad.Core.Views
 {
     /// <summary>
     ///     An interface that all views or controls could implement for easy 

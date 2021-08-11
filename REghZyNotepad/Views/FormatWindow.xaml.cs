@@ -1,16 +1,16 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
-using REghZyFramework.Utilities;
-using REghZyNotepad.Notepad;
+using REghZyNotepad.Core.ViewModels;
+using REghZyNotepad.Core.Views;
 
 namespace REghZyNotepad.Views {
     /// <summary>
     /// Interaction logic for FormatWindow.xaml
     /// </summary>
-    public partial class FormatWindow : Window, BaseView<NotepadEditorViewModel> {
-        public NotepadEditorViewModel Model {
-            get => (NotepadEditorViewModel) this.DataContext;
+    public partial class FormatWindow : Window, BaseView<TextEditorViewModel> {
+        public TextEditorViewModel Model {
+            get => (TextEditorViewModel) this.DataContext;
             set => this.DataContext = value;
         }
 

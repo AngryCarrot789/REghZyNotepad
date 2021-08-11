@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace REghZyFramework.Utilities {
+namespace REghZyNotepad.Core.Utilities {
     // stands for "REghZy Config Structure"... lol. technically just a YAML parser 
     // but with less supported features (e.g. no lists within lists)
 
@@ -270,6 +270,23 @@ namespace REghZyFramework.Utilities {
             }
         }
 
+        public bool TryGetDouble(string fieldName, out double fieldValue) {
+            if (TryGetString(fieldName, out string value)) {
+                if (double.TryParse(value, out double doubleValue)) {
+                    fieldValue = doubleValue;
+                    return true;
+                }
+                else {
+                    fieldValue = 0;
+                    return false;
+                }
+            }
+            else {
+                fieldValue = 0;
+                return false;
+            }
+        }
+
         public bool TryGetBoolean(string fieldName, out bool fieldValue) {
             if (StringValues.TryGetValue(fieldName, out string value)) {
                 if (bool.TryParse(value, out bool boolValue)) {
@@ -357,6 +374,10 @@ namespace REghZyFramework.Utilities {
         }
 
         public void SetInteger(string fieldName, int fieldValue, bool replaceIfNotFound = true) {
+            SetString(fieldName, fieldValue.ToString(), replaceIfNotFound);
+        }
+
+        public void SetDouble(string fieldName, double fieldValue, bool replaceIfNotFound = true) {
             SetString(fieldName, fieldValue.ToString(), replaceIfNotFound);
         }
 

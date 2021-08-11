@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace REghZyFramework.Utilities {
+namespace REghZyNotepad.Core.Utilities {
     /// <summary>
     /// A class i made that provides a bunch of helpful functions for "manipulating" strings
     /// </summary>

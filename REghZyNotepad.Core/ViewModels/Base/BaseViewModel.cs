@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace REghZyFramework.Utilities
+namespace REghZyNotepad.Core.ViewModels.Base
 {
     /// <summary>
     /// <para>

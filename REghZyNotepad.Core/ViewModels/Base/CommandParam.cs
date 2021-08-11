@@ -1,22 +1,19 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace REghZyFramework.Utilities
-{
+namespace REghZyNotepad.Core.ViewModels.Base {
     /// <summary>
     /// An always executable capiable of passing parameters
     /// </summary>
     /// <typeparam name="Parameter">The parameter type (<see cref="string"/>, <see cref="int"/>, etc)</typeparam>
-    public class CommandParam<Parameter> : ICommand
-    {
+    public class CommandParam<Parameter> : ICommand {
         readonly Action<Parameter> _execute;
 
         /// <summary>
         /// Creates a new command that can always execute
         /// </summary>
         /// <param name="execute">The method to execute</param>
-        public CommandParam(Action<Parameter> execute)
-        {
+        public CommandParam(Action<Parameter> execute) {
             if (execute == null)
                 return;
 
@@ -30,8 +27,7 @@ namespace REghZyFramework.Utilities
         /// </para>
         /// </summary>
         /// <param name="parameter"></param>
-        public void Execute(object parameter)
-        {
+        public void Execute(object parameter) {
             if (parameter is Parameter p)
                 _execute?.Invoke(p);
         }
@@ -41,14 +37,13 @@ namespace REghZyFramework.Utilities
         /// </summary>
         /// <param name="parameter">Ignored</param>
         /// <returns>True</returns>
-        public bool CanExecute(object parameter)
-        {
+        public bool CanExecute(object parameter) {
             return true;
         }
 
-        public event EventHandler CanExecuteChanged
-        {
-            add { } remove { }
+        public event EventHandler CanExecuteChanged {
+            add { }
+            remove { }
             //add { CommandManager.RequerySuggested += value; }
             //remove { CommandManager.RequerySuggested -= value; }
         }

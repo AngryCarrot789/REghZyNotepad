@@ -1,9 +1,8 @@
 using System;
 using System.IO;
-using System.Linq;
-using REghZyFramework.Utilities;
+using REghZyNotepad.Core.ViewModels.Base;
 
-namespace REghZyNotepad.Notepad {
+namespace REghZyNotepad.Core.ViewModels {
     public class DocumentViewModel : BaseViewModel {
         private string _contents;
         private string _filePath;
@@ -42,23 +41,23 @@ namespace REghZyNotepad.Notepad {
         /// <exception cref="InvalidDataException">If the new file name doesn't contain an extension</exception>
         public string FileName {
             get => Path.GetFileName(this.FilePath);
-            set {
-                if (value == null) {
-                    throw new NullReferenceException("New file name cannot be null");
-                }
-                if (value.IndexOf('.') == -1) {
-                    throw new InvalidDataException("New file name does not have an extension");
-                }
-
-                this.FilePath = Path.Combine(Path.GetPathRoot(this.FilePath), value);
-            }
+            // set {
+            //     if (value == null) {
+            //         throw new NullReferenceException("New file name cannot be null");
+            //     }
+            //     if (value.IndexOf('.') == -1) {
+            //         throw new Exceptions.InvalidDataException("New file name does not have an extension");
+            //     }
+            // 
+            //     this.FilePath = Path.Combine(Path.GetFullPath(this.FilePath), value);
+            // }
         }
 
         public long Length {
             get => _length;
             set {
                 if (value > 41943040) {
-                    throw new InvalidDataException("File size cannot exceed 41943040 bytes");
+                    throw new Exceptions.InvalidDataException("File size cannot exceed 41943040 bytes");
                 }
 
                 this.WordCount = CountWords();

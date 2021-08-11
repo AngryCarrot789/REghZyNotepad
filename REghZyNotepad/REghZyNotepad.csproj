@@ -60,16 +60,15 @@
     <Compile Include="Controls\ItemSelector.xaml.cs">
       <DependentUpon>ItemSelector.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\FilePathConverter.cs" />
+    <Compile Include="Converters\FontConverter.cs" />
     <Compile Include="Converters\NumberAddConverter.cs" />
+    <Compile Include="Converters\StringFormatConverter.cs" />
+    <Compile Include="Converters\TextWrappingConverter.cs" />
     <Compile Include="Converters\WindowTitleConverter.cs" />
+    <Compile Include="Dialogs\WindowsDialogService.cs" />
     <Compile Include="Editor\REghZyTextEditor.cs" />
-    <Compile Include="Files\DialogHelper.cs" />
     <Compile Include="MainViewModel.cs" />
-    <Compile Include="Notepad\DocumentViewModel.cs" />
-    <Compile Include="Notepad\FormatViewModel.cs" />
-    <Compile Include="Notepad\ITextSelectable.cs" />
-    <Compile Include="Notepad\NotepadBarViewModel.cs" />
-    <Compile Include="Notepad\NotepadEditorViewModel.cs" />
     <Compile Include="Themes\ColourfulDarkTheme.xaml.cs">
       <DependentUpon>ColourfulDarkTheme.xaml</DependentUpon>
     </Compile>
@@ -84,13 +83,7 @@
     </Compile>
     <Compile Include="Themes\ThemesController.cs" />
     <Compile Include="Themes\ThemeType.cs" />
-    <Compile Include="Utilities\BaseView.cs" />
-    <Compile Include="Utilities\BaseViewModel.cs" />
-    <Compile Include="Utilities\Command.cs" />
-    <Compile Include="Utilities\CommandParam.cs" />
-    <Compile Include="Utilities\RCSConfig.cs" />
-    <Compile Include="Utilities\ScrollViewerHelper.cs" />
-    <Compile Include="Utilities\StringExtensions.cs" />
+    <Compile Include="AttachedProperties\ScrollViewerHelper.cs" />
     <Compile Include="Views\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
@@ -101,7 +94,6 @@
     <Compile Include="Views\FormatWindow.xaml.cs">
       <DependentUpon>FormatWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\IViewProvider.cs" />
     <Page Include="Controls\ItemSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -176,6 +168,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Finding\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\REghZyNotepad.Core\REghZyNotepad.Core.csproj">
+      <Project>{87cea552-8d72-46d3-86d0-f3986e24d060}</Project>
+      <Name>REghZyNotepad.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

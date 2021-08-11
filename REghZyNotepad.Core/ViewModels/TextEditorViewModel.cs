@@ -1,17 +1,45 @@
 using System;
 using System.IO;
 using System.Text;
-using REghZyFramework.Utilities;
+using REghZyNotepad.Core.ViewModels.Base;
+using REghZyNotepad.Core.Views;
 
-namespace REghZyNotepad.Notepad {
-    public class NotepadEditorViewModel : BaseViewModel {
+namespace REghZyNotepad.Core.ViewModels {
+    /// <summary>
+    /// A ViewModel for the text editor area (including formats, contents, line number, etc)
+    /// </summary>
+    public class TextEditorViewModel : BaseViewModel {
+        /// <summary>
+        /// The document information, such as file path, file contents, etc
+        /// </summary>
         public DocumentViewModel Document { get; }
+
+        /// <summary>
+        /// The formatting for this text editor
+        /// </summary>
         public FormatViewModel Format { get; }
 
-        public ITextSelectable TextSelector { get; }
+        private int _line;
 
-        public NotepadEditorViewModel(ITextSelectable textSelector) {
-            this.TextSelector = textSelector;
+        /// <summary>
+        /// The zero-based line index that the caret it on
+        /// </summary>
+        public int Line {
+            get => _line;
+            set => RaisePropertyChanged(ref this._line, value);
+        }
+
+        private int _column;
+
+        /// <summary>
+        /// The zero-based column index that the caret it on
+        /// </summary>
+        public int Column {
+            get => _column;
+            set => RaisePropertyChanged(ref this._column, value);
+        }
+
+        public TextEditorViewModel() {
             this.Document = new DocumentViewModel();
             this.Format = new FormatViewModel();
         }
@@ -38,7 +66,7 @@ namespace REghZyNotepad.Notepad {
 
             // 40mb
             if (fileSize > 41943040) {
-                throw new InvalidDataException($"File is bigger than 41943040 bytes ({fileSize})");
+                throw new Exceptions.InvalidDataException($"File is bigger than 41943040 bytes ({fileSize})");
             }
 
             StringBuilder contentBuilder = new StringBuilder((int) fileSize);
@@ -51,11 +79,24 @@ namespace REghZyNotepad.Notepad {
             this.Document.HasTextChangedSinceSave = false;
         }
 
+        /// <summary>
+        /// Saves this notepad document to the given path, and sets the document's file path to it
+        /// </summary>
+        /// <param name="path">The path to save (path doesn't have to exist, but any file will be overritten)</param>
+        /// <exception cref="NullReferenceException">If the given path is null</exception>
         public void SaveDocumentTo(string path) {
+            if (path == null) {
+                throw new NullReferenceException("The path to save to cannot be null");
+            }
+
             this.Document.FilePath = path;
             SaveDocument();
         }
 
+        /// <summary>
+        /// Saves this notepad document to the internal path (by overriting the entire file)
+        /// </summary>
+        /// <exception cref="NullReferenceException">If this document's file path is null</exception>
         public void SaveDocument() {
             string path = this.Document.FilePath;
             if (path == null) {
@@ -68,6 +109,15 @@ namespace REghZyNotepad.Notepad {
             writer.Close();
             writer.Dispose();
             this.Document.HasTextChangedSinceSave = false;
+        }
+
+        /// <summary>
+        /// Updates the <see cref="Line"/> and <see cref="Column"/> for the Text Editor
+        /// </summary>
+        public void UpdateCaret() {
+            ITextEditor editor = ServiceLocator.TextEditor;
+            this.Line = editor.LineIndex;
+            this.Column = editor.ColumnIndex;
         }
     }
 }

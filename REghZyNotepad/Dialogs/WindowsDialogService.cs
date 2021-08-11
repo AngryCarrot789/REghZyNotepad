@@ -1,7 +1,9 @@
+﻿using System.Windows;
 using Microsoft.Win32;
+using REghZyNotepad.Core.Views;
 
-namespace REghZyNotepad.Files {
-    public static class DialogHelper {
+namespace REghZyNotepad.Dialogs {
+    public class WindowsDialogService : ISaveOpenService, IDialogMessage {
         private const string FILTERS =
             "All files|*.*|" +
             "Plain Text (.txt)|*.txt|" +
@@ -17,7 +19,7 @@ namespace REghZyNotepad.Files {
             "CSS File (.css)|*.css|" +
             "JS File (.js)|*.js";
 
-        public static string OpenFile() {
+        public string OpenFile() {
             OpenFileDialog dialog = new OpenFileDialog {
                 Title = "Select a file to open",
                 Filter = FILTERS,
@@ -31,7 +33,7 @@ namespace REghZyNotepad.Files {
             return null;
         }
 
-        public static string SaveFile() {
+        public string SaveFile() {
             SaveFileDialog dialog = new SaveFileDialog() {
                 Title = "Select a file to save",
                 FileName = "Untitled.txt",
@@ -44,6 +46,14 @@ namespace REghZyNotepad.Files {
             }
 
             return null;
+        }
+
+        public void Show(string caption, string message) {
+            MessageBox.Show(message, caption);
+        }
+
+        public bool ShowConfirmable(string caption, string message, bool defaultResult = false) {
+            return MessageBox.Show(message, caption, MessageBoxButton.YesNo, MessageBoxImage.Information, defaultResult ? MessageBoxResult.Yes : MessageBoxResult.No) == MessageBoxResult.Yes;
         }
     }
 }

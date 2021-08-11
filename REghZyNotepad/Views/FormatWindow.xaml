@@ -3,14 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:sys="clr-namespace:System;assembly=mscorlib"
-        xmlns:notepad="clr-namespace:REghZyNotepad.Notepad"
-        d:DataContext="{d:DesignInstance Type=notepad:NotepadEditorViewModel}"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib" 
+        xmlns:viewmodels="clr-namespace:REghZyNotepad.Core.ViewModels;assembly=REghZyNotepad.Core" 
+        xmlns:converters="clr-namespace:REghZyNotepad.Converters"
+        xmlns:core="clr-namespace:REghZyNotepad.Core;assembly=REghZyNotepad.Core"
+        d:DataContext="{d:DesignInstance Type=viewmodels:TextEditorViewModel}"
         mc:Ignorable="d"
         Title="Format" 
         Width="450" Height="500"
+
+        DataContext="{Binding Application.Notepad.Editor, Source={x:Static core:ViewModelLocator.Instance}, UpdateSourceTrigger=PropertyChanged}"
         Style="{DynamicResource CustomWindowStyle}">
     <Window.Resources>
+        <converters:FontConverter x:Key="FontConverter"/>
         <DropShadowBitmapEffect x:Key="NormalShadow" ShadowDepth="2" Softness="0.2" Opacity="0.64"/>
         <ObjectDataProvider x:Key="FontFamilyOptions" ObjectType="{x:Type Fonts}" MethodName="get_SystemFontFamilies"/>
         <x:Array x:Key="FontSizeOptions" Type="{x:Type sys:Double}">
@@ -60,7 +65,8 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <GroupBox Header="Font" HorizontalAlignment="Left" Width="197">
-            <ListBox ItemsSource="{Binding Source={StaticResource FontFamilyOptions}}" SelectedItem="{Binding Format.Font, UpdateSourceTrigger=PropertyChanged}"/>
+            <ListBox ItemsSource="{Binding Source={StaticResource FontFamilyOptions}}" 
+                     SelectedItem="{Binding Format.Font, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FontConverter}}"/>
         </GroupBox>
         <Grid Margin="202,0,0,0">
             <Grid.ColumnDefinitions>
@@ -90,7 +96,7 @@
                 </ListBox>
             </GroupBox>
             <GroupBox Header="Text Decorations" Margin="0,208,0,0" Height="135" VerticalAlignment="Top">
-                <ListBox ItemsSource="{Binding Source={StaticResource TextDeocrationOptions}}" SelectedItem="{Binding Format.DecorationString, UpdateSourceTrigger=PropertyChanged}">
+                <ListBox ItemsSource="{Binding Source={StaticResource TextDeocrationOptions}}" SelectedItem="{Binding Format.Decoration, UpdateSourceTrigger=PropertyChanged}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}" TextDecorations="{Binding}"/>
@@ -100,13 +106,13 @@
             </GroupBox>
             <GroupBox Header="Example" Margin="0,343,0,0" Grid.ColumnSpan="3" Style="{DynamicResource OriginalGroupBox}">
                 <TextBlock Text="AaBb Yy Z z" VerticalAlignment="Center" HorizontalAlignment="Center"
-                           TextDecorations="{Binding Format.DecorationString, UpdateSourceTrigger=PropertyChanged}"
+                           TextDecorations="{Binding Format.Decoration, UpdateSourceTrigger=PropertyChanged}"
                            FontWeight="{Binding Format.Weight, UpdateSourceTrigger=PropertyChanged}"
                            FontStyle="{Binding Format.Style, UpdateSourceTrigger=PropertyChanged}"
                            FontFamily="{Binding Format.Font, UpdateSourceTrigger=PropertyChanged}"
                            FontSize="{Binding Format.FontSize, UpdateSourceTrigger=PropertyChanged}"/>
             </GroupBox>
-            <CheckBox IsChecked="{Binding Format.IsWrapped, UpdateSourceTrigger=PropertyChanged}" Content="Word Wrapping" Grid.Column="2" Margin="0,328,0,79"/>
+            <CheckBox IsChecked="{Binding Format.IsWrapped, UpdateSourceTrigger=PropertyChanged}" Content="Word Wrapping" Grid.Column="2" Margin="0,328,0,0" VerticalAlignment="Top"/>
         </Grid>
     </Grid>
 </Window>

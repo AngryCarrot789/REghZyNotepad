@@ -2,8 +2,10 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using REghZyFramework.Utilities;
-using REghZyNotepad.Notepad;
+using REghZyNotepad.Core;
+using REghZyNotepad.Core.Utilities;
+using REghZyNotepad.Core.ViewModels;
+using REghZyNotepad.Core.Views;
 using REghZyNotepad.Views;
 using REghZyNotepad.Views.Dialogs;
 using REghZyThemes;
@@ -13,7 +15,7 @@ namespace REghZyNotepad {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, BaseView<MainViewModel>, ITextSelectable, IViewProvider {
+    public partial class MainWindow : Window, BaseView<MainViewModel>, ITextEditor, IViewProvider {
         public FormatWindow FormatWindow { get; }
         public AboutWindow AboutWindow { get; }
 
@@ -39,33 +41,55 @@ namespace REghZyNotepad {
 
         public MainWindow() {
             InitializeComponent();
-            this.FormatWindow = new FormatWindow();
-            this.AboutWindow = new AboutWindow();
-            this.Model = new MainViewModel(this, this);
+            IoC.SetService<ITextEditor>(this);
+            IoC.SetService<IViewProvider>(this);
+            //this.Model = new MainViewModel();
+
+            int configVersion = 1;
             // WPF's builtin settings thing sometimes doesnt load when the main window opens so i made my own :)))))
             RCSConfig.Main = new RCSConfig("reghzy-notepad");
-            if (!RCSConfig.Main.TryGetBoolean("first-time-setup-complete", out bool hasSetup) || !hasSetup) {
+            if (!RCSConfig.Main.TryGetInteger("config-version", out int value) || value != configVersion) {
                 RCSConfig.Main.SetBoolean("save-location", true);
                 RCSConfig.Main.SetBoolean("load-location", true);
                 RCSConfig.Main.SetBoolean("save-size", true);
                 RCSConfig.Main.SetBoolean("load-size", true);
                 RCSConfig.Main.SetBoolean("save-theme", true);
                 RCSConfig.Main.SetBoolean("load-theme", true);
-                RCSConfig.Main.SetBoolean("first-time-setup-complete", true);
+                RCSConfig.Main.SetString("default-font-family", "Consolas");
+                RCSConfig.Main.SetDouble("default-font-size", 15);
+                // RCSConfig.Main.SetBoolean("allow-mwheel-horiz-scroll", true);
+                // RCSConfig.Main.SetBoolean("allow-select-entire-line", true);
+                RCSConfig.Main.SetInteger("config-version", configVersion);
+                RCSConfig.Main.SaveConfig();
             }
-            if (RCSConfig.Main.TryGetBoolean("load-location", out bool saveLocation) && saveLocation) {
-                if (RCSConfig.Main.TryGetInteger("last-x", out int x)) { this.Left = x; }
-                if (RCSConfig.Main.TryGetInteger("last-y", out int y)) { this.Top = y; }
-            }
-            if (RCSConfig.Main.TryGetBoolean("load-size", out bool saveSize) && saveSize) {
-                if (RCSConfig.Main.TryGetInteger("last-w", out int w)) { this.Width = w; }
-                if (RCSConfig.Main.TryGetInteger("last-h", out int h)) { this.Height = h; }
-            }
-            if (RCSConfig.Main.TryGetBoolean("load-theme", out bool saveTheme) && saveTheme) {
-                if (RCSConfig.Main.TryGetEnum("theme", out ThemeType theme)) { ThemesController.SetTheme(theme); }
+            else {
+                if (RCSConfig.Main.TryGetBoolean("load-location", out bool saveLocation) && saveLocation) {
+                    if (RCSConfig.Main.TryGetInteger("last-x", out int x)) { this.Left = x; }
+                    if (RCSConfig.Main.TryGetInteger("last-y", out int y)) { this.Top = y; }
+                }
+                if (RCSConfig.Main.TryGetBoolean("load-size", out bool saveSize) && saveSize) {
+                    if (RCSConfig.Main.TryGetInteger("last-w", out int w)) { this.Width = w; }
+                    if (RCSConfig.Main.TryGetInteger("last-h", out int h)) { this.Height = h; }
+                }
+                if (RCSConfig.Main.TryGetBoolean("load-theme", out bool saveTheme) && saveTheme) {
+                    if (RCSConfig.Main.TryGetEnum("theme", out ThemeType theme)) { ThemesController.SetTheme(theme); }
+                }
+                if (RCSConfig.Main.TryGetString("default-font-family", out string defaultFamily)) {
+                    FormatViewModel.DEFAULT_FONT_FAMILY = defaultFamily;
+                }
+                if (RCSConfig.Main.TryGetDouble("default-font-size", out double defaultSize)) {
+                    FormatViewModel.DEFAULT_FONT_SIZE = defaultSize;
+                }
+                // if (RCSConfig.Main.TryGetBoolean("allow-mwheel-horiz-scroll", out bool mwheelScroll)) {
+                //     HorizontalScrolling.SCROLL_HORIZONTAL_WITH_SHIFT_MOUSEWHEEL = mwheelScroll;
+                // }
+                // if (RCSConfig.Main.TryGetBoolean("allow-select-entire-line", out bool selectLine)) {
+                //     REghZyTextEditor.CAN_SELECT_ENTIRE_LINE_CTRL_SHIFT_A = selectLine;
+                // }
             }
 
-            RCSConfig.Main.SaveConfig();
+            this.FormatWindow = new FormatWindow();
+            this.AboutWindow = new AboutWindow();
         }
 
         public int GetCharIndexWithinLine(int line) {
@@ -81,8 +105,7 @@ namespace REghZyNotepad {
         }
 
         public void OpenGotoLineView() {
-            GotoLineDialog dialog = new GotoLineDialog(this.Model.NotepadEditor);
-            dialog.ShowDialog();
+            new GotoLineDialog().ShowDialog();
         }
 
         public void OpenAboutView() {
@@ -93,7 +116,7 @@ namespace REghZyNotepad {
 
         }
 
-        public void UpdateCurrentEditor(NotepadEditorViewModel editor) {
+        public void UpdateCurrentEditor(TextEditorViewModel editor) {
             this.FormatWindow.Model = editor;
         }
 
@@ -119,20 +142,20 @@ namespace REghZyNotepad {
         }
 
         private void TextEditor_SelectionChanged(object sender, RoutedEventArgs e) {
-            this.Model.UpdateBar();
+            ViewModelLocator.Instance.Application.Notepad.Editor.UpdateCaret();
             DrawLineBorder();
         }
 
         private void TextEditor_MouseWheel(object sender, MouseWheelEventArgs e) {
             if (Keyboard.IsKeyDown(Key.LeftCtrl)) {
-                double currentFont = this.Model.NotepadEditor.Format.FontSize;
+                double currentFont = ViewModelLocator.Instance.Application.Notepad.Editor.Format.FontSize;
                 int fontChange = e.Delta / 100;
                 if (currentFont > 1)
                     currentFont += fontChange;
                 if (currentFont == 1 && fontChange >= 1)
                     currentFont += fontChange;
 
-                this.Model.NotepadEditor.Format.FontSize = currentFont;
+                ViewModelLocator.Instance.Application.Notepad.Editor.Format.FontSize = currentFont;
                 e.Handled = true;
             }
 
@@ -148,14 +171,14 @@ namespace REghZyNotepad {
         }
 
         protected override void OnClosing(CancelEventArgs e) {
-            if (this.Model.NotepadEditor.Document.HasTextChangedSinceSave) {
+            if (ViewModelLocator.Instance.Application.Notepad.Editor.Document.HasTextChangedSinceSave) {
                 if (MessageBox.Show(
                     "You have unsaved changes. Do you want to save them?", 
                     "Save changes?", 
                     MessageBoxButton.YesNo, 
                     MessageBoxImage.Warning, 
                     MessageBoxResult.No) == MessageBoxResult.Yes) {
-                    this.Model.SaveDocumentAuto();
+                    ViewModelLocator.Instance.Application.Notepad.SaveDocumentAuto();
                 }
             }
 

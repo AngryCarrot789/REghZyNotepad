@@ -1,20 +1,22 @@
-﻿using REghZyFramework.Utilities;
-using REghZyNotepad.Notepad;
+﻿using REghZyNotepad.Core;
+using REghZyNotepad.Core.ViewModels;
+using REghZyNotepad.Core.ViewModels.Base;
+using System.Windows.Input;
 
 namespace REghZyNotepad.Views.Dialogs {
     public class GotoLineViewModel : BaseViewModel {
         private int _targetLine;
 
-        public NotepadEditorViewModel NotepadEditor { get; }
+        public ICommand GoToCommand { get; }
 
-        public GotoLineViewModel(NotepadEditorViewModel notepadEditor) {
-            this.NotepadEditor = notepadEditor;
+        public GotoLineViewModel() {
+            this.GoToCommand = new Command(GotoLine);
         }
 
         public int TargetLine {
             get => this._targetLine;
             set {
-                if (value < 0 || value > this.NotepadEditor.Document.GetTotalLines()) {
+                if (value < 0 || value > ViewModelLocator.Instance.GetCurrentTextEditor().Document.GetTotalLines()) {
                     return;
                 }
 
@@ -24,10 +26,11 @@ namespace REghZyNotepad.Views.Dialogs {
 
         public void GotoLine() {
             if (this.TargetLine == 0) {
-                this.NotepadEditor.TextSelector.LineIndex = 0;
+                ServiceLocator.TextEditor.LineIndex = 0;
             }
-
-            this.NotepadEditor.TextSelector.LineIndex = this.TargetLine - 1;
+            else {
+                ServiceLocator.TextEditor.LineIndex = this.TargetLine - 1;
+            }
         }
     }
 }

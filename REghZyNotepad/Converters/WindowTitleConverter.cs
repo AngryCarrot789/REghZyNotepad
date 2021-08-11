@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
-using System.IO;
 using System.Windows.Data;
+using REghZyNotepad.Core.Exceptions;
 
 namespace REghZyNotepad.Converters {
     // values[0] = bool (has content changed)

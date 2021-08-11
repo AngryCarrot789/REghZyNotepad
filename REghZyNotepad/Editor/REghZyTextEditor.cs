@@ -2,19 +2,19 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows;
-using REghZyNotepad.Notepad;
+using REghZyNotepad.Core.ViewModels;
 
 namespace REghZyNotepad.Editor {
     public class REghZyTextEditor : TextBox {
-        public const bool CAN_SELECT_ENTIRE_LINE_CTRL_SHIFT_A = true;
-        public const bool CAN_CUT_ENTIRE_LINE_CTRL_X = true;
-        public const bool CAN_ADD_ENTIRE_LINES = true;
-        public const bool CAN_COPY_ENTIRE_LINE_CTRL_C = true;
-        public const bool SCROLL_VERTICAL_WITH_CTRL_ARROWKEYS = true;
-        public const bool SCROLL_HORIZONTAL_WITH_CTRL_ARROWKEYS = false;
+        public static bool CAN_SELECT_ENTIRE_LINE_CTRL_SHIFT_A = true;
+        public static bool CAN_CUT_ENTIRE_LINE_CTRL_X = true;
+        public static bool CAN_ADD_ENTIRE_LINES = true;
+        public static bool CAN_COPY_ENTIRE_LINE_CTRL_C = true;
+        public static bool SCROLL_VERTICAL_WITH_CTRL_ARROWKEYS = true;
+        public static bool SCROLL_HORIZONTAL_WITH_CTRL_ARROWKEYS = false;
 
-        private NotepadEditorViewModel Model {
-            get => (NotepadEditorViewModel)this.DataContext;
+        private TextEditorViewModel Model {
+            get => (TextEditorViewModel) this.DataContext;
         }
 
         public REghZyTextEditor() { }
