@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REghZyNotepad", "REghZyNote
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REghZyNotepad.Core", "REghZyNotepad.Core\REghZyNotepad.Core.csproj", "{87CEA552-8D72-46D3-86D0-F3986E24D060}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REghZyMVVM", "REghZyMVVM\REghZyMVVM\REghZyMVVM.csproj", "{F73F8351-3650-45D3-8C72-606D09F8B728}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REghZyMVVM.Utils", "REghZyMVVM\REghZyMVVM.Utils\REghZyMVVM.Utils.csproj", "{56303E0F-C01E-42B6-A39B-83D878141531}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{87CEA552-8D72-46D3-86D0-F3986E24D060}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87CEA552-8D72-46D3-86D0-F3986E24D060}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87CEA552-8D72-46D3-86D0-F3986E24D060}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F73F8351-3650-45D3-8C72-606D09F8B728}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F73F8351-3650-45D3-8C72-606D09F8B728}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F73F8351-3650-45D3-8C72-606D09F8B728}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F73F8351-3650-45D3-8C72-606D09F8B728}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56303E0F-C01E-42B6-A39B-83D878141531}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56303E0F-C01E-42B6-A39B-83D878141531}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56303E0F-C01E-42B6-A39B-83D878141531}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56303E0F-C01E-42B6-A39B-83D878141531}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

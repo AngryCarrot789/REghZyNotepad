@@ -174,6 +174,14 @@
     <Folder Include="Finding\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\REghZyMVVM\REghZyMVVM.Utils\REghZyMVVM.Utils.csproj">
+      <Project>{56303e0f-c01e-42b6-a39b-83d878141531}</Project>
+      <Name>REghZyMVVM.Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\REghZyMVVM\REghZyMVVM\REghZyMVVM.csproj">
+      <Project>{f73f8351-3650-45d3-8c72-606d09f8b728}</Project>
+      <Name>REghZyMVVM</Name>
+    </ProjectReference>
     <ProjectReference Include="..\REghZyNotepad.Core\REghZyNotepad.Core.csproj">
       <Project>{87cea552-8d72-46d3-86d0-f3986e24d060}</Project>
       <Name>REghZyNotepad.Core</Name>

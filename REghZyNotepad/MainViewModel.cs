@@ -1,6 +1,6 @@
 using System.Windows;
+using REghZyMVVM.ViewModels.Base;
 using REghZyNotepad.Core;
-using REghZyNotepad.Core.ViewModels.Base;
 
 namespace REghZyNotepad {
     public class MainViewModel : BaseViewModel {
@@ -8,6 +8,12 @@ namespace REghZyNotepad {
         public bool ShowInfoBar {
             get => this._showInfoBar;
             set => RaisePropertyChanged(ref this._showInfoBar, value);
+        }
+
+        private bool _showOutlineBar;
+        public bool ShowOutlineBar {
+            get => _showOutlineBar;
+            set => RaisePropertyChanged(ref this._showOutlineBar, value);
         }
 
         public Command NewFileCommand { get; }
@@ -26,6 +32,7 @@ namespace REghZyNotepad {
         public Command ShowFormatCommand { get; }
         public Command AboutCommand { get; }
         public Command SwitchShowBottomBarCommand { get; }
+        public Command SwitchLineOutlineCommand { get; }
 
         public MainViewModel() {
             this.NewFileCommand = new Command(() => {
@@ -37,6 +44,7 @@ namespace REghZyNotepad {
 
                 ViewModelLocator.Instance.Application.Notepad.ClearDocument();
             });
+
             this.OpenFileCommand = new Command(() => ViewModelLocator.Instance.Application.Notepad.OpenDocumentWithDialog());
             this.SaveFileCommand = new Command(() => ViewModelLocator.Instance.Application.Notepad.SaveDocumentAuto());
             this.SaveFileAsCommand = new Command(() => ViewModelLocator.Instance.Application.Notepad.SaveDocumentAsAuto());
@@ -46,8 +54,15 @@ namespace REghZyNotepad {
             this.ShowFormatCommand = new Command(() => ServiceLocator.ViewProvider.OpenFormatView());
             this.GotoLineCommand = new Command(() => ServiceLocator.ViewProvider.OpenGotoLineView());
             this.AboutCommand = new Command(() => ServiceLocator.ViewProvider.OpenAboutView());
-            this.SwitchShowBottomBarCommand = new Command(() => { this.ShowInfoBar = !this.ShowInfoBar; });
+            this.SwitchShowBottomBarCommand = new Command(() => { 
+                this.ShowInfoBar = !this.ShowInfoBar; 
+            });
+            this.SwitchLineOutlineCommand = new Command(()=> { 
+                this.ShowOutlineBar = !this.ShowOutlineBar; 
+            });
+
             this.ShowInfoBar = true;
+            this.ShowOutlineBar = true;
         }
     }
 }

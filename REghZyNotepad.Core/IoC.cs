@@ -1,49 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using REghZyNotepad.Core.Exceptions;
-using REghZyNotepad.Core.ViewModels.Base;
+﻿
+using REghZyMVVM.IOC;
+using REghZyMVVM.Service;
+using REghZyMVVM.ViewModels.Base;
 
 namespace REghZyNotepad.Core {
     public static class IoC {
-        private static Dictionary<Type, BaseViewModel> _viewModels;
-        private static Dictionary<Type, object> _services;
-
-        static IoC() {
-            _viewModels = new Dictionary<Type, BaseViewModel>();
-            _services = new Dictionary<Type, object>();
-        }
+        private static ManagedIoC _ioc = new ManagedIoC();
 
         /// <summary>
-        /// Gets the singleton ViewModel instance of the given type
+        /// Gets the ViewModel instance of the given type
         /// </summary>
         /// <typeparam name="T">The ViewModel type</typeparam>
         /// <returns>The instance of the ViewModel</returns>
-        /// <exception cref="NoSuchViewModelException">Thrown if there isn't a ViewModel of that type</exception>
-        public static T GetVM<T>() where T : BaseViewModel {
-            if (_viewModels.TryGetValue(typeof(T), out BaseViewModel viewModel)) {
-                return (T)viewModel;
-            }
-
-            throw new NoSuchViewModelException(typeof(T));
+        /// <exception cref="ViewModelNotFoundException">Thrown if there isn't a ViewModel of that type</exception>
+        /// <exception cref="InvalidCastException">Thrown if the target ViewModel type doesn't match the actual ViewModel type (somehow)</exception>
+        public static T GetViewModel<T>() where T : BaseViewModel {
+            return _ioc.GetViewModel<T>();
         }
 
         /// <summary>
-        /// Gets the singleton service instance of the given generic type
+        /// Gets the service instance of the given generic type
         /// </summary>
         /// <typeparam name="T">The service type (typically the base type)</typeparam>
         /// <returns>The instance of the service</returns>
-        /// <exception cref="NoSuchViewModelException">Thrown if there isn't a ViewModel of that type</exception>
+        /// <exception cref="ServiceNotFoundException">Thrown if there isn't a ViewModel of that type</exception>
         /// <exception cref="InvalidCastException">Thrown if the target service type doesn't match the actual service type</exception>
-        public static T GetService<T>() {
-            if (_services.TryGetValue(typeof(T), out object service)) {
-                if (service is T t) {
-                    return t;
-                }
-
-                throw new InvalidCastException($"The target service type '{typeof(T).Name}' is incompatiable with actual service type '{service.GetType().Name}'");
-            }
-
-            throw new NoSuchServiceException(typeof(T));
+        public static T GetService<T>() where T : IService {
+            return _ioc.GetService<T>();
         }
 
         /// <summary>
@@ -52,7 +35,7 @@ namespace REghZyNotepad.Core {
         /// <typeparam name="T">The ViewModel type</typeparam>
         /// <param name="viewModel"></param>
         public static void SetViewModel<T>(T viewModel) where T : BaseViewModel {
-            _viewModels[typeof(T)] = viewModel;
+            _ioc.SetViewModel<T>(viewModel);
         }
 
         /// <summary>
@@ -60,8 +43,26 @@ namespace REghZyNotepad.Core {
         /// </summary>
         /// <typeparam name="T">The service type (typically an interface, for an API service)</typeparam>
         /// <param name="service"></param>
-        public static void SetService<T>(object service) {
-            _services[typeof(T)] = service;
+        public static void SetService<T>(T service) where T : IService {
+            _ioc.SetService<T>(service);
+        }
+
+        /// <summary>
+        /// Returns whether this IoC manager contains a given ViewModel
+        /// </summary>
+        /// <typeparam name="T">The viewmodel type</typeparam>
+        /// <returns></returns>
+        public static bool HasViewModel<T>() where T : BaseViewModel {
+            return _ioc.HasViewModel<T>();
+        }
+
+        /// <summary>
+        /// Returns whether this IoC manager contains a given service
+        /// </summary>
+        /// <typeparam name="T">The service type</typeparam>
+        /// <returns></returns>
+        public static bool HasService<T>() where T : IService {
+            return _ioc.HasService<T>();
         }
     }
 }

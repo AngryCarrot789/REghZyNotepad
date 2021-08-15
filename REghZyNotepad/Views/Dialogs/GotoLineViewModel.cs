@@ -1,6 +1,5 @@
-﻿using REghZyNotepad.Core;
-using REghZyNotepad.Core.ViewModels;
-using REghZyNotepad.Core.ViewModels.Base;
+﻿using REghZyMVVM.ViewModels.Base;
+using REghZyNotepad.Core;
 using System.Windows.Input;
 
 namespace REghZyNotepad.Views.Dialogs {

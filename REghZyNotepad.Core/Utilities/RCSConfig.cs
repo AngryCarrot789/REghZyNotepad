@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using REghZyMVVM.Utils;
 
 namespace REghZyNotepad.Core.Utilities {
     // stands for "REghZy Config Structure"... lol. technically just a YAML parser 
@@ -157,6 +158,7 @@ namespace REghZyNotepad.Core.Utilities {
                     if (fieldName.IsEmpty() || fieldName[0] == ':') {
                         continue;
                     }
+
                     // this is the only thing that can tell if looking for a field/value
                     // or a field/list. fieldValue will always be empty unless you put a
                     // value after the colon. if you put something after the colon then

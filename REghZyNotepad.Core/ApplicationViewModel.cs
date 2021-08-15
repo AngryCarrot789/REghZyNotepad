@@ -1,5 +1,5 @@
-﻿using REghZyNotepad.Core.ViewModels;
-using REghZyNotepad.Core.ViewModels.Base;
+﻿using REghZyMVVM.ViewModels.Base;
+using REghZyNotepad.Core.ViewModels;
 
 namespace REghZyNotepad.Core {
     public class ApplicationViewModel : BaseViewModel {

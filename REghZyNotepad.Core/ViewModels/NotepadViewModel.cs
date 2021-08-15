@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using REghZyNotepad.Core.ViewModels.Base;
+using REghZyMVVM.ViewModels.Base;
 
 namespace REghZyNotepad.Core.ViewModels {
     /// <summary>

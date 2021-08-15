@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using REghZyMVVM.Views;
 using REghZyNotepad.Core.ViewModels;
 using REghZyNotepad.Core.Views;
 

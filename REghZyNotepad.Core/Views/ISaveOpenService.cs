@@ -1,8 +1,10 @@
-﻿namespace REghZyNotepad.Core.Views {
+﻿using REghZyMVVM.Service;
+
+namespace REghZyNotepad.Core.Views {
     /// <summary>
     /// A dialog service for saving and opening files
     /// </summary>
-    public interface ISaveOpenService {
+    public interface ISaveOpenService : IService {
         /// <summary>
         /// Returns a string path of the file that is to be saved, 
         /// or <see langword="null"/> if a path wasn't selected

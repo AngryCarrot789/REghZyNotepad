@@ -48,7 +48,7 @@
         <Menu VerticalAlignment="Top" Height="18" Background="{DynamicResource ControlDefaultBackground}">
             <MenuItem Header="File">
                 <MenuItem Header="New" InputGestureText="Ctrl + N"                Command="{Binding NewFileCommand, Mode=OneTime}">
-                    <MenuItem.Icon>
+                  <MenuItem.Icon>
                         <Image Source="Resources/newFile.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
@@ -133,6 +133,7 @@
                         <Image Source="Resources/topTabsOpen.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
+                <MenuItem Header="Show current-line outline" Command="{Binding SwitchLineOutlineCommand, Mode=OneTime}"/>
             </MenuItem>
             <MenuItem Header="Theme">
                 <MenuItem Header="Light" Click="ChangeTheme" Uid="0">
@@ -243,7 +244,6 @@
                     IsTabStop="True"
                     AcceptsTab="True"
                     BorderThickness="0 1 0 0" 
-                    Background="Transparent" 
                     AutoWordSelection="False"
                     IsInactiveSelectionHighlightEnabled="True"
                     SpellCheck.SpellingReform="Postreform"

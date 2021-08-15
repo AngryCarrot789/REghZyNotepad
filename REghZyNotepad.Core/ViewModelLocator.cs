@@ -11,7 +11,7 @@ namespace REghZyNotepad.Core {
         /// Gets the application view model
         /// </summary>
         public ApplicationViewModel Application {
-            get => IoC.GetVM<ApplicationViewModel>();
+            get => IoC.GetViewModel<ApplicationViewModel>();
             // shouldn't set this more than once because the view isn't designed to handle it changing... not yet atleast ;)
             set => IoC.SetViewModel<ApplicationViewModel>(value);
         }

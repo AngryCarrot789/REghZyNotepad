@@ -43,12 +43,9 @@
   <ItemGroup>
     <Compile Include="ApplicationViewModel.cs" />
     <Compile Include="Exceptions\InvalidDataException.cs" />
-    <Compile Include="Exceptions\NoSuchServiceException.cs" />
-    <Compile Include="Exceptions\NoSuchViewModelException.cs" />
     <Compile Include="IoC.cs" />
     <Compile Include="ServiceLocator.cs" />
     <Compile Include="Utilities\RCSConfig.cs" />
-    <Compile Include="Utilities\StringExtensions.cs" />
     <Compile Include="Views\IDialogMessage.cs" />
     <Compile Include="Views\ISaveOpenService.cs" />
     <Compile Include="Views\ITextEditor.cs" />
@@ -58,11 +55,17 @@
     <Compile Include="ViewModels\FormatViewModel.cs" />
     <Compile Include="ViewModels\TextEditorViewModel.cs" />
     <Compile Include="ViewModels\NotepadViewModel.cs" />
-    <Compile Include="Views\BaseView.cs" />
-    <Compile Include="ViewModels\Base\BaseViewModel.cs" />
-    <Compile Include="ViewModels\Base\Command.cs" />
-    <Compile Include="ViewModels\Base\CommandParam.cs" />
     <Compile Include="Views\IViewProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\REghZyMVVM\REghZyMVVM.Utils\REghZyMVVM.Utils.csproj">
+      <Project>{56303e0f-c01e-42b6-a39b-83d878141531}</Project>
+      <Name>REghZyMVVM.Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\REghZyMVVM\REghZyMVVM\REghZyMVVM.csproj">
+      <Project>{f73f8351-3650-45d3-8c72-606d09f8b728}</Project>
+      <Name>REghZyMVVM</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

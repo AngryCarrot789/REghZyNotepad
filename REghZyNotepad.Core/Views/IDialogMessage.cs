@@ -1,8 +1,10 @@
-﻿namespace REghZyNotepad.Core.Views {
+﻿using REghZyMVVM.Service;
+
+namespace REghZyNotepad.Core.Views {
     /// <summary>
     /// An API for showing messages onscreen
     /// </summary>
-    public interface IDialogMessage {
+    public interface IDialogMessage : IService {
         /// <summary>
         /// Shows a general message with the given title
         /// </summary>

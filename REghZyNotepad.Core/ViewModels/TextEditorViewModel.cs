@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using System.Text;
-using REghZyNotepad.Core.ViewModels.Base;
+using REghZyMVVM.ViewModels.Base;
 using REghZyNotepad.Core.Views;
 
 namespace REghZyNotepad.Core.ViewModels {

@@ -1,4 +1,4 @@
-using REghZyNotepad.Core.ViewModels.Base;
+using REghZyMVVM.ViewModels.Base;
 
 namespace REghZyNotepad.Core.ViewModels {
     public class FormatViewModel : BaseViewModel {
