@@ -14,3 +14,8 @@ This is basically notepad, only without the finding feature (not yet atleast) bu
 - and more
 
 Also the text wrapping option is broken... forgot to bind it in the FormatWindow.xaml... whoops
+
+# to download
+this uses a submodule of another repo i used for utils and stuff. so i think you do (in cmd or whatever):
+`git clone --recursive https://github.com/AngryCarrot789/REghZyNotepad`
+and then maybe `git submodule --init --recursive` probbaly... i havent done that before but ive seen others do it
