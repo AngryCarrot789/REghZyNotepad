@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Media;
-using REghZyThemes.Themes;
 
-namespace REghZyThemes
-{
+namespace DragonJetzFramework.Themes {
     public static class ThemesController
     {
         public static ThemeType CurrentTheme { get; set; }
@@ -41,10 +39,7 @@ namespace REghZyThemes
 
         public static SolidColorBrush GetBrush(string name)
         {
-            if (GetResource(name) is SolidColorBrush brush)
-                return brush;
-            else
-                return new SolidColorBrush(Colors.White);
+            return GetResource(name) is SolidColorBrush brush ? brush : new SolidColorBrush(Colors.White);
         }
     }
 }

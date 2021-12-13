@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{6525B1A4-C4F9-4B7C-8342-EF1E2EBD35A2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>REghZyNotepad</RootNamespace>
-    <AssemblyName>REghZyNotepad</AssemblyName>
+    <RootNamespace>DragonJetzNotepad</RootNamespace>
+    <AssemblyName>DragonJetzNotepad</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -64,30 +64,27 @@
     <Compile Include="Controls\ItemSelector.xaml.cs">
       <DependentUpon>ItemSelector.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\FilePathConverter.cs" />
+    <Compile Include="Controls\NotepadItemControl.xaml.cs">
+      <DependentUpon>NotepadItemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\BoolToOpacityConverter.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\FilePathPreviewConverter.cs" />
+    <Compile Include="Converters\FilePathToNameConverter.cs" />
     <Compile Include="Converters\FontConverter.cs" />
     <Compile Include="Converters\NumberAddConverter.cs" />
     <Compile Include="Converters\StringFormatConverter.cs" />
+    <Compile Include="Converters\NullToStringConverter.cs" />
     <Compile Include="Converters\TextWrappingConverter.cs" />
     <Compile Include="Converters\WindowTitleConverter.cs" />
     <Compile Include="Dialogs\WindowsDialogService.cs" />
-    <Compile Include="Editor\REghZyTextEditor.cs" />
+    <Compile Include="Editor\DragonJetzTextEditor.cs" />
     <Compile Include="MainViewModel.cs" />
-    <Compile Include="Themes\ColourfulDarkTheme.xaml.cs">
-      <DependentUpon>ColourfulDarkTheme.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Themes\ColourfulLightTheme.xaml.cs">
-      <DependentUpon>ColourfulLightTheme.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Themes\DarkTheme.xaml.cs">
-      <DependentUpon>DarkTheme.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Themes\LightTheme.xaml.cs">
-      <DependentUpon>LightTheme.xaml</DependentUpon>
+    <Compile Include="Themes\Controls.xaml.cs">
+      <DependentUpon>Controls.xaml</DependentUpon>
     </Compile>
     <Compile Include="Themes\ThemesController.cs" />
-    <Compile Include="Themes\ThemeType.cs" />
-    <Compile Include="AttachedProperties\ScrollViewerHelper.cs" />
+    <Compile Include="Themes\ThemeTypes.cs" />
     <Compile Include="Views\AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
@@ -102,7 +99,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Editor\REghZyTextEditorStyles.xaml">
+    <Page Include="Controls\NotepadItemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Editor\DragonJetzTextEditorStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -118,19 +119,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Themes\ColourfulDarkTheme.xaml">
+    <Page Include="Themes\ControlColours.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\ColourfulLightTheme.xaml">
+    <Page Include="Themes\Controls.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\DarkTheme.xaml">
+    <Page Include="Themes\RedBlackTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Themes\LightTheme.xaml">
+    <Page Include="Themes\VeryDarkTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -174,20 +175,6 @@
     <Folder Include="Finding\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\REghZyMVVM\REghZyMVVM.Utils\REghZyMVVM.Utils.csproj">
-      <Project>{56303e0f-c01e-42b6-a39b-83d878141531}</Project>
-      <Name>REghZyMVVM.Utils</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\REghZyMVVM\REghZyMVVM\REghZyMVVM.csproj">
-      <Project>{f73f8351-3650-45d3-8c72-606d09f8b728}</Project>
-      <Name>REghZyMVVM</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\REghZyNotepad.Core\REghZyNotepad.Core.csproj">
-      <Project>{87cea552-8d72-46d3-86d0-f3986e24d060}</Project>
-      <Name>REghZyNotepad.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="file.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -226,6 +213,20 @@
     <Resource Include="Resources\topTabsOpen.png" />
     <Resource Include="Resources\undo.png" />
     <Resource Include="Resources\upIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\REghZyMVVM\REghZyMVVM.Utils\DragonJetzMVVM.Utils.csproj">
+      <Project>{56303e0f-c01e-42b6-a39b-83d878141531}</Project>
+      <Name>DragonJetzMVVM.Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\REghZyMVVM\REghZyMVVM\DragonJetzMVVM.csproj">
+      <Project>{f73f8351-3650-45d3-8c72-606d09f8b728}</Project>
+      <Name>DragonJetzMVVM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\REghZyNotepad.Core\DragonJetzNotepad.Core.csproj">
+      <Project>{87cea552-8d72-46d3-86d0-f3986e24d060}</Project>
+      <Name>DragonJetzNotepad.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

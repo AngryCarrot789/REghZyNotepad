@@ -7,11 +7,11 @@ using System.Windows;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("REghZyNotepad")]
+[assembly: AssemblyTitle("DragonJetzNotepad")]
 [assembly: AssemblyDescription("A remake of windows notepad with a dark theme and more text editor features (no find feature yet though)")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("REghZy")]
-[assembly: AssemblyProduct("REghZyNotepad")]
+[assembly: AssemblyProduct("DragonJetzNotepad")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

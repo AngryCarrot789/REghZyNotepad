@@ -2,17 +2,16 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using REghZyMVVM.Views;
-using REghZyNotepad.Core;
-using REghZyNotepad.Core.Utilities;
-using REghZyNotepad.Core.ViewModels;
-using REghZyNotepad.Core.Views;
-using REghZyNotepad.Views;
-using REghZyNotepad.Views.Dialogs;
-using REghZyThemes;
-using REghZyThemes.Themes;
+using DragonJetzFramework.Themes;
+using DragonJetzMVVM.Views;
+using DragonJetzNotepad.Core;
+using DragonJetzNotepad.Core.Utilities;
+using DragonJetzNotepad.Core.ViewModels;
+using DragonJetzNotepad.Core.Views;
+using DragonJetzNotepad.Views;
+using DragonJetzNotepad.Views.Dialogs;
 
-namespace REghZyNotepad {
+namespace DragonJetzNotepad {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -183,8 +182,8 @@ namespace REghZyNotepad {
             }
 
             if (RCSConfig.Main.TryGetBoolean("save-location", out bool saveLocation) && saveLocation) {
-                RCSConfig.Main.SetInteger("last-x", (int) this.Left);
-                RCSConfig.Main.SetInteger("last-y", (int) this.Top);
+                RCSConfig.Main.SetInteger("last-x", (int)this.Left);
+                RCSConfig.Main.SetInteger("last-y", (int)this.Top);
             }
             if (RCSConfig.Main.TryGetBoolean("save-size", out bool saveSize) && saveSize) {
                 RCSConfig.Main.SetInteger("last-w", (int)this.Width);
@@ -213,15 +212,12 @@ namespace REghZyNotepad {
                     theme = ThemeType.Light;
                     break;
                 case 1:
-                    theme = ThemeType.ColourfulLight;
-                    break;
-                case 2:
                     theme = ThemeType.Dark;
                     break;
-                case 3:
-                    theme = ThemeType.ColourfulDark;
+                case 2:
+                    theme = ThemeType.Red;
                     break;
-                default: 
+                default:
                     return;
             }
 

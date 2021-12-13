@@ -1,16 +1,16 @@
-﻿<Window x:Class="REghZyNotepad.Views.FormatWindow"
+﻿<Window x:Class="DragonJetzNotepad.Views.FormatWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sys="clr-namespace:System;assembly=mscorlib" 
-        xmlns:viewmodels="clr-namespace:REghZyNotepad.Core.ViewModels;assembly=REghZyNotepad.Core" 
-        xmlns:converters="clr-namespace:REghZyNotepad.Converters"
-        xmlns:core="clr-namespace:REghZyNotepad.Core;assembly=REghZyNotepad.Core"
+        xmlns:converters="clr-namespace:DragonJetzNotepad.Converters"
+        xmlns:core="clr-namespace:DragonJetzNotepad.Core;assembly=DragonJetzNotepad.Core" 
+        xmlns:viewmodels="clr-namespace:DragonJetzNotepad.Core.ViewModels;assembly=DragonJetzNotepad.Core"
         d:DataContext="{d:DesignInstance Type=viewmodels:TextEditorViewModel}"
         mc:Ignorable="d"
         Title="Format" 
-        Width="450" Height="500"
+        Width="450" Height="520"
 
         DataContext="{Binding Application.Notepad.Editor, Source={x:Static core:ViewModelLocator.Instance}, UpdateSourceTrigger=PropertyChanged}"
         Style="{DynamicResource CustomWindowStyle}">
@@ -74,7 +74,7 @@
                 <ColumnDefinition Width="5"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <GroupBox Header="Font Style" Height="99" VerticalAlignment="Top">
+            <GroupBox Header="Font Style" Height="105" VerticalAlignment="Top">
                 <ListBox ItemsSource="{Binding Source={StaticResource FontStyleOptions}}" SelectedItem="{Binding Format.Style, UpdateSourceTrigger=PropertyChanged}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
@@ -83,10 +83,10 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </GroupBox>
-            <GroupBox Header="Font Size" Grid.Column="2" Height="325" VerticalAlignment="Top">
+            <GroupBox Header="Font Size" Grid.Column="2" Height="343" VerticalAlignment="Top">
                 <ListBox ItemsSource="{Binding Source={StaticResource FontSizeOptions}}" SelectedItem="{Binding Format.FontSize, UpdateSourceTrigger=PropertyChanged}"/>
             </GroupBox>
-            <GroupBox Header="Font Weight" Margin="0,104,0,0" Height="99" VerticalAlignment="Top">
+            <GroupBox Header="Font Weight" Margin="0,110,0,0" Height="105" VerticalAlignment="Top">
                 <ListBox ItemsSource="{Binding Source={StaticResource FontWeightOptions}}" SelectedItem="{Binding Format.Weight, UpdateSourceTrigger=PropertyChanged}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
@@ -95,7 +95,7 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </GroupBox>
-            <GroupBox Header="Text Decorations" Margin="0,208,0,0" Height="135" VerticalAlignment="Top">
+            <GroupBox Header="Text Decorations" Margin="0,220,0,0" Height="145" VerticalAlignment="Top">
                 <ListBox ItemsSource="{Binding Source={StaticResource TextDeocrationOptions}}" SelectedItem="{Binding Format.Decoration, UpdateSourceTrigger=PropertyChanged}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
@@ -104,7 +104,7 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </GroupBox>
-            <GroupBox Header="Example" Margin="0,343,0,0" Grid.ColumnSpan="3" Style="{DynamicResource OriginalGroupBox}">
+            <GroupBox Header="Example" Margin="0,365,0,0" Grid.ColumnSpan="3" Style="{DynamicResource SquaredGroupBox}">
                 <TextBlock Text="AaBb Yy Z z" VerticalAlignment="Center" HorizontalAlignment="Center"
                            TextDecorations="{Binding Format.Decoration, UpdateSourceTrigger=PropertyChanged}"
                            FontWeight="{Binding Format.Weight, UpdateSourceTrigger=PropertyChanged}"
@@ -112,7 +112,7 @@
                            FontFamily="{Binding Format.Font, UpdateSourceTrigger=PropertyChanged}"
                            FontSize="{Binding Format.FontSize, UpdateSourceTrigger=PropertyChanged}"/>
             </GroupBox>
-            <CheckBox IsChecked="{Binding Format.IsWrapped, UpdateSourceTrigger=PropertyChanged}" Content="Word Wrapping" Grid.Column="2" Margin="0,328,0,0" VerticalAlignment="Top"/>
+            <CheckBox IsChecked="{Binding Format.IsWrapped, UpdateSourceTrigger=PropertyChanged}" Content="Word Wrapping" Grid.Column="2" Margin="0,348,0,0" VerticalAlignment="Top" Height="18"/>
         </Grid>
     </Grid>
 </Window>

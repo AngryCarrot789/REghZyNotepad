@@ -1,12 +1,12 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:REghZyNotepad.Editor">
-    <Style x:Key="REghZyTextEditorStyle" TargetType="{x:Type local:REghZyTextEditor}">
-        <Setter Property="Background" Value="{DynamicResource ContainerBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ControlDefaultBorderBrush}" />
-        <Setter Property="Foreground" Value="{DynamicResource ControlDefaultForeground}" />
-        <Setter Property="CaretBrush" Value="{DynamicResource ControlDefaultForeground}" />
-        <Setter Property="SelectionBrush" Value="{DynamicResource ControlPrimaryColourBackground}" />
+                    xmlns:local="clr-namespace:DragonJetzNotepad.Editor">
+    <Style x:Key="DragonJetzTextEditorStyle" TargetType="{x:Type local:DragonJetzTextEditor}">
+        <Setter Property="Background" Value="{DynamicResource DragonJetzBrush.Primary.1.Background.Static}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DragonJetzBrush.Primary.1.Border.Static}" />
+        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}" />
+        <Setter Property="CaretBrush" Value="{DynamicResource DragonJetzBrush.Glyth.Static}" />
+        <Setter Property="SelectionBrush" Value="{DynamicResource DragonJetzBrush.ColourfulGlyth.Static}" />
         <Setter Property="IsInactiveSelectionHighlightEnabled" Value="True" />
         <Setter Property="SelectionOpacity" Value="0.7" />
         <Setter Property="BorderThickness" Value="1" />
@@ -36,10 +36,10 @@
                             <Setter Property="Opacity" TargetName="border" Value="0.56" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource ControlMouseOverBorderBrush}" />
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource DragonJetzBrush.Primary.1.Border.MouseOver}" />
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="true">
-                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource ControlSelectedBorderBrush}" />
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource DragonJetzBrush.Primary.1.Border.Selected}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -51,7 +51,7 @@
                     <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true" />
                     <Condition Property="IsSelectionActive" Value="false" />
                 </MultiTrigger.Conditions>
-                <Setter Property="SelectionBrush" Value="{DynamicResource ControlDisabledGlythColour}" />
+                <Setter Property="SelectionBrush" Value="{DynamicResource DragonJetzBrush.ColourfulGlyth.Disabled}" />
             </MultiTrigger>
         </Style.Triggers>
     </Style>

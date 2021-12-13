@@ -1,6 +1,7 @@
-﻿using REghZyNotepad.Core.ViewModels;
+﻿using System.Runtime.CompilerServices;
+using DragonJetzNotepad.Core.ViewModels;
 
-namespace REghZyNotepad.Core {
+namespace DragonJetzNotepad.Core {
     /// <summary>
     /// A wrapper for the <see cref="IoC"/> class
     /// </summary>
@@ -12,12 +13,16 @@ namespace REghZyNotepad.Core {
         /// </summary>
         public ApplicationViewModel Application {
             get => IoC.GetViewModel<ApplicationViewModel>();
-            // shouldn't set this more than once because the view isn't designed to handle it changing... not yet atleast ;)
-            set => IoC.SetViewModel<ApplicationViewModel>(value);
+            // shouldn't set this more than once because the view isn't designed to handle it changing
+            private set => IoC.SetViewModel<ApplicationViewModel>(value);
         }
 
         static ViewModelLocator() {
             Instance = new ViewModelLocator();
+        }
+
+        public static void Init() {
+            Instance.Application = new ApplicationViewModel();
         }
 
         public NotepadViewModel GetCurrentNotepad() {

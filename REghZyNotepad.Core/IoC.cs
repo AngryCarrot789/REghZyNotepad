@@ -1,11 +1,10 @@
-﻿
-using REghZyMVVM.IOC;
-using REghZyMVVM.Service;
-using REghZyMVVM.ViewModels.Base;
+﻿using DragonJetzMVVM.IOC;
+using DragonJetzMVVM.Service;
+using DragonJetzMVVM.ViewModels.Base;
 
-namespace REghZyNotepad.Core {
+namespace DragonJetzNotepad.Core {
     public static class IoC {
-        private static ManagedIoC _ioc = new ManagedIoC();
+        private static readonly ManagedIoC _ioc = new ManagedIoC();
 
         /// <summary>
         /// Gets the ViewModel instance of the given type

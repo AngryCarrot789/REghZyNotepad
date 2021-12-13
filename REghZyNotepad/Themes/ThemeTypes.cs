@@ -1,10 +1,9 @@
-﻿namespace REghZyThemes.Themes {
+﻿namespace DragonJetzFramework.Themes {
     public enum ThemeType
     {
-        Light,
         Dark,
-        ColourfulLight,
-        ColourfulDark
+        Red,
+        Light,
     }
 
     public static class ThemeTypeExtension
@@ -14,9 +13,8 @@
             switch (type)
             {
                 case ThemeType.Light: return "LightTheme";
-                case ThemeType.Dark: return "DarkTheme";
-                case ThemeType.ColourfulLight: return "ColourfulLightTheme";
-                case ThemeType.ColourfulDark: return "ColourfulDarkTheme";
+                case ThemeType.Dark: return "VeryDarkTheme";
+                case ThemeType.Red: return "RedBlackTheme";
                 default: return null;
             }
         }

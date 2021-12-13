@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
-using REghZyNotepad.Core.Exceptions;
+using DragonJetzNotepad.Core.Exceptions;
 
-namespace REghZyNotepad.Converters {
+namespace DragonJetzNotepad.Converters {
     public class FontConverter : IValueConverter {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
             if (value is FontFamily font) {
@@ -12,7 +13,7 @@ namespace REghZyNotepad.Converters {
             }
             else if (value is string fontName) {
                 if (string.IsNullOrEmpty(fontName)) {
-                    return null;
+                    return DependencyProperty.UnsetValue;
                 }
 
                 return new FontFamily(fontName);

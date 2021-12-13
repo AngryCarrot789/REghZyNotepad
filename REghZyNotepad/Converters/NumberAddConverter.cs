@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using REghZyNotepad.Core.Exceptions;
+using DragonJetzNotepad.Core.Exceptions;
 
-namespace REghZyNotepad.Converters {
+namespace DragonJetzNotepad.Converters {
     public class NumberAddConverter : IValueConverter {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
             if (parameter == null) {

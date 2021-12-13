@@ -1,6 +1,6 @@
-﻿using REghZyMVVM.Service;
+﻿using DragonJetzMVVM.Service;
 
-namespace REghZyNotepad.Core.Views {
+namespace DragonJetzNotepad.Core.Views {
     /// <summary>
     /// A TextEditor API for getting or setting the line, cursor, caret, etc
     /// </summary>

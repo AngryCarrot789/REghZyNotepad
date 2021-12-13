@@ -1,6 +1,6 @@
-using REghZyMVVM.ViewModels.Base;
+using DragonJetzMVVM.ViewModels.Base;
 
-namespace REghZyNotepad.Core.ViewModels {
+namespace DragonJetzNotepad.Core.ViewModels {
     public class FormatViewModel : BaseViewModel {
         public static string DEFAULT_FONT_FAMILY = "Consolas";
         public static double DEFAULT_FONT_SIZE = 14;

@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace REghZyNotepad.Converters {
+namespace DragonJetzNotepad.Converters {
     [ValueConversion(typeof(string), typeof(string))]
     public class StringFormatConverter : IValueConverter {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {

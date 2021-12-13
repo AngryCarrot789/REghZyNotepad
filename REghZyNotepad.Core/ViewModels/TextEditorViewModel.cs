@@ -1,10 +1,10 @@
 using System;
 using System.IO;
 using System.Text;
-using REghZyMVVM.ViewModels.Base;
-using REghZyNotepad.Core.Views;
+using DragonJetzMVVM.ViewModels.Base;
+using DragonJetzNotepad.Core.Views;
 
-namespace REghZyNotepad.Core.ViewModels {
+namespace DragonJetzNotepad.Core.ViewModels {
     /// <summary>
     /// A ViewModel for the text editor area (including formats, contents, line number, etc)
     /// </summary>
@@ -64,9 +64,8 @@ namespace REghZyNotepad.Core.ViewModels {
                 fileSize = int.MaxValue;
             }
 
-            // 40mb
             if (fileSize > 41943040) {
-                throw new Exceptions.InvalidDataException($"File is bigger than 41943040 bytes ({fileSize})");
+                throw new Exceptions.InvalidDataException($"File is bigger than 41943040 bytes (40 MB). File was {fileSize} bytes");
             }
 
             StringBuilder contentBuilder = new StringBuilder((int) fileSize);

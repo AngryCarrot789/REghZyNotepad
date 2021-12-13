@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Windows;
-using REghZyNotepad.Core;
-using REghZyNotepad.Dialogs;
+using DragonJetzNotepad.Core;
+using DragonJetzNotepad.Dialogs;
 
-namespace REghZyNotepad {
+namespace DragonJetzNotepad {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
@@ -12,16 +12,16 @@ namespace REghZyNotepad {
         private void Application_Startup(object sender, StartupEventArgs e) {
             AppDomain.CurrentDomain.UnhandledException += this.CurrentDomain_UnhandledException;
 
+            ViewModelLocator.Init();
             WindowsDialogService service = new WindowsDialogService();
             ServiceLocator.SaveOpen = service;
             ServiceLocator.Dialog = service;
-            ViewModelLocator.Instance.Application = new ApplicationViewModel();
 
             this.MainWindow = new MainWindow();
             this.MainWindow.Show();
 
             if (e.Args != null && e.Args.Length > 0) {
-                ProcessArgs(e.Args);
+                this.ProcessArgs(e.Args);
             }
         }
 
@@ -35,7 +35,7 @@ namespace REghZyNotepad {
         private void ProcessArgs(string[] args) {
             string parms = string.Join(" ", args);
             if (parms.Length > 0) {
-                OpenArgsFile(parms.Replace('\"', '\0'));
+                this.OpenArgsFile(parms.Replace('\"', '\0'));
             }
         }
 

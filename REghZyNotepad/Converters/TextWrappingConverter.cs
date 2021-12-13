@@ -2,9 +2,9 @@
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
-using REghZyNotepad.Core.Exceptions;
+using DragonJetzNotepad.Core.Exceptions;
 
-namespace REghZyNotepad.Converters {
+namespace DragonJetzNotepad.Converters {
     public class TextWrappingConverter : IValueConverter {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
             if (value is bool isWrapping) {

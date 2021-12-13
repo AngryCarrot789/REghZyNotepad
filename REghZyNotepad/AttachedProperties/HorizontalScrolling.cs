@@ -4,26 +4,24 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows;
 
-namespace REghZyNotepad.AttachedProperties {
+namespace DragonJetzNotepad.AttachedProperties {
     /// <summary>
     /// A class for allowing horizontal scrolling on any control that has a scrollviewer 
     /// </summary>
     public static class HorizontalScrolling {
-        public static readonly DependencyProperty UseHorizontalScrollingProperty =
+        public static readonly DependencyProperty UseHorizontalScrollingProperty = 
             DependencyProperty.RegisterAttached(
                 "UseHorizontalScrolling",
                 typeof(bool),
-                typeof(HorizontalScrolling),
-                new PropertyMetadata(
-                    new PropertyChangedCallback(OnHorizontalScrollingValueChanged)));
+                typeof(HorizontalScrolling), 
+                new PropertyMetadata(new PropertyChangedCallback(OnUseHorizontalScrollingValueChanged)));
 
-        public static readonly DependencyProperty ForceHorizontalScrollingProperty =
+        public static readonly DependencyProperty ForceHorizontalScrollingProperty = 
             DependencyProperty.RegisterAttached(
                 "ForceHorizontalScrolling",
-                typeof(bool),
-                typeof(HorizontalScrolling),
-                new PropertyMetadata(
-                    new PropertyChangedCallback(OnHorizontalScrollingValueChanged)));
+                typeof(bool), 
+                typeof(HorizontalScrolling), 
+                new PropertyMetadata(new PropertyChangedCallback(OnUseHorizontalScrollingValueChanged)));
 
         public static readonly DependencyProperty HorizontalScrollingAmountProperty =
             DependencyProperty.RegisterAttached(
@@ -58,19 +56,17 @@ namespace REghZyNotepad.AttachedProperties {
             d.SetValue(HorizontalScrollingAmountProperty, value);
         }
 
-        public static void OnHorizontalScrollingValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e) {
+        public static void OnUseHorizontalScrollingValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e) {
             if (sender is UIElement element) {
                 element.PreviewMouseWheel -= OnPreviewMouseWheel;
                 element.PreviewMouseWheel += OnPreviewMouseWheel;
             }
-
             else {
                 throw new Exception("Attached property must be used with a UIElement");
             }
         }
 
         private static void OnPreviewMouseWheel(object sender, MouseWheelEventArgs args) {
-            ScrollViewer scrollViewer = null;
             bool forceHorizontalScrolling;
             int horizontalScrollingAmount;
 
@@ -78,17 +74,17 @@ namespace REghZyNotepad.AttachedProperties {
                 return;
 
             if (sender is UIElement element) {
-                DependencyObject senderDp = sender as DependencyObject;
-                scrollViewer = FindDescendant<ScrollViewer>(element);
-                forceHorizontalScrolling = GetForceHorizontalScrollingValue(senderDp);
-                horizontalScrollingAmount = GetHorizontalScrollingAmountValue(senderDp);
+                ScrollViewer scrollViewer = FindDescendant<ScrollViewer>(element);
+                if (scrollViewer == null) {
+                    throw new Exception($"Element ({element.GetType().Name}) did not contain a scroll viewer as a descendant");
+                }
+
+                forceHorizontalScrolling = GetForceHorizontalScrollingValue(element);
+                horizontalScrollingAmount = GetHorizontalScrollingAmountValue(element);
                 if (horizontalScrollingAmount < 1)
                     horizontalScrollingAmount = 3;
 
                 if (!forceHorizontalScrolling && (Keyboard.Modifiers == ModifierKeys.Shift || Mouse.MiddleButton == MouseButtonState.Pressed)) {
-                    if (scrollViewer == null)
-                        return;
-
                     if (args.Delta < 0) {
                         for (int i = 0; i < horizontalScrollingAmount; i++) {
                             scrollViewer.LineRight();
@@ -102,11 +98,7 @@ namespace REghZyNotepad.AttachedProperties {
 
                     args.Handled = true;
                 }
-
                 else if (forceHorizontalScrolling) {
-                    if (scrollViewer == null)
-                        return;
-
                     if (args.Delta < 0) {
                         for (int i = 0; i < horizontalScrollingAmount; i++) {
                             scrollViewer.LineRight();

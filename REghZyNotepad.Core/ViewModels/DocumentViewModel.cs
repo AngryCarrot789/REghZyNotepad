@@ -1,8 +1,8 @@
 using System;
 using System.IO;
-using REghZyMVVM.ViewModels.Base;
+using DragonJetzMVVM.ViewModels.Base;
 
-namespace REghZyNotepad.Core.ViewModels {
+namespace DragonJetzNotepad.Core.ViewModels {
     public class DocumentViewModel : BaseViewModel {
         private string _contents;
         private string _filePath;
@@ -10,6 +10,12 @@ namespace REghZyNotepad.Core.ViewModels {
         private long _wordCount;
 
         private bool _hasMadeChanges;
+        /// <summary>
+        /// Whether the text has changed since the document was last saved (will be false if you save, then true if you type anything)
+        /// <para>
+        /// This is mainly used to prompt saving when exiting, and updating the window title
+        /// </para>
+        /// </summary>
         public bool HasTextChangedSinceSave {
             get => this._hasMadeChanges;
             set {
@@ -18,6 +24,9 @@ namespace REghZyNotepad.Core.ViewModels {
             }
         }
 
+        /// <summary>
+        /// The raw document text/contents
+        /// </summary>
         public string Contents {
             get => _contents;
             set {
@@ -29,35 +38,24 @@ namespace REghZyNotepad.Core.ViewModels {
             }
         }
 
+        /// <summary>
+        /// The path to the opened file, or null if it hasn't got one
+        /// </summary>
         public string FilePath {
             get => _filePath;
-            set => RaisePropertyChanged(ref this._filePath, value);
+            set {
+                RaisePropertyChanged(ref this._filePath, value);
+            }
         }
 
         /// <summary>
-        /// Sets the file name by editing the <see cref="FilePath"/> property
+        /// How many characters there are in this document
         /// </summary>
-        /// <exception cref="NullReferenceException">If the new file name is null or empty</exception>
-        /// <exception cref="InvalidDataException">If the new file name doesn't contain an extension</exception>
-        public string FileName {
-            get => Path.GetFileName(this.FilePath);
-            // set {
-            //     if (value == null) {
-            //         throw new NullReferenceException("New file name cannot be null");
-            //     }
-            //     if (value.IndexOf('.') == -1) {
-            //         throw new Exceptions.InvalidDataException("New file name does not have an extension");
-            //     }
-            // 
-            //     this.FilePath = Path.Combine(Path.GetFullPath(this.FilePath), value);
-            // }
-        }
-
         public long Length {
             get => _length;
             set {
                 if (value > 41943040) {
-                    throw new Exceptions.InvalidDataException("File size cannot exceed 41943040 bytes");
+                    throw new Exceptions.InvalidDataException("File size cannot exceed 41943040 bytes (40 MB)");
                 }
 
                 this.WordCount = CountWords();
@@ -67,9 +65,14 @@ namespace REghZyNotepad.Core.ViewModels {
 
         public long WordCount {
             get => _wordCount;
-            set {
-                RaisePropertyChanged(ref this._wordCount, value);
-            }
+            set => RaisePropertyChanged(ref this._wordCount, value);
+        }
+
+        /// <summary>
+        /// Gets the name of the file path, or null if there isn't one
+        /// </summary>
+        public string GetFileName() {
+            return Path.GetFileName(this.FilePath);
         }
 
         /// <summary>
@@ -100,8 +103,9 @@ namespace REghZyNotepad.Core.ViewModels {
 
         public int CountWords() {
             string text = this.Contents.Trim();
-            if (string.IsNullOrEmpty(text))
+            if (string.IsNullOrEmpty(text)) {
                 return 0;
+            }
 
             int count = 0;
             bool lastWasWordChar = false;
@@ -115,8 +119,9 @@ namespace REghZyNotepad.Core.ViewModels {
                     count++;
                 }
             }
-            if (!lastWasWordChar)
+            if (!lastWasWordChar) {
                 count--;
+            }
 
             return count + 1;
         }

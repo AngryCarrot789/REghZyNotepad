@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using REghZyMVVM.Utils;
+using DragonJetzMVVM.Utils;
 
-namespace REghZyNotepad.Core.Utilities {
+namespace DragonJetzNotepad.Core.Utilities {
     // stands for "REghZy Config Structure"... lol. technically just a YAML parser 
     // but with less supported features (e.g. no lists within lists)
 

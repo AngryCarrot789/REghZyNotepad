@@ -1,20 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace REghZyNotepad.Controls {
+namespace DragonJetzNotepad.Controls {
     /// <summary>
     /// Interaction logic for ItemSelector.xaml
     /// </summary>
@@ -24,7 +12,7 @@ namespace REghZyNotepad.Controls {
                 nameof(LabelText),
                 typeof(string),
                 typeof(ItemSelector),
-                new PropertyMetadata("Label Here", OnLabelTextChanged));
+                new PropertyMetadata("Label", OnLabelTextChanged));
 
         public static DependencyProperty ItemsSourceProperty =
             DependencyProperty.Register(
@@ -45,7 +33,7 @@ namespace REghZyNotepad.Controls {
                 nameof(SelectedItem),
                 typeof(string),
                 typeof(ItemSelector),
-                new PropertyMetadata(string.Empty, OnSelectedItemChanged));
+                new PropertyMetadata(null, OnSelectedItemChanged));
 
         public static void OnLabelTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e) {
             if (d is ItemSelector control) {
@@ -89,32 +77,6 @@ namespace REghZyNotepad.Controls {
             set => SetValue(SelectedItemProperty, value);
         }
 
-        public ItemSelector() {
-            InitializeComponent();
-        }
-
-        public void SetSelectedItem(string value) {
-            SelectedItem = value;
-        }
-
-        public string GetPreviousItem() {
-            if (ItemsSource != null && HasItems)
-                if (HasItems && SelectedPosition <= ItemsCount)
-                    return ItemsSource[SelectedIndex - 1];
-            return string.Empty;
-        }
-
-        public string GetNextItem() {
-            if (ItemsSource != null && HasItems)
-                if (!IsLastItemSelected)
-                    return ItemsSource[SelectedIndex + 1];
-            return string.Empty;
-        }
-
-        public void ResetSelectedItem() {
-            SelectedIndex = 0;
-        }
-
         public bool HasItems {
             get => ItemsCount > 0;
         }
@@ -131,23 +93,51 @@ namespace REghZyNotepad.Controls {
             get => ItemsSource != null ? ItemsSource.Count : 0;
         }
 
-        public void MoveItemRight() {
-            if (HasItems && SelectedIndex < (ItemsCount - 1))
-                SelectedIndex++;
+        public ItemSelector() {
+            InitializeComponent();
         }
 
-        public void MoveItemLeft() {
-            if (HasItems) {
-                if (SelectedIndex > 0 && SelectedPosition <= ItemsSource.Count)
-                    SelectedIndex--;
+        public void SetSelectedItem(string value) {
+            SelectedItem = value;
+        }
+
+        public string GetPreviousItem() {
+            if (HasItems && SelectedPosition <= ItemsCount) {
+                return ItemsSource[SelectedIndex - 1];
+            }
+
+            return null;
+        }
+
+        public string GetNextItem() {
+            if (HasItems && !IsLastItemSelected) {
+                return ItemsSource[SelectedIndex + 1];
+            }
+
+            return null;
+        }
+
+        public void ResetSelectedItem() {
+            SelectedIndex = 0;
+        }
+
+        public void MoveItemRight() {
+            if (HasItems && SelectedIndex < (ItemsCount - 1)) {
+                SelectedIndex++;
             }
         }
 
-        private void moveItemRightClick(object sender, RoutedEventArgs e) {
+        public void MoveItemLeft() {
+            if (HasItems && SelectedIndex > 0 && SelectedPosition <= ItemsSource.Count) {
+                SelectedIndex--;
+            }
+        }
+
+        private void MoveItemRightClick(object sender, RoutedEventArgs e) {
             MoveItemRight();
         }
 
-        private void moveItemLeftClick(object sender, RoutedEventArgs e) {
+        private void MoveItemLeftClick(object sender, RoutedEventArgs e) {
             MoveItemLeft();
         }
     }

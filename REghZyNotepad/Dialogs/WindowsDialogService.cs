@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 using Microsoft.Win32;
-using REghZyNotepad.Core.Views;
+using DragonJetzNotepad.Core.Views;
 
-namespace REghZyNotepad.Dialogs {
+namespace DragonJetzNotepad.Dialogs {
     public class WindowsDialogService : ISaveOpenService, IDialogMessage {
         private const string FILTERS =
             "All files|*.*|" +

@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
-using REghZyNotepad.Core.Exceptions;
+using DragonJetzNotepad.Core.Exceptions;
 
-namespace REghZyNotepad.Converters {
-    public class FilePathConverter : IValueConverter {
+namespace DragonJetzNotepad.Converters {
+    public class FilePathPreviewConverter : IValueConverter {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
             if (value == null) {
                 return "Save or Open a file to display the path";
@@ -30,7 +31,7 @@ namespace REghZyNotepad.Converters {
             //     throw new InvalidDataException($"Provided value was not a string ({value.GetType().Name})");
             // }
 
-            return null;
+            return DependencyProperty.UnsetValue;
         }
     }
 }
