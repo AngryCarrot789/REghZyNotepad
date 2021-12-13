@@ -13,7 +13,7 @@ This is basically notepad, only without the finding feature (not yet atleast) bu
 - Zoom/change font size when holding CTRL and scrolling (slightly buggy if you're not at the bottom of the text editor)
 - and more
 
-Also the text wrapping option is broken... forgot to bind it in the FormatWindow.xaml... whoops
+Also this is (i think lol) the first time i made a proper "mvvm" progra, so it might not be 100% what some would call "standard"... but eh. it works, and there's no view dependent stuff sort of :)
 
 # to download
 this uses a submodule of another repo i used for utils and stuff. so i think you do (in cmd or whatever):
