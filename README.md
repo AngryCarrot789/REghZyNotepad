@@ -17,5 +17,5 @@ Also this is (i think lol) the first time i made a proper "mvvm" progra, so it m
 
 # to download
 this uses a submodule of another repo i used for utils and stuff. so i think you do (in cmd or whatever):
-`git clone --recursive https://github.com/AngryCarrot789/REghZyNotepad`
+`git clone --recursive https://github.com/AngryCarrot789/DragonJetzNotepad`
 and then maybe `git submodule --init --recursive` probbaly... i havent done that before but ive seen others do it
