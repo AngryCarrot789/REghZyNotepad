@@ -1,8 +1,8 @@
-﻿using DragonJetzMVVM.ViewModels.Base;
-using DragonJetzNotepad.Core;
-using System.Windows.Input;
+﻿using System.Windows.Input;
+using REghZyMVVM.ViewModels.Base;
+using REghZyNotepad.Core;
 
-namespace DragonJetzNotepad.Views.Dialogs {
+namespace REghZyNotepad.Views.Dialogs {
     public class GotoLineViewModel : BaseViewModel {
         private int _targetLine;
         public int TargetLine {

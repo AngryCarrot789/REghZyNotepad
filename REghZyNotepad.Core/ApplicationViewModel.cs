@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using DragonJetzMVVM.ViewModels.Base;
-using DragonJetzNotepad.Core.ViewModels;
+using REghZyMVVM.ViewModels.Base;
+using REghZyNotepad.Core.ViewModels;
 
-namespace DragonJetzNotepad.Core {
+namespace REghZyNotepad.Core {
     public class ApplicationViewModel : BaseViewModel {
         public ObservableCollection<NotepadViewModel> Notepads { get; }
 

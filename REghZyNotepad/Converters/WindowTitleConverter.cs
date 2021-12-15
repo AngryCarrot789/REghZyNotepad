@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using DragonJetzNotepad.Core.Exceptions;
+using REghZyNotepad.Core.Exceptions;
 
-namespace DragonJetzNotepad.Converters {
+namespace REghZyNotepad.Converters {
     // values[0] = bool (has content changed)
     // values[1] = string (file path)
     public class WindowTitleConverter : IMultiValueConverter {
-        public const string WINDOW_TITLE = "DragonJetz Notepad";
+        public const string WINDOW_TITLE = "REghZy Notepad";
         public const string WINDOW_TITLE_UNTITLED = (WINDOW_TITLE + " - Untitled");
 
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture) {

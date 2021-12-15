@@ -2,10 +2,10 @@
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
-using DragonJetzMVVM.Utils;
-using DragonJetzNotepad.Core.Exceptions;
+using REghZyMVVM.Utils;
+using REghZyNotepad.Core.Exceptions;
 
-namespace DragonJetzNotepad.Converters {
+namespace REghZyNotepad.Converters {
     public class BoolToVisibilityConverter : IValueConverter {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
             bool visible;

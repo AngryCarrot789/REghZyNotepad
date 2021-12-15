@@ -2,11 +2,11 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using DragonJetzMVVM.Views;
-using DragonJetzNotepad.Core.ViewModels;
-using DragonJetzNotepad.Core.Views;
+using REghZyMVVM.Views;
+using REghZyNotepad.Core.ViewModels;
+using REghZyNotepad.Core.Views;
 
-namespace DragonJetzNotepad.Views.Dialogs {
+namespace REghZyNotepad.Views.Dialogs {
     /// <summary>
     /// Interaction logic for GotoLineDialog.xaml
     /// </summary>

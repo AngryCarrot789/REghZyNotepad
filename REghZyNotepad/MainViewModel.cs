@@ -1,9 +1,9 @@
 using System.Windows;
 using System.Windows.Input;
-using DragonJetzMVVM.ViewModels.Base;
-using DragonJetzNotepad.Core;
+using REghZyMVVM.ViewModels.Base;
+using REghZyNotepad.Core;
 
-namespace DragonJetzNotepad {
+namespace REghZyNotepad {
     public class MainViewModel : BaseViewModel {
         private bool _showInfoBar;
         public bool ShowInfoBar {

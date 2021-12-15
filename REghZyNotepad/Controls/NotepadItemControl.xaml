@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:DragonJetzNotepad.Controls"
-             xmlns:viewmodels="clr-namespace:DragonJetzNotepad.Core.ViewModels;assembly=DragonJetzNotepad.Core" 
-             xmlns:core="clr-namespace:DragonJetzNotepad.Core;assembly=DragonJetzNotepad.Core"
-             xmlns:Converters="clr-namespace:DragonJetzNotepad.Converters" x:Class="DragonJetzNotepad.Controls.NotepadItemControl"
+             xmlns:local="clr-namespace:REghZyNotepad.Controls"
+             xmlns:viewmodels="clr-namespace:REghZyNotepad.Core.ViewModels;assembly=REghZyNotepad.Core"
+             xmlns:core="clr-namespace:REghZyNotepad.Core;assembly=REghZyNotepad.Core"
+             xmlns:Converters="clr-namespace:REghZyNotepad.Converters" x:Class="REghZyNotepad.Controls.NotepadItemControl"
              d:DataContext="{d:DesignInstance Type={x:Type viewmodels:NotepadViewModel}}"
              mc:Ignorable="d" 
              Height="28" d:DesignWidth="200">
@@ -19,7 +19,7 @@
             <Image Width="16" DockPanel.Dock="Left" 
                    ToolTip="Changes have not been changed"
                    Margin="0,0"
-                   Source="/DragonJetzNotepad;component/Resources/alertSaveFile.png"
+                   Source="/REghZyNotepad;component/Resources/alertSaveFile.png"
                    Visibility="{Binding Editor.Document.HasTextChangedSinceSave, Converter={StaticResource bool2vis}, UpdateSourceTrigger=PropertyChanged}"/>
             <Label Content="{Binding Editor.Document.FilePath, FallbackValue=Untitled, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FilePathConverter}}" 
                    ToolTip="{Binding Editor.Document.FilePath, FallbackValue=FileName.txt, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FilePathConverter}}"

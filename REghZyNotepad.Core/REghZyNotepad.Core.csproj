@@ -7,8 +7,8 @@
     <ProjectGuid>{87CEA552-8D72-46D3-86D0-F3986E24D060}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DragonJetzNotepad.Core</RootNamespace>
-    <AssemblyName>DragonJetzNotepad.Core</AssemblyName>
+    <RootNamespace>REghZyNotepad.Core</RootNamespace>
+    <AssemblyName>REghZyNotepad.Core</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -58,13 +58,13 @@
     <Compile Include="Views\IViewProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\REghZyMVVM\REghZyMVVM.Utils\DragonJetzMVVM.Utils.csproj">
+    <ProjectReference Include="..\REghZyMVVM\REghZyMVVM.Utils\REghZyMVVM.Utils.csproj">
       <Project>{56303e0f-c01e-42b6-a39b-83d878141531}</Project>
-      <Name>DragonJetzMVVM.Utils</Name>
+      <Name>REghZyMVVM.Utils</Name>
     </ProjectReference>
-    <ProjectReference Include="..\REghZyMVVM\REghZyMVVM\DragonJetzMVVM.csproj">
+    <ProjectReference Include="..\REghZyMVVM\REghZyMVVM\REghZyMVVM.csproj">
       <Project>{f73f8351-3650-45d3-8c72-606d09f8b728}</Project>
-      <Name>DragonJetzMVVM</Name>
+      <Name>REghZyMVVM</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

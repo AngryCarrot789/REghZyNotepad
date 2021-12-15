@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DragonJetzNotepad.Core.Exceptions {
+namespace REghZyNotepad.Core.Exceptions {
 
     /// <summary>
     /// An exception for invalid data or information

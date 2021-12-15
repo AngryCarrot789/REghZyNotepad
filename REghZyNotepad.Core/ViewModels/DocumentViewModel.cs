@@ -1,8 +1,8 @@
 using System;
 using System.IO;
-using DragonJetzMVVM.ViewModels.Base;
+using REghZyMVVM.ViewModels.Base;
 
-namespace DragonJetzNotepad.Core.ViewModels {
+namespace REghZyNotepad.Core.ViewModels {
     public class DocumentViewModel : BaseViewModel {
         private string _contents;
         private string _filePath;

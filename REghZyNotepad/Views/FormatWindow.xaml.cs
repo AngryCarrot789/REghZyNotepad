@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
-using DragonJetzMVVM.Views;
-using DragonJetzNotepad.Core.ViewModels;
+using REghZyMVVM.Views;
+using REghZyNotepad.Core.ViewModels;
 
-namespace DragonJetzNotepad.Views {
+namespace REghZyNotepad.Views {
     /// <summary>
     /// Interaction logic for FormatWindow.xaml
     /// </summary>

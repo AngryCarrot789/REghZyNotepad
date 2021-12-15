@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Windows;
-using DragonJetzNotepad.Core;
-using DragonJetzNotepad.Dialogs;
+using REghZyNotepad.Core;
+using REghZyNotepad.Dialogs;
 
-namespace DragonJetzNotepad {
+namespace REghZyNotepad {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>

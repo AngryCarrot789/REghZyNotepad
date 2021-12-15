@@ -2,7 +2,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 
-namespace DragonJetzNotepad.Views {
+namespace REghZyNotepad.Views {
     public partial class AboutWindow : Window {
         public AboutWindow() {
             InitializeComponent();

@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Media;
 
-namespace DragonJetzFramework.Themes {
+namespace REghZyNotepad.Themes {
     public static class ThemesController
     {
         public static ThemeType CurrentTheme { get; set; }

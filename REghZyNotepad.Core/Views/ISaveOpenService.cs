@@ -1,6 +1,6 @@
-﻿using DragonJetzMVVM.Service;
+﻿using REghZyMVVM.Service;
 
-namespace DragonJetzNotepad.Core.Views {
+namespace REghZyNotepad.Core.Views {
     /// <summary>
     /// A dialog service for saving and opening files
     /// </summary>

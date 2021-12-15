@@ -4,7 +4,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Data;
 
-namespace DragonJetzNotepad.Converters {
+namespace REghZyNotepad.Converters {
     public class FilePathToNameConverter : IValueConverter {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
             if (value == null) {

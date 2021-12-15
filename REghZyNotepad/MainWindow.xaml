@@ -1,20 +1,20 @@
-﻿<Window x:Class="DragonJetzNotepad.MainWindow"
+﻿<Window x:Class="REghZyNotepad.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-        xmlns:DragonJetzNotepad="clr-namespace:DragonJetzNotepad" 
-        xmlns:core="clr-namespace:DragonJetzNotepad.Core;assembly=DragonJetzNotepad.Core" 
-        xmlns:Converters="clr-namespace:DragonJetzNotepad.Converters" 
-        xmlns:editor="clr-namespace:DragonJetzNotepad.Editor"
-        xmlns:attchprop="clr-namespace:DragonJetzNotepad.AttachedProperties" 
-        xmlns:controls="clr-namespace:DragonJetzNotepad.Controls"
+        xmlns:rznotepad="clr-namespace:REghZyNotepad"
+        xmlns:core="clr-namespace:REghZyNotepad.Core;assembly=REghZyNotepad.Core" 
+        xmlns:Converters="clr-namespace:REghZyNotepad.Converters" 
+        xmlns:editor="clr-namespace:REghZyNotepad.Editor"
+        xmlns:attchprop="clr-namespace:REghZyNotepad.AttachedProperties" 
+        xmlns:controls="clr-namespace:REghZyNotepad.Controls"
         mc:Ignorable="d"
         Width="800" Height="500"
         ResizeMode="CanResizeWithGrip"
         Style="{DynamicResource CustomWindowStyle}">
     <Window.DataContext>
-        <DragonJetzNotepad:MainViewModel x:Name="MVM"/>
+        <rznotepad:MainViewModel x:Name="MVM"/>
     </Window.DataContext>
     <Window.Resources>
         <Converters:WindowTitleConverter x:Key="TitleConverter"/>
@@ -233,7 +233,7 @@
             </Border>
             <DockPanel DataContext="{Binding Notepad, UpdateSourceTrigger=PropertyChanged}">
                 <Grid DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Height="22" 
-                      Background="{DynamicResource DragonJetzBrush.Primary.1.Background.Static}" 
+                      Background="{DynamicResource REghZyBrush.Primary.1.Background.Static}"
                       Visibility="{Binding ShowInfoBar, ElementName=MVM, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource bool2vis}}">
                     <DockPanel DataContext="{Binding Editor, UpdateSourceTrigger=PropertyChanged}" >
                         <DockPanel.Resources>
@@ -296,7 +296,7 @@
                     <Grid.Resources>
                         <Converters:BoolToOpacityConverter x:Key="bool2opacity"/>
                     </Grid.Resources>
-                    <editor:DragonJetzTextEditor x:Name="TextEditor"
+                    <editor:REghZyTextEditor x:Name="TextEditor"
                         DataContext="{Binding Editor, UpdateSourceTrigger=PropertyChanged}"
                         Text="{Binding Document.Contents, UpdateSourceTrigger=PropertyChanged}"
                         FontSize="{Binding Format.FontSize, UpdateSourceTrigger=PropertyChanged}"
@@ -330,8 +330,8 @@
                         ScrollViewer.VerticalScrollBarVisibility="Visible"
                         Focusable="True" 
                         Visibility="Visible" 
-                        Style="{DynamicResource DragonJetzTextEditorStyle}">
-                        <editor:DragonJetzTextEditor.ContextMenu>
+                        Style="{DynamicResource REghZyTextEditorStyle}">
+                        <editor:REghZyTextEditor.ContextMenu>
                             <ContextMenu OverridesDefaultStyle="False">
                                 <MenuItem Header="Undo" InputGestureText="Ctrl + Z"         Command="ApplicationCommands.Undo"/>
                                 <MenuItem Header="Redo" InputGestureText="Ctrl + Shift + Z" Command="ApplicationCommands.Redo"/>
@@ -341,14 +341,14 @@
                                 <MenuItem Header="Paste"  InputGestureText="Ctrl + V" Command="ApplicationCommands.Paste"/>
                                 <MenuItem Header="Delete" InputGestureText="Del"      Command="ApplicationCommands.Delete"/>
                             </ContextMenu>
-                        </editor:DragonJetzTextEditor.ContextMenu>
-                        <editor:DragonJetzTextEditor.InputBindings>
+                        </editor:REghZyTextEditor.ContextMenu>
+                        <editor:REghZyTextEditor.InputBindings>
                             <KeyBinding Key="Z" Modifiers="Ctrl+Shift" Command="ApplicationCommands.Redo"/>
-                        </editor:DragonJetzTextEditor.InputBindings>
-                    </editor:DragonJetzTextEditor>
+                        </editor:REghZyTextEditor.InputBindings>
+                    </editor:REghZyTextEditor>
                     <Border x:Name="aditionalSelection"
                             Visibility="Collapsed"
-                            BorderBrush="{DynamicResource DragonJetzBrush.Primary.3.Background.Static}"
+                            BorderBrush="{DynamicResource REghZyBrush.Primary.3.Background.Static}"
                             Opacity="{Binding ElementName=MVM, Path=ShowOutlineBar, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource bool2opacity}, ConverterParameter=0.0|0.7}"
                             BorderThickness="2"
                             CornerRadius="2"

@@ -2,16 +2,16 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using DragonJetzFramework.Themes;
-using DragonJetzMVVM.Views;
-using DragonJetzNotepad.Core;
-using DragonJetzNotepad.Core.Utilities;
-using DragonJetzNotepad.Core.ViewModels;
-using DragonJetzNotepad.Core.Views;
-using DragonJetzNotepad.Views;
-using DragonJetzNotepad.Views.Dialogs;
+using REghZyMVVM.Views;
+using REghZyNotepad.Core;
+using REghZyNotepad.Core.Utilities;
+using REghZyNotepad.Core.ViewModels;
+using REghZyNotepad.Core.Views;
+using REghZyNotepad.Themes;
+using REghZyNotepad.Views;
+using REghZyNotepad.Views.Dialogs;
 
-namespace DragonJetzNotepad {
+namespace REghZyNotepad {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>

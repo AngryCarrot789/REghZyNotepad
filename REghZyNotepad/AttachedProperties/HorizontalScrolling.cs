@@ -4,7 +4,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows;
 
-namespace DragonJetzNotepad.AttachedProperties {
+namespace REghZyNotepad.AttachedProperties {
     /// <summary>
     /// A class for allowing horizontal scrolling on any control that has a scrollviewer 
     /// </summary>

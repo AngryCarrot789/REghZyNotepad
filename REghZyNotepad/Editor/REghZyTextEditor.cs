@@ -2,10 +2,10 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows;
-using DragonJetzNotepad.Core.ViewModels;
+using REghZyNotepad.Core.ViewModels;
 
-namespace DragonJetzNotepad.Editor {
-    public class DragonJetzTextEditor : TextBox {
+namespace REghZyNotepad.Editor {
+    public class REghZyTextEditor : TextBox {
         public static bool CAN_SELECT_ENTIRE_LINE_CTRL_SHIFT_A = true;
         public static bool CAN_CUT_ENTIRE_LINE_CTRL_X = true;
         public static bool CAN_ADD_ENTIRE_LINES = true;
@@ -17,7 +17,7 @@ namespace DragonJetzNotepad.Editor {
             get => (TextEditorViewModel) this.DataContext;
         }
 
-        public DragonJetzTextEditor() {
+        public REghZyTextEditor() {
             AllowDrop = true;
         }
 

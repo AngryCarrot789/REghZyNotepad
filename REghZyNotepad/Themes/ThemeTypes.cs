@@ -1,4 +1,4 @@
-﻿namespace DragonJetzFramework.Themes {
+﻿namespace REghZyNotepad.Themes {
     public enum ThemeType
     {
         Dark,

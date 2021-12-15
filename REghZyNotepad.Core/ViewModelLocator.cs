@@ -1,7 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
-using DragonJetzNotepad.Core.ViewModels;
+using REghZyNotepad.Core.ViewModels;
 
-namespace DragonJetzNotepad.Core {
+namespace REghZyNotepad.Core {
     /// <summary>
     /// A wrapper for the <see cref="IoC"/> class
     /// </summary>

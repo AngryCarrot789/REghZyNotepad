@@ -1,7 +1,7 @@
-﻿using DragonJetzMVVM.Service;
-using DragonJetzNotepad.Core.ViewModels;
+﻿using REghZyMVVM.Service;
+using REghZyNotepad.Core.ViewModels;
 
-namespace DragonJetzNotepad.Core.Views {
+namespace REghZyNotepad.Core.Views {
     /// <summary>
     /// An API for providing the ability to show specific views or update them
     /// </summary>

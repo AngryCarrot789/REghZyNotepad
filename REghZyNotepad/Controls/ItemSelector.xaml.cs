@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace DragonJetzNotepad.Controls {
+namespace REghZyNotepad.Controls {
     /// <summary>
     /// Interaction logic for ItemSelector.xaml
     /// </summary>

@@ -1,10 +1,10 @@
 using System;
 using System.IO;
 using System.Text;
-using DragonJetzMVVM.ViewModels.Base;
-using DragonJetzNotepad.Core.Views;
+using REghZyMVVM.ViewModels.Base;
+using REghZyNotepad.Core.Views;
 
-namespace DragonJetzNotepad.Core.ViewModels {
+namespace REghZyNotepad.Core.ViewModels {
     /// <summary>
     /// A ViewModel for the text editor area (including formats, contents, line number, etc)
     /// </summary>

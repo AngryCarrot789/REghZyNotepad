@@ -1,6 +1,6 @@
-﻿using DragonJetzMVVM.Service;
+﻿using REghZyMVVM.Service;
 
-namespace DragonJetzNotepad.Core.Views {
+namespace REghZyNotepad.Core.Views {
     /// <summary>
     /// An API for showing messages onscreen
     /// </summary>

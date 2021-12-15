@@ -1,4 +1,4 @@
-﻿<ResourceDictionary x:Class="DragonJetzFramework.Themes.Controls" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
+﻿<ResourceDictionary x:Class="REghZyNotepad.Themes.Controls" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Style x:Key="FocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
@@ -186,8 +186,8 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <Style x:Key="ComboBoxEditableTextBox" TargetType="{x:Type TextBox}">
-        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}" />
-        <Setter Property="CaretBrush" Value="{DynamicResource DragonJetzBrush.Glyth.Static}" />
+        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}" />
+        <Setter Property="CaretBrush" Value="{DynamicResource REghZyBrush.Glyth.Static}" />
         <Setter Property="OverridesDefaultStyle" Value="true" />
         <Setter Property="AllowDrop" Value="true" />
         <Setter Property="MinWidth" Value="0" />
@@ -273,7 +273,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{DynamicResource DragonJetzBrush.Foreground.Disabled}" />
+                            <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{DynamicResource REghZyBrush.Foreground.Disabled}" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -464,8 +464,8 @@
     <Style TargetType="{x:Type TextBox}">
         <Setter Property="Background" Value="{DynamicResource TextBox.Static.Background}" />
         <Setter Property="BorderBrush" Value="{DynamicResource TextBox.Static.Border}" />
-        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}" />
-        <Setter Property="CaretBrush" Value="{DynamicResource DragonJetzBrush.Glyth.Static}" />
+        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}" />
+        <Setter Property="CaretBrush" Value="{DynamicResource REghZyBrush.Glyth.Static}" />
         <Setter Property="SelectionBrush" Value="{DynamicResource TextBox.Selection}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
@@ -508,7 +508,7 @@
     <Style TargetType="{x:Type ListBox}">
         <Setter Property="Background" Value="{DynamicResource ListBox.Static.Background}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ListBox.Static.Border}" />
-        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}" />
+        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
@@ -582,7 +582,7 @@
                             <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource Item.SelectedActive.Border}" />
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{DynamicResource DragonJetzBrush.Foreground.Disabled}" />
+                            <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{DynamicResource REghZyBrush.Foreground.Disabled}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -591,7 +591,7 @@
     </Style>
 
     <Style TargetType="{x:Type Label}">
-        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}" />
+        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Padding" Value="5" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -604,7 +604,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Disabled}" />
+                            <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Disabled}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -626,7 +626,7 @@
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
         <Setter Property="Background" Value="{DynamicResource OptionMark.Static.Background}" />
         <Setter Property="BorderBrush" Value="{DynamicResource OptionMark.Static.Border}" />
-        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}" />
+        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Template">
@@ -947,9 +947,9 @@
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
         <Setter Property="Background" Value="{DynamicResource RadioButton.Static.Background}" />
         <Setter Property="BorderBrush" Value="{DynamicResource RadioButton.Static.Border}" />
-        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}" />
+        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}" />
+        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Template">
             <Setter.Value>
@@ -1004,7 +1004,7 @@
         <Setter Property="Background" Value="{StaticResource TabItem.Selected.Background}" />
         <Setter Property="BorderBrush" Value="{StaticResource TabItem.Selected.Border}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}" />
+        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabControl}">
@@ -1053,7 +1053,7 @@
                             <Setter Property="Margin" TargetName="headerPanel" Value="0,2,2,2" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="{DynamicResource DragonJetzBrush.Foreground.Disabled}" />
+                            <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="{DynamicResource REghZyBrush.Foreground.Disabled}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -1063,7 +1063,7 @@
 
     <Style TargetType="{x:Type TabItem}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
-        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}" />
+        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}" />
         <Setter Property="Background" Value="{DynamicResource TabItem.Static.Background}" />
         <Setter Property="BorderBrush" Value="{DynamicResource TabItem.Static.Border}" />
         <Setter Property="Margin" Value="0" />
@@ -1452,7 +1452,7 @@
     </Style>
 
     <Style TargetType="{x:Type Expander}">
-        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}" />
+        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
@@ -1487,7 +1487,7 @@
                             <Setter Property="Style" TargetName="HeaderSite" Value="{StaticResource ExpanderLeftHeaderStyle}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Disabled}" />
+                            <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Disabled}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -1496,7 +1496,7 @@
     </Style>
 
     <Style TargetType="{x:Type GridSplitter}">
-        <Setter Property="Background" Value="{DynamicResource DragonJetzBrush.Primary.2.Border.Static}" />
+        <Setter Property="Background" Value="{DynamicResource REghZyBrush.Primary.2.Border.Static}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type GridSplitter}">
@@ -1510,7 +1510,7 @@
     <Style TargetType="{x:Type GroupBox}">
         <Setter Property="Background" Value="{DynamicResource GroupBox.Static.Background}" />
         <Setter Property="BorderBrush" Value="{DynamicResource GroupBox.Static.Border}" />
-        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}" />
+        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}" />
         <Setter Property="BorderThickness" Value="2" />
         <Setter Property="Template">
             <Setter.Value>
@@ -1552,7 +1552,7 @@
     <Style x:Key="ThinGroupBox" TargetType="{x:Type GroupBox}">
         <Setter Property="Background" Value="{DynamicResource GroupBox.Static.Background}" />
         <Setter Property="BorderBrush" Value="{DynamicResource GroupBox.Static.Border}" />
-        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}" />
+        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}" />
         <Setter Property="BorderThickness" Value="2" />
         <Setter Property="Template">
             <Setter.Value>
@@ -1594,7 +1594,7 @@
     <Style x:Key="SquaredGroupBox" TargetType="{x:Type GroupBox}">
         <Setter Property="BorderBrush" Value="{DynamicResource GroupBox.Static.Border}" />
         <Setter Property="Background" Value="{DynamicResource GroupBox.Static.Background}" />
-        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}" />
+        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Template">
             <Setter.Value>
@@ -1638,7 +1638,7 @@
     <Style x:Key="DefaultGroupbox" TargetType="{x:Type GroupBox}">
         <Setter Property="BorderBrush" Value="{DynamicResource GroupBox.Static.Border}" />
         <Setter Property="Background" Value="{DynamicResource GroupBox.Static.Background}" />
-        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}" />
+        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Template">
             <Setter.Value>
@@ -1682,7 +1682,7 @@
     <Style TargetType="{x:Type ContextMenu}">
         <Setter Property="Background" Value="{StaticResource Popup.Static.Background}" />
         <Setter Property="BorderBrush" Value="{StaticResource Popup.Static.Border}" />
-        <Setter Property="Foreground" Value="{StaticResource DragonJetzBrush.Foreground.Static}" />
+        <Setter Property="Foreground" Value="{StaticResource REghZyBrush.Foreground.Static}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Grid.IsSharedSizeScope" Value="true" />
@@ -1715,7 +1715,7 @@
         <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.MenuFontSizeKey}}" />
         <Setter Property="FontStyle" Value="{DynamicResource {x:Static SystemFonts.MenuFontStyleKey}}" />
         <Setter Property="FontWeight" Value="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" />
-        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}" />
+        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
@@ -1775,7 +1775,7 @@
                             <Setter Property="BorderBrush" TargetName="templateRoot" Value="{DynamicResource MenuItem.MouseOver.Border}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="{DynamicResource DragonJetzBrush.Foreground.Disabled}" />
+                            <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="{DynamicResource REghZyBrush.Foreground.Disabled}" />
                             <Setter Property="Background" Value="{DynamicResource MenuItem.Disabled.Background}" />
                         </Trigger>
                         <Trigger Property="CanContentScroll" SourceName="SubMenuScrollViewer" Value="False">
@@ -1846,7 +1846,7 @@
                 <Setter Property="BorderBrush" TargetName="templateRoot" Value="{DynamicResource MenuItem.MouseOver.Border}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="{DynamicResource DragonJetzBrush.Foreground.Disabled}" />
+                <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="{DynamicResource REghZyBrush.Foreground.Disabled}" />
                 <Setter Property="Background" Value="{DynamicResource MenuItem.Disabled.Background}" />
             </Trigger>
             <Trigger Property="CanContentScroll" SourceName="SubMenuScrollViewer" Value="False">
@@ -1873,7 +1873,7 @@
                 </Border>
                 <ContentPresenter ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Grid.Column="2" ContentStringFormat="{TemplateBinding HeaderStringFormat}" ContentSource="Header" HorizontalAlignment="Left" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" />
                 <TextBlock Grid.Column="4" Margin="{TemplateBinding Padding}" Opacity="0.7" Text="{TemplateBinding InputGestureText}" VerticalAlignment="Center" />
-                <Path x:Name="RightArrow" Grid.Column="5" Data="M0,0L4,3.5 0,7z" Fill="{StaticResource DragonJetzBrush.Glyth.Static}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" />
+                <Path x:Name="RightArrow" Grid.Column="5" Data="M0,0L4,3.5 0,7z" Fill="{StaticResource REghZyBrush.Glyth.Static}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" />
                 <Popup x:Name="PART_Popup" AllowsTransparency="True" Focusable="False" HorizontalOffset="-2" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" PopupAnimation="Fade" Placement="Right" VerticalOffset="-3">
                     <Themes:SystemDropShadowChrome Name="Shdw" Themes:SystemDropShadowChrome.Color="#71000000" Themes:SystemDropShadowChrome.CornerRadius="0" SnapsToDevicePixels="True" Margin="0 0 5 5">
                         <Border x:Name="SubMenuBorder" BorderBrush="{DynamicResource Popup.Static.Border}" Background="{DynamicResource Popup.Static.Background}" BorderThickness="1" Padding="0">
@@ -1908,7 +1908,7 @@
                 <Setter Property="BorderBrush" TargetName="templateRoot" Value="{DynamicResource MenuItem.MouseOver.Border}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="{StaticResource DragonJetzBrush.Foreground.Disabled}" />
+                <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="{StaticResource REghZyBrush.Foreground.Disabled}" />
                 <Setter Property="Fill" TargetName="Glyph" Value="{DynamicResource MenuItem.Disabled.Glyth}" />
                 <Setter Property="Fill" TargetName="RightArrow" Value="{DynamicResource MenuItem.Disabled.Glyth}" />
                 <Setter Property="Background" Value="{DynamicResource MenuItem.Disabled.Background}" />
@@ -1936,7 +1936,7 @@
                 </Border>
                 <ContentPresenter ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Grid.Column="2" ContentStringFormat="{TemplateBinding HeaderStringFormat}" ContentSource="Header" HorizontalAlignment="Left" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="Center" />
                 <TextBlock Grid.Column="4" Margin="{TemplateBinding Padding}" Opacity="0.7" Text="{TemplateBinding InputGestureText}" VerticalAlignment="Center" />
-                <Path x:Name="RightArrow" Grid.Column="5" Data="M0,0L4,3.5 0,7z" Visibility="Hidden" Fill="{StaticResource DragonJetzBrush.Glyth.Static}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" />
+                <Path x:Name="RightArrow" Grid.Column="5" Data="M0,0L4,3.5 0,7z" Visibility="Hidden" Fill="{StaticResource REghZyBrush.Glyth.Static}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" />
                 <Popup x:Name="PART_Popup" AllowsTransparency="True" Focusable="False" HorizontalOffset="-2" IsOpen="{Binding IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" PopupAnimation="Fade" Placement="Right" VerticalOffset="-3">
                     <Border x:Name="SubMenuBorder" BorderBrush="{DynamicResource Popup.Static.Border}" Background="{DynamicResource Popup.Static.Background}" BorderThickness="1" Padding="0">
                         <ScrollViewer x:Name="SubMenuScrollViewer" Style="{DynamicResource {ComponentResourceKey ResourceId=MenuScrollViewer, TypeInTargetAssembly={x:Type FrameworkElement}}}">
@@ -1969,7 +1969,7 @@
                 <Setter Property="BorderBrush" TargetName="templateRoot" Value="{DynamicResource MenuItem.MouseOver.Border}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="{StaticResource DragonJetzBrush.Foreground.Disabled}" />
+                <Setter Property="TextElement.Foreground" TargetName="templateRoot" Value="{StaticResource REghZyBrush.Foreground.Disabled}" />
                 <Setter Property="Fill" TargetName="Glyph" Value="{DynamicResource MenuItem.Disabled.Glyth}" />
                 <Setter Property="Fill" TargetName="RightArrow" Value="{DynamicResource MenuItem.Disabled.Glyth}" />
                 <Setter Property="Background" Value="{DynamicResource MenuItem.Disabled.Background}" />
@@ -1984,7 +1984,7 @@
     <Style TargetType="{x:Type ListView}">
         <Setter Property="Background" Value="{DynamicResource ListView.Static.Background}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ListView.Static.Border}" />
-        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}" />
+        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
@@ -2064,7 +2064,7 @@
     <Style x:Key="{x:Type GridViewColumnHeader}" TargetType="GridViewColumnHeader">
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}" />
+        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="GridViewColumnHeader">
@@ -2165,7 +2165,7 @@
                             <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource Item.SelectedActive.Border}" />
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{DynamicResource DragonJetzBrush.Foreground.Disabled}" />
+                            <Setter Property="TextElement.Foreground" TargetName="Bd" Value="{DynamicResource REghZyBrush.Foreground.Disabled}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -2177,7 +2177,7 @@
         <Setter Property="PasswordChar" Value="●" />
         <Setter Property="Background" Value="{DynamicResource TextBox.Static.Background}" />
         <Setter Property="BorderBrush" Value="{DynamicResource TextBox.Static.Border}" />
-        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}" />
+        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -2511,7 +2511,7 @@
         <Setter Property="TextWrapping" Value="NoWrap" />
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
         <Setter Property="TextAlignment" Value="Left" />
-        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}" />
+        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}" />
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value="0.5" />
@@ -2522,7 +2522,7 @@
     <Style TargetType="{x:Type ToolTip}">
         <Setter Property="Background" Value="{DynamicResource Popup.Static.Background}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Popup.Static.Border}" />
-        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}" />
+        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}" />
         <Setter Property="MaxWidth" Value="800" />
         <Setter Property="OverridesDefaultStyle" Value="true" />
         <Setter Property="HasDropShadow" Value="True" />
@@ -2542,7 +2542,7 @@
                                         <Setter Property="TextWrapping" Value="Wrap" />
                                         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
                                         <Setter Property="TextAlignment" Value="Left" />
-                                        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}" />
+                                        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}" />
                                     </Style>
                                 </ContentPresenter.Resources>
                             </ContentPresenter>
@@ -2560,7 +2560,7 @@
     </Style>
 
     <Style TargetType="{x:Type Separator}">
-        <Setter Property="Background" Value="{DynamicResource DragonJetzBrush.Primary.3.Border.Static}" />
+        <Setter Property="Background" Value="{DynamicResource REghZyBrush.Primary.3.Border.Static}" />
         <Setter Property="Margin" Value="0,2,0,2" />
         <Setter Property="Focusable" Value="false" />
         <Setter Property="Template">
@@ -2573,7 +2573,7 @@
     </Style>
 
     <Style x:Key="VerticalSeparator" TargetType="{x:Type Separator}">
-        <Setter Property="Background" Value="{DynamicResource DragonJetzBrush.Primary.3.Border.Static}" />
+        <Setter Property="Background" Value="{DynamicResource REghZyBrush.Primary.3.Border.Static}" />
         <Setter Property="Margin" Value="2,0,2,0" />
         <Setter Property="Focusable" Value="false" />
         <Setter Property="Template">
@@ -2602,7 +2602,7 @@
         <Setter Property="Background" Value="{DynamicResource StatusBar.Static.Background}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource StatusBar.Static.Border}"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}"/>
+        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}"/>
         <Setter Property="FontFamily" Value="{DynamicResource {x:Static SystemFonts.StatusFontFamilyKey}}"/>
         <Setter Property="FontSize" Value="{DynamicResource {x:Static SystemFonts.StatusFontSizeKey}}"/>
         <Setter Property="FontStyle" Value="{DynamicResource {x:Static SystemFonts.StatusFontStyleKey}}"/>
@@ -2736,7 +2736,7 @@
     </Style>
     <Style TargetType="{x:Type ToolBar}">
         <Setter Property="Background" Value="{StaticResource ToolBarHorizontalBackground}"/>
-        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}"/>
+        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}"/>
         <Setter Property="Padding" Value="2,1,1,1"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -2817,7 +2817,7 @@
     <Style TargetType="{x:Type TreeView}">
         <Setter Property="Background" Value="{DynamicResource TreeView.Static.Background}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource TreeView.Static.Border}"/>
-        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}"/>
+        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="1"/>
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
@@ -2918,7 +2918,7 @@
     <Style TargetType="{x:Type TreeViewItem}">
         <Setter Property="Background" Value="{DynamicResource TreeViewItem.Static.Background}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource TreeViewItem.Static.Border}"/>
-        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}"/>
+        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
         <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
@@ -2970,7 +2970,7 @@
                             <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource TreeViewItem.Selected.Inactive.Border}"/>
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Disabled}"/>
+                            <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Disabled}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -2992,8 +2992,8 @@
     <Style x:Key="{x:Type TextBoxBase}" TargetType="{x:Type TextBoxBase}">
         <Setter Property="Background" Value="{DynamicResource TextBox.Static.Background}" />
         <Setter Property="BorderBrush" Value="{DynamicResource TextBox.Static.Border}" />
-        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}" />
-        <Setter Property="CaretBrush" Value="{DynamicResource DragonJetzBrush.Glyth.Static}" />
+        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}" />
+        <Setter Property="CaretBrush" Value="{DynamicResource REghZyBrush.Glyth.Static}" />
         <Setter Property="SelectionBrush" Value="{DynamicResource TextBox.Selection}" />
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
@@ -3035,14 +3035,14 @@
         </Style.Triggers>
     </Style>
     <Style x:Key="{x:Type Hyperlink}" TargetType="{x:Type Hyperlink}">
-        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Static}"/>
+        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Static}"/>
         <Setter Property="TextDecorations" Value="Underline"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
-                <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.ColourfulGlyth.Static}"/>
+                <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.ColourfulGlyth.Static}"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
-                <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Disabled}"/>
+                <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Disabled}"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="true">
                 <Setter Property="Cursor" Value="Hand"/>
@@ -3057,10 +3057,10 @@
             <Style x:Key="{x:Type Hyperlink}" BasedOn="{StaticResource {x:Type Hyperlink}}" TargetType="{x:Type Hyperlink}">
                 <Style.Triggers>
                     <Trigger Property="IsMouseOver" Value="true">
-                        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.ColourfulGlyth.Static}"/>
+                        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.ColourfulGlyth.Static}"/>
                     </Trigger>
                     <Trigger Property="IsEnabled" Value="false">
-                        <Setter Property="Foreground" Value="{DynamicResource DragonJetzBrush.Foreground.Disabled}"/>
+                        <Setter Property="Foreground" Value="{DynamicResource REghZyBrush.Foreground.Disabled}"/>
                     </Trigger>
                     <Trigger Property="IsEnabled" Value="true">
                         <Setter Property="Cursor" Value="Hand"/>

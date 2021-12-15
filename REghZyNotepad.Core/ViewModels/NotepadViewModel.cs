@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
-using DragonJetzMVVM.ViewModels.Base;
+using REghZyMVVM.ViewModels.Base;
 
-namespace DragonJetzNotepad.Core.ViewModels {
+namespace REghZyNotepad.Core.ViewModels {
     /// <summary>
     /// A ViewModel for an entire Notepad view
     /// </summary>

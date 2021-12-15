@@ -1,6 +1,6 @@
-﻿using DragonJetzNotepad.Core.Views;
+﻿using REghZyNotepad.Core.Views;
 
-namespace DragonJetzNotepad.Core {
+namespace REghZyNotepad.Core {
     /// <summary>
     /// A wrapper for <see cref="IoC"/> services
     /// </summary>

@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31313.79
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DragonJetzNotepad", "REghZyNotepad\DragonJetzNotepad.csproj", "{6525B1A4-C4F9-4B7C-8342-EF1E2EBD35A2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REghZyNotepad", "REghZyNotepad\REghZyNotepad.csproj", "{6525B1A4-C4F9-4B7C-8342-EF1E2EBD35A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DragonJetzNotepad.Core", "REghZyNotepad.Core\DragonJetzNotepad.Core.csproj", "{87CEA552-8D72-46D3-86D0-F3986E24D060}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REghZyNotepad.Core", "REghZyNotepad.Core\REghZyNotepad.Core.csproj", "{87CEA552-8D72-46D3-86D0-F3986E24D060}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DragonJetzMVVM", "REghZyMVVM\REghZyMVVM\DragonJetzMVVM.csproj", "{F73F8351-3650-45D3-8C72-606D09F8B728}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REghZyMVVM", "REghZyMVVM\REghZyMVVM\REghZyMVVM.csproj", "{F73F8351-3650-45D3-8C72-606D09F8B728}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DragonJetzMVVM.Utils", "REghZyMVVM\REghZyMVVM.Utils\DragonJetzMVVM.Utils.csproj", "{56303E0F-C01E-42B6-A39B-83D878141531}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "REghZyMVVM.Utils", "REghZyMVVM\REghZyMVVM.Utils\REghZyMVVM.Utils.csproj", "{56303E0F-C01E-42B6-A39B-83D878141531}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

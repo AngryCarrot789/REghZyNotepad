@@ -3,9 +3,9 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
-using DragonJetzNotepad.Core.Exceptions;
+using REghZyNotepad.Core.Exceptions;
 
-namespace DragonJetzNotepad.Converters {
+namespace REghZyNotepad.Converters {
     public class FontConverter : IValueConverter {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
             if (value is FontFamily font) {
